@@ -5,17 +5,16 @@
 package info5100.university.example.Role;
 
 import info5100.university.example.College.College;
-import info5100.university.example.UI.StudentWorkArea.StudentJFrame;
+import info5100.university.example.UI.AuthorityWorkArea.AuthorityJFrame;
 import javax.swing.JFrame;
 
 /**
  *
- * @author Ma2017
+ * @author alilovepeach
  */
-public class StudentRole extends Role {
-
+public class FacultyRole extends Role {
     @Override
-    public JFrame createWorkArea(College college, UserAccount userAccount) {
-        return new StudentJFrame(college, userAccount);
+    public JFrame createWorkArea(College college, UserAccount useraccount) {
+        return new AuthorityJFrame(college, useraccount);
     }
 }
