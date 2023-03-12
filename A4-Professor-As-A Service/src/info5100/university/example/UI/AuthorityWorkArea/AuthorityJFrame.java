@@ -23,10 +23,12 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     
     public AuthorityJFrame() {
         initComponents();
+        this.setVisible(true);
     }
     
     public AuthorityJFrame(College college, UserAccount userAccount) {
         initComponents();
+        this.setVisible(true);
     }
 
     /**

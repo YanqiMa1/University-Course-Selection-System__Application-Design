@@ -46,8 +46,13 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        btnSignIn = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        fieldUserName = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        fieldPassword = new javax.swing.JTextField();
+        btnSignIn1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,14 +62,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnSignIn.setText("Sign In");
-        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignInActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 80, 30));
-
         btnSignUp.setText("Sign Up");
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +69,26 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 80, 30));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel1.setText("Professor As A Service Cloud");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 360, 40));
+
+        jLabel3.setText("Username");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
+        jPanel1.add(fieldUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 168, 30));
+
+        jLabel2.setText("Password");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, -1, -1));
+        jPanel1.add(fieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 168, 30));
+
+        btnSignIn1.setText("Sign In");
+        btnSignIn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignIn1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSignIn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 80, 30));
 
         jSplitPane1.setLeftComponent(jPanel1);
 
@@ -102,18 +119,29 @@ public class MainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        // TODO add your handling code here:
-
-        jSplitPane1.setRightComponent(new SignInJPanel(this.college, userAccount));
-            
-    }//GEN-LAST:event_btnSignInActionPerformed
-
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
         
         jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));
     }//GEN-LAST:event_btnSignUpActionPerformed
+
+    private void btnSignIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignIn1ActionPerformed
+        // TODO add your handling code here:
+        this.uad = college.findDepartment("Information System").getUad();
+        if(this.uad.authenticateStudentUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
+            UserAccount studentUser = this.uad.authenticateStudentUser(fieldUserName.getText(), fieldPassword.getText());
+            this.setVisible(false);
+            studentUser.getRole().createWorkArea(this.college, studentUser);
+        }else if(this.uad.authenticateFacultyUser(fieldUserName.getText(), fieldPassword.getText()) != null ){
+            UserAccount facultyUser = this.uad.authenticateFacultyUser(fieldUserName.getText(), fieldPassword.getText());
+            this.setVisible(false);
+            facultyUser.getRole().createWorkArea(this.college, facultyUser);
+
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Invalid Credentials");
+        }
+    }//GEN-LAST:event_btnSignIn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,8 +179,13 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSignIn;
+    private javax.swing.JButton btnSignIn1;
     private javax.swing.JButton btnSignUp;
+    private javax.swing.JTextField fieldPassword;
+    private javax.swing.JTextField fieldUserName;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;

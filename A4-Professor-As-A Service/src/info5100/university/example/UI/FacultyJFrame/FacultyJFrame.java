@@ -15,6 +15,7 @@ public class FacultyJFrame extends javax.swing.JFrame {
      */
     public FacultyJFrame() {
         initComponents();
+        this.setVisible(true);
     }
 
     /**
