@@ -24,13 +24,14 @@ public class UserAccount {
     String accountId;
     String username;
     String password;
-    String role;
+    Role role;
     
-    public UserAccount(Person p){
+    public UserAccount(String username, String password, Role role){
         this.accountId = "user" + count++;
-        person = p;
-        this.username = "";
-        this.password = "";
+//        person = p;
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     public Person getPerson() {
@@ -81,11 +82,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
     

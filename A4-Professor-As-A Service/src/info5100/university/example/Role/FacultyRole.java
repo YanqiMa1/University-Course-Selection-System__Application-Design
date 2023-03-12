@@ -14,7 +14,7 @@ import javax.swing.JFrame;
  */
 public class FacultyRole extends Role {
     @Override
-    public JFrame createWorkArea(College college, UserAccount useraccount) {
-        return new AuthorityJFrame(college, useraccount);
+    public JFrame createWorkArea(College college, UserAccount userAccount) {
+        return new AuthorityJFrame(college, userAccount);
     }
 }

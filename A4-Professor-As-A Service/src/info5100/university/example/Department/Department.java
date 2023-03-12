@@ -41,6 +41,7 @@ public class Department {
         mastercoursecatalog = new HashMap<>();
         coursecatalog = new CourseCatalog(this);
         studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
+        facultydirectory = new FacultyDirectory(this);
         persondirectory = new PersonDirectory();
         degree = new Degree("MSIS");
         uad = new UserAccountDirectory(this);

@@ -4,6 +4,9 @@
  */
 package info5100.university.example.UI.StudentWorkArea;
 
+import info5100.university.example.College.College;
+import info5100.university.example.Role.UserAccount;
+
 /**
  *
  * @author alilovepeach
@@ -13,7 +16,13 @@ public class StudentJFrame extends javax.swing.JFrame {
     /**
      * Creates new form StudentJFrame
      */
+    private College college;
+    private UserAccount userAccount; 
     public StudentJFrame() {
+        initComponents();
+    }
+    
+    public StudentJFrame(College college, UserAccount userAccount) {
         initComponents();
     }
 

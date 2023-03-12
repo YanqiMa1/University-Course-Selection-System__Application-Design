@@ -7,6 +7,7 @@ package info5100.university.example.UI;
 import info5100.university.example.College.College;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Role.UserAccount;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,12 +19,12 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private College college;
+    private UserAccount userAccount;
     private UserAccountDirectory uad;
     
     public MainJFrame() {
         initComponents();
         this.college = College.getInstance();
-        
     }
     
     public MainJFrame(College college, UserAccount userAccount){
@@ -43,25 +44,18 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        fieldUserName = new javax.swing.JTextField();
-        fieldPassword = new javax.swing.JTextField();
         btnSignIn = new javax.swing.JButton();
         btnSignUp = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(800, 600));
+
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jLabel1.setText("Professor As A Service Cloud");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 360, 40));
-        jPanel1.add(fieldUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 168, 30));
-        jPanel1.add(fieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 168, 30));
 
         btnSignIn.setText("Sign In");
         btnSignIn.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +63,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnSignInActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 80, 30));
+        jPanel1.add(btnSignIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 80, 30));
 
         btnSignUp.setText("Sign Up");
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
@@ -77,27 +71,48 @@ public class MainJFrame extends javax.swing.JFrame {
                 btnSignUpActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, 80, 30));
+        jPanel1.add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 80, 30));
 
-        jLabel2.setText("Password");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
+        jSplitPane1.setLeftComponent(jPanel1);
 
-        jLabel3.setText("Username");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jSplitPane1.setRightComponent(jPanel2);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         // TODO add your handling code here:
-        
+
+        jSplitPane1.setRightComponent(new SignInJPanel(this.college, userAccount));
+            
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
         
+        jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     /**
@@ -138,11 +153,8 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSignIn;
     private javax.swing.JButton btnSignUp;
-    private javax.swing.JTextField fieldPassword;
-    private javax.swing.JTextField fieldUserName;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
 }

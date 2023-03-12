@@ -24,21 +24,21 @@ public class UserAccountDirectory {
     public UserAccountDirectory(Department d) {
 
         department = d;
-        studentlist = new ArrayList<>();
-        facultylist = new ArrayList<>();
+        studentlist = new ArrayList<UserAccount>();
+        facultylist = new ArrayList<UserAccount>();
 
     }
 
-    public UserAccount newStudentAccount(Person p) {
+    public UserAccount newStudentAccount(String username, String password, Role role) {
 
-        UserAccount sp = new UserAccount(p);
+        UserAccount sp = new UserAccount(username, password, role);
         studentlist.add(sp);
         return sp;
     }
 
-    public UserAccount newFacultyAccount(Person p) {
+    public UserAccount newFacultyAccount(String username, String password, Role role) {
 
-        UserAccount fp = new UserAccount(p);
+        UserAccount fp = new UserAccount(username, password, role);
         facultylist.add(fp);
         return fp;
     }
@@ -116,18 +116,18 @@ public class UserAccountDirectory {
         return false;
     }
 
-    public UserAccount authenticateStudentUser(String name, String password) {
+    public UserAccount authenticateStudentUser(String username, String password) {
         for (UserAccount ua : this.studentlist) {
-            if (ua.getUsername().equals(name) && ua.getPassword().equals(password)) {
+            if (ua.getUsername().equals(username) && ua.getPassword().equals(password)) {
                 return ua;
             }
         }
         return null;
     }
     
-    public UserAccount authenticateFacultyUser(String name, String password) {
+    public UserAccount authenticateFacultyUser(String username, String password) {
         for (UserAccount ua : this.facultylist) {
-            if (ua.getUsername().equals(name) && ua.getPassword().equals(password)) {
+            if (ua.getUsername().equals(username) && ua.getPassword().equals(password)) {
                 return ua;
             }
         }
