@@ -14,8 +14,41 @@ import java.util.ArrayList;
  */
 public class College {
     ArrayList<Department> departments;
+    String name;
     
     public College(String name){
         departments = new ArrayList();
+        this.name = name;
     }
+
+    public static College getInstance() {
+        return new College("College of Engineering");
+    }
+    
+    public ArrayList<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(ArrayList<Department> departments) {
+        this.departments = departments;
+    }
+    
+    
+    public Department newDepartment(String n) {
+        Department d = new Department(n);
+        departments.add(d);
+        return d;
+    }
+    
+    public Department findDepartment(String n){
+        for (Department d: this.departments){
+            if (d.getName().equals(n)){
+                return d;
+            }
+        }
+        return null;
+    }
+    
+    
+    
 }
