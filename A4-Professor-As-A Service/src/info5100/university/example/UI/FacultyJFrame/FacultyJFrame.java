@@ -4,6 +4,9 @@
  */
 package info5100.university.example.UI.FacultyJFrame;
 
+import info5100.university.example.College.College;
+import info5100.university.example.Role.UserAccount;
+
 /**
  *
  * @author alilovepeach
@@ -17,6 +20,12 @@ public class FacultyJFrame extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
     }
+    
+    public FacultyJFrame(College college, UserAccount userAccount) {
+        initComponents();
+        this.setVisible(true);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
