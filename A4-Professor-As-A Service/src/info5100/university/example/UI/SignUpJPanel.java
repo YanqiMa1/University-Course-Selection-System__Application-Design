@@ -103,11 +103,11 @@ public class SignUpJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:\
         Department info = this.college.findDepartment("Information System");
         UserAccountDirectory infoUad = info.getUad();
-        if (infoUad.studentAccountExists(fieldUsername.getText())) {
+        if (infoUad.accountExists(fieldUsername.getText())) {
             JOptionPane.showMessageDialog(null, "This username has been taken.");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
-                UserAccount user = infoUad.newStudentAccount(fieldUsername.getText(), fieldPassword.getText(), new StudentRole());
+                UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new StudentRole());
                 Person p = info.getPersondirectory().newPerson(user.getAccountId());
                 p.setNameOfPerson(fieldName.getText());
 
@@ -116,11 +116,19 @@ public class SignUpJPanel extends javax.swing.JPanel {
 
             }
             if (roleComboBox.getSelectedItem().equals("Professor")) {
-                UserAccount user = infoUad.newFacultyAccount(fieldUsername.getText(), fieldPassword.getText(), new FacultyRole());
+                UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new FacultyRole());
                 Person p = info.getPersondirectory().newPerson(user.getAccountId());
                 p.setNameOfPerson(fieldName.getText());
                 info.getFacultydirectory().newFacultyProfile(p);
                 JOptionPane.showMessageDialog(null, "Professor successfully registered.");
+            }
+            
+            if (roleComboBox.getSelectedItem().equals("Authority")) {
+                UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new FacultyRole());
+                Person p = info.getPersondirectory().newPerson(user.getAccountId());
+                p.setNameOfPerson(fieldName.getText());
+                info.getFacultydirectory().newFacultyProfile(p);
+                JOptionPane.showMessageDialog(null, "Authority successfully registered.");
             }
         }
     }//GEN-LAST:event_btnSignUpActionPerformed
