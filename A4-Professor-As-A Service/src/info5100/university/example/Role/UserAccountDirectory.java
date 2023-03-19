@@ -18,140 +18,76 @@ import java.util.ArrayList;
 public class UserAccountDirectory {
 
     Department department;
-    ArrayList<UserAccount> studentlist;
-    ArrayList<UserAccount> facultylist;
+    ArrayList<UserAccount> useraccountlist;
+//    ArrayList<UserAccount> facultylist;
 
     public UserAccountDirectory(Department d) {
 
         department = d;
-        studentlist = new ArrayList<UserAccount>();
-        facultylist = new ArrayList<UserAccount>();
+        useraccountlist = new ArrayList<UserAccount>();
+        
 
     }
 
-    public UserAccount newStudentAccount(String username, String password, Role role) {
-
-        UserAccount sp = new UserAccount(username, password, role);
-        studentlist.add(sp);
-        return sp;
+    public ArrayList<UserAccount> getUseraccountlist() {
+        return useraccountlist;
     }
-
-    public UserAccount newFacultyAccount(String username, String password, Role role) {
-
-        UserAccount fp = new UserAccount(username, password, role);
-        facultylist.add(fp);
-        return fp;
+     
+    public UserAccount createUserAccount(String username, String password, Role role) {
+        UserAccount user = new UserAccount(username, password, role);
+        
+        useraccountlist.add(user);
+        return user;
     }
-
-    public UserAccount findStudent(String id) {
-
-        for (UserAccount sp : studentlist) {
-
-//            if (sp.isMatch(id)) {
-//                return sp;
-//            }
-        }
-        return null; //not found after going through the whole list
-    }
-
-    public UserAccount findStudentById(String id) {
-        for (UserAccount u : this.studentlist) {
-            if (u.getAccountId().equals(id)) {
+    
+    public UserAccount findById(String id) {
+        for(UserAccount u: this.useraccountlist) {
+            if(u.getAccountId().equals(id)) {
                 return u;
             }
         }
-
-        return null;
-    }
-
-    public UserAccount findFacultyById(String id) {
-        for (UserAccount u : this.facultylist) {
-            if (u.getAccountId().equals(id)) {
-                return u;
-            }
-        }
-
-        return null;
-    }
-
-    public UserAccount getStudentAccount(String username, String password, Role role) {
-        for (UserAccount u : this.studentlist) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password) && u.getRole().equals(role)) {
-                return u;
-            }
-        }
-
+        
         return null;
     }
     
-    
-    public UserAccount getFacultyAccount(String username, String password, Role role) {
-        for (UserAccount u : this.facultylist) {
-            if (u.getUsername().equals(username) && u.getPassword().equals(password) && u.getRole().equals(role)) {
+    public UserAccount getUserAccount(String username, String password, Role role) {
+        for(UserAccount u: this.useraccountlist) {
+            if(u.getUsername().equals(username) && u.getPassword().equals(password) && u.getRole().equals(role)) {
                 return u;
             }
         }
-
+        
         return null;
     }
-
-    public Boolean studentAccountExists(String username) {
-        for (UserAccount u : this.studentlist) {
-            if (u.getUsername().equals(username)) {
+    
+    public Boolean accountExists(String username) {
+        for(UserAccount u: this.useraccountlist) {
+            if(u.getUsername().equals(username)) {
                 return true;
             }
         }
-
+        
         return false;
     }
     
     
-    public Boolean facultyAccountExists(String username) {
-        for (UserAccount u : this.facultylist) {
-            if (u.getUsername().equals(username)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public UserAccount authenticateStudentUser(String username, String password) {
-        for (UserAccount ua : this.studentlist) {
-            if (ua.getUsername().equals(username) && ua.getPassword().equals(password)) {
+    public UserAccount authenticateUser(String name, String password) {
+        for(UserAccount ua: this.useraccountlist) {
+            if(ua.getUsername().equals(name) && ua.getPassword().equals(password)) {
                 return ua;
             }
         }
         return null;
     }
     
-    public UserAccount authenticateFacultyUser(String username, String password) {
-        for (UserAccount ua : this.facultylist) {
-            if (ua.getUsername().equals(username) && ua.getPassword().equals(password)) {
-                return ua;
-            }
-        }
-        return null;
-    }
-
-    public UserAccount findStduentByUsername(String username) {
-        for (UserAccount ua : this.studentlist) {
-            if (ua.getUsername().equals(username)) {
-                return ua;
-            }
-        }
-
-        return null;
-    }
     
-    
-    public UserAccount findFacultyByUsername(String username) {
-        for (UserAccount ua : this.facultylist) {
-            if (ua.getUsername().equals(username)) {
+      public UserAccount findByUsername(String username) {
+        for(UserAccount ua: this.useraccountlist) {
+            if(ua.getUsername().equals(username)) {
                 return ua;
             }
         }
-
+        
         return null;
     }
 }
