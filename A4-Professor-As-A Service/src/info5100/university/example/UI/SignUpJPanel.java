@@ -112,9 +112,9 @@ public class SignUpJPanel extends javax.swing.JPanel {
     if(fieldName.getText()!=null && fieldUsername.getText()!=null && fieldPassword.getText()!=null){
             
         
-        if (infoUad.findByUsername(fieldUsername.getText())!=null) {
+        if (infoUad.accountExists(fieldUsername.getText())) {
             
-            if(infoUad.accountExists(fieldUsername.getText())){
+           
             JOptionPane.showMessageDialog(null, "This username has been taken.");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
@@ -141,10 +141,10 @@ public class SignUpJPanel extends javax.swing.JPanel {
                 info.getFacultydirectory().newFacultyProfile(p);
                 JOptionPane.showMessageDialog(null, "Authority successfully registered.");
             }
-        }}
-        }else{
-            JOptionPane.showMessageDialog(null, "Please fill all text!");
         }
+    }
+        
+        
         
 
     }//GEN-LAST:event_btnSignUpActionPerformed

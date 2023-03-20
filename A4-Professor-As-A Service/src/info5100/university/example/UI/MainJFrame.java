@@ -131,7 +131,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnSignIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignIn1ActionPerformed
         // TODO add your handling code here:
         this.uad = college.findDepartment("Information System").getUad();
-    if(fieldUserName.getText()!=null && fieldPassword.getText()!= null){
+    
             
         
         if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
@@ -151,9 +151,7 @@ public class MainJFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
         
-    }else{
-            JOptionPane.showMessageDialog(null, "Please fill all text fields!");
-        }
+
         //待验证的其他role--yanqi
     }//GEN-LAST:event_btnSignIn1ActionPerformed
 
