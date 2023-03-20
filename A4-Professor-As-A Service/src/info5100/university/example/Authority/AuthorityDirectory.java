@@ -4,10 +4,41 @@
  */
 package info5100.university.example.Authority;
 
+import info5100.university.example.Department.Department;
+import java.util.ArrayList;
+
 /**
  *
  * @author alilovepeach
  */
 public class AuthorityDirectory {
+    
+    Department department;
+    ArrayList<AuthorityProfile> authoritylist;
+
+    public AuthorityDirectory(Department d) {
+
+        department = d;
+        authoritylist = new ArrayList<>();
+
+    }
+
+    public AuthorityProfile newAuthorityProfile(String n) {
+
+        AuthorityProfile sp = new AuthorityProfile(n);
+        authoritylist.add(sp);
+        return sp;
+    }
+
+    public AuthorityProfile findAuthorityProfile(String n) {
+
+        for (AuthorityProfile ap : authoritylist) {
+
+            if (ap.getName().equals(n)) {
+                return ap;
+            }
+        }
+            return null; //not found after going through the whole list
+         }
     
 }

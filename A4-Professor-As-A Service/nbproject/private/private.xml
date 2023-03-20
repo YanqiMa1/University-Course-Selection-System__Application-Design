@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+
             <file>file:/C:/Users/hp/Downloads/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/StudentJFrame.java</file>
             <file>file:/C:/Users/hp/Downloads/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/FacultyJFrame/AddCourseJPanel.java</file>
             <file>file:/C:/Users/hp/Downloads/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/FacultyJFrame/FacultyJFrame.java</file>
@@ -10,6 +11,44 @@
             <file>file:/C:/Users/hp/Downloads/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/TranscriptJPanel.java</file>
             <file>file:/C:/Users/hp/Downloads/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/RegisterCourseJPanel.java</file>
             <file>file:/C:/Users/hp/Downloads/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/CourseCatalog/CourseCatalog.java</file>
+
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Role/AdminRole.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Department/Calendar.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/Faculty/FacultyProfile.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Campus/Building.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Role/FacultyRole.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/MainJFrame.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Role/UserAccountDirectory.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Info5001UniversityExample.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/StudentProfile.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Campus/Floor.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/Transcript.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/SignUpJPanel.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Campus/Campus.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/workareas/Workarea.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Role/StudentRole.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/AdminWorkArea/AdminJFrame.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/AuthorityWorkArea/AuthorityJFrame.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Role/UserAccount.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/FacultyJFrame/FacultyJFrame.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Campus/Classroom.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/StudentDirectory.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/TranscriptJPanel.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/StudentAccount.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/workareas/WorkRequest.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/PersonDirectory.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Department/DepartmentAccount.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/StudentJFrame.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/College/College.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Department/Department.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Role/Role.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/Person.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Campus/Location.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/RegisterCourseJPanel.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/AdminWorkArea/ShowJPanel.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/Faculty/FacultyDirectory.java</file>
+            <file>file:/F:/GroupAssignment/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Role/AuthorityRole.java</file>
+
         </group>
     </open-files>
 </project-private>

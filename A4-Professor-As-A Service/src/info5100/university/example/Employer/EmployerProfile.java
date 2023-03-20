@@ -13,15 +13,20 @@ import java.util.ArrayList;
  * @author kal bugrara
  */
 public class EmployerProfile {
+
     String name;
     ArrayList<Employment> employments;
-    public EmployerProfile(String n){  //could be company instead of just a name as a string
+
+    public EmployerProfile(String n) {  //could be company instead of just a name as a string
         name = n;
-        
+
     }
-         public boolean isMatch(String id){
-        if(name.equals(id)) return true;             //String is an object and can do equal matach
+
+    public boolean isMatch(String id) {
+        if (name.equals(id)) {
+            return true;             //String is an object and can do equal matach
+        }
         return false;
     }
-    
+
 }

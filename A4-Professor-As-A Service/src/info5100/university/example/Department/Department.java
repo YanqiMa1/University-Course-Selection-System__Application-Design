@@ -5,6 +5,7 @@
  */
 package info5100.university.example.Department;
 
+import info5100.university.example.Authority.AuthorityDirectory;
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseCatalog.CourseCatalog;
 import info5100.university.example.CourseSchedule.CourseLoad;
@@ -30,6 +31,7 @@ public class Department {
     PersonDirectory persondirectory;
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
+    AuthorityDirectory authoritydirectory;
     EmployerDirectory employerdirectory;
     Degree degree;
     UserAccountDirectory uad;
@@ -43,8 +45,10 @@ public class Department {
         studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
         facultydirectory = new FacultyDirectory(this);
         persondirectory = new PersonDirectory();
+        authoritydirectory = new AuthorityDirectory(this);
         degree = new Degree("MSIS");
         uad = new UserAccountDirectory(this);
+        
     }
 
     public void addCoreCourse(Course c) {
@@ -122,6 +126,15 @@ public class Department {
     public HashMap<String, CourseSchedule> getMastercoursecatalog() {
         return mastercoursecatalog;
     }
+
+    public AuthorityDirectory getAuthoritydirectory() {
+        return authoritydirectory;
+    }
+
+    public void setAuthoritydirectory(AuthorityDirectory authoritydirectory) {
+        this.authoritydirectory = authoritydirectory;
+    }
+    
 
     public void setMastercoursecatalog(HashMap<String, CourseSchedule> mastercoursecatalog) {
         this.mastercoursecatalog = mastercoursecatalog;
