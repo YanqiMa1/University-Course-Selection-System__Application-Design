@@ -18,19 +18,23 @@ import java.util.ArrayList;
 public class UserAccountDirectory {
 
     Department department;
+
     ArrayList<UserAccount> useraccountlist;
 //    ArrayList<UserAccount> facultylist;
+
 
     public UserAccountDirectory(Department d) {
 
         department = d;
-        useraccountlist = new ArrayList<UserAccount>();
+
+       
         
 
     }
 
     public ArrayList<UserAccount> getUseraccountlist() {
         return useraccountlist;
+
     }
      
     public UserAccount createUserAccount(String username, String password, Role role) {
