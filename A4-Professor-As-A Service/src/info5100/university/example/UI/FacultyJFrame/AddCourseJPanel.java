@@ -6,6 +6,8 @@ package info5100.university.example.UI.FacultyJFrame;
 
 import info5100.university.example.College.College;
 import info5100.university.example.Role.UserAccount;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +18,18 @@ public class AddCourseJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddCourseJPanel
      */
+    
+    private College college;
+    private UserAccount userAccount;
+    
+    private DefaultTableModel courseTableModel;
+    
     public AddCourseJPanel(College college, UserAccount userAccount) {
         initComponents();
+        this.setVisible(true);
+        
+        this.college = college;
+        this.userAccount = userAccount;
     }
 
     /**
@@ -89,11 +101,48 @@ public class AddCourseJPanel extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 530, 240));
 
         createBtn.setText("CREATE");
-        add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 120, 30));
+        createBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createBtnActionPerformed(evt);
+            }
+        });
+        add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 120, 30));
 
         deleteBtn.setText("DELETE");
-        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 120, 30));
+        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 120, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
+        // TODO add your handling code here:
+
+        //get course information
+        String userName = fieldusername.getText();
+        String pass = fieldPassword.getText();
+        String name = fieldname.getText();
+        int exp = Integer.valueOf(fieldexperience.getText());
+        String role = (String) designationCombo.getSelectedItem();
+        String branch = (String) branchCombo.getSelectedItem();
+
+        //check user account unique
+        if(!uad.checkUserNameUnique(userName)) {
+            JOptionPane.showMessageDialog(null, "Sorry credentials are taken.");
+        }
+        //create user account and employee profile
+        else {
+            if (role.equals("librarian")){
+                UserAccount user = uad.createUserAccount(userName, pass, new LibrarianRole());
+                Library lib = this.app.getBranchDirectory().findBranch(branch).getLibrary();
+                lib.getEmployeeDirectory().createEmployee(exp, role, name,user.getAccountid(), lib);
+
+            } else if(role.equals("branch manager")){
+                UserAccount user = uad.createUserAccount(userName, pass, new BranchManagerRole());
+                Library lib = this.app.getBranchDirectory().findBranch(branch).getLibrary();
+                lib.getEmployeeDirectory().createEmployee(exp, role, name,user.getAccountid(), lib);
+
+            }
+            populateCourseTable();
+        }
+    }//GEN-LAST:event_createBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
