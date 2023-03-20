@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  */
 public abstract class Role {
 
-    static String[] roles = {"Student", "Professor"};
+    static String[] roles = {"Student", "Professor", "Authority"};
 
     public static String[] getRoles() {
         return roles;

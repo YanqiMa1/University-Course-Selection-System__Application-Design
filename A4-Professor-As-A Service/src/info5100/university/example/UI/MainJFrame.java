@@ -128,17 +128,19 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnSignIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignIn1ActionPerformed
         // TODO add your handling code here:
         this.uad = college.findDepartment("Information System").getUad();
-        if(this.uad.authenticateStudentUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
-            UserAccount studentUser = this.uad.authenticateStudentUser(fieldUserName.getText(), fieldPassword.getText());
+        if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
+            UserAccount studentUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
             studentUser.getRole().createWorkArea(this.college, studentUser);
-        }else if(this.uad.authenticateFacultyUser(fieldUserName.getText(), fieldPassword.getText()) != null ){
-            UserAccount facultyUser = this.uad.authenticateFacultyUser(fieldUserName.getText(), fieldPassword.getText());
+        }else if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null ){
+            UserAccount facultyUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
             facultyUser.getRole().createWorkArea(this.college, facultyUser);
-
-
-        }else{
+        }else if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null ){
+            UserAccount authorityUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
+            this.setVisible(false);
+            authorityUser.getRole().createWorkArea(this.college, authorityUser);}
+        else{
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
         //待验证的其他role--yanqi
