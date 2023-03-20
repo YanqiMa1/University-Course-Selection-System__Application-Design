@@ -38,6 +38,7 @@ public class StudentJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
         logoutBtn = new javax.swing.JButton();
@@ -76,17 +77,20 @@ public class StudentJFrame extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jSplitPane1.setRightComponent(jPanel3);
 
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSplitPane1)
+
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -101,6 +105,7 @@ public class StudentJFrame extends javax.swing.JFrame {
     private void registerCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCourseBtnActionPerformed
          jSplitPane1.setRightComponent(new RegisterCourseJPanel(college,userAccount)); 
     }//GEN-LAST:event_registerCourseBtnActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -138,6 +143,7 @@ public class StudentJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -145,5 +151,6 @@ public class StudentJFrame extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton registerCourseBtn;
     private javax.swing.JButton transBtn;
+
     // End of variables declaration//GEN-END:variables
 }

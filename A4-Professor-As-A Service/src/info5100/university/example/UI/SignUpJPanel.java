@@ -80,7 +80,9 @@ public class SignUpJPanel extends javax.swing.JPanel {
         jLabel4.setText("Choose your role");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
+
         roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Professor", "System Admin", "Authority" }));
+
         roleComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleComboBoxActionPerformed(evt);
@@ -109,9 +111,9 @@ public class SignUpJPanel extends javax.swing.JPanel {
         Department info = this.college.findDepartment("Information System");
         UserAccountDirectory infoUad = info.getUad();
 
-    if(fieldName.getText()!=null && fieldUsername.getText()!=null && fieldPassword.getText()!=null){
-            
-        
+
+
+
         if (infoUad.accountExists(fieldUsername.getText())) {
             
            
@@ -119,6 +121,7 @@ public class SignUpJPanel extends javax.swing.JPanel {
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
                 UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new StudentRole());
+
                 Person p = info.getPersondirectory().newPerson(user.getAccountId());
                 p.setNameOfPerson(fieldName.getText());
 
@@ -127,12 +130,15 @@ public class SignUpJPanel extends javax.swing.JPanel {
 
             }
             if (roleComboBox.getSelectedItem().equals("Professor")) {
+
                 UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new FacultyRole());
+
                 Person p = info.getPersondirectory().newPerson(user.getAccountId());
                 p.setNameOfPerson(fieldName.getText());
                 info.getFacultydirectory().newFacultyProfile(p);
                 JOptionPane.showMessageDialog(null, "Professor successfully registered.");
             }
+
             
             if (roleComboBox.getSelectedItem().equals("Authority")) {
                 UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new FacultyRole());
@@ -145,7 +151,7 @@ public class SignUpJPanel extends javax.swing.JPanel {
     }
         
         
-        
+
 
     }//GEN-LAST:event_btnSignUpActionPerformed
 
