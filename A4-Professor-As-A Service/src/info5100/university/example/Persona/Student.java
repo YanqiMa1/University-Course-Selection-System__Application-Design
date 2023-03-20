@@ -9,11 +9,7 @@ package info5100.university.example.Persona;
  *
  * @author kal bugrara
  */
-public class Address {
-    String line1;
-    String line2;
-    public Address(){
-        
-    }
+public class Student {
+    String name;
     
 }
