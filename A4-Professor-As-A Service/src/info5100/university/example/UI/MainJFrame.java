@@ -122,7 +122,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
         
-        jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));
+        jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));//这里应该是college还是department，还是都有
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void btnSignIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignIn1ActionPerformed
@@ -141,6 +141,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
+        //待验证的其他role--yanqi
     }//GEN-LAST:event_btnSignIn1ActionPerformed
 
     /**

@@ -80,7 +80,12 @@ public class SignUpJPanel extends javax.swing.JPanel {
         jLabel4.setText("Choose your role");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
-        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Professor" }));
+        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Professor", "System Admin", "Authority" }));
+        roleComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roleComboBoxActionPerformed(evt);
+            }
+        });
         add(roleComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 80, -1));
 
         btnSignUp.setText("Sign Up");
@@ -103,7 +108,7 @@ public class SignUpJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:\
         Department info = this.college.findDepartment("Information System");
         UserAccountDirectory infoUad = info.getUad();
-        if (infoUad.studentAccountExists(fieldUsername.getText())) {
+        if (infoUad.studentAccountExists(fieldUsername.getText())||infoUad.facultyAccountExists(fieldUsername.getText())) { //这里没有验证facultyaccount是否存在（后续应该还有authority和admin，都得验证一下）--yanqi
             JOptionPane.showMessageDialog(null, "This username has been taken.");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
@@ -123,7 +128,13 @@ public class SignUpJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Professor successfully registered.");
             }
         }
+        
+        //待创建其他两个role--yanqi
     }//GEN-LAST:event_btnSignUpActionPerformed
+
+    private void roleComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roleComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

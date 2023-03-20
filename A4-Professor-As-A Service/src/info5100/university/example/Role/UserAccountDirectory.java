@@ -20,12 +20,14 @@ public class UserAccountDirectory {
     Department department;
     ArrayList<UserAccount> studentlist;
     ArrayList<UserAccount> facultylist;
+    ArrayList<UserAccount> authoritylist;
 
     public UserAccountDirectory(Department d) {
 
         department = d;
         studentlist = new ArrayList<UserAccount>();
         facultylist = new ArrayList<UserAccount>();
+        authoritylist = new ArrayList<UserAccount>();
 
     }
 
@@ -41,6 +43,14 @@ public class UserAccountDirectory {
         UserAccount fp = new UserAccount(username, password, role);
         facultylist.add(fp);
         return fp;
+    }
+    
+    
+    public UserAccount newAuthorityAccount(String username, String password, Role role) {
+
+        UserAccount ap = new UserAccount(username, password, role);
+        authoritylist.add(ap);
+        return ap;
     }
 
     public UserAccount findStudent(String id) {
