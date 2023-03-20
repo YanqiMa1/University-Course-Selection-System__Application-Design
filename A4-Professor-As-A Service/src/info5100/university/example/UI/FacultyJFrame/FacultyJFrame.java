@@ -6,22 +6,27 @@ package info5100.university.example.UI.FacultyJFrame;
 
 import info5100.university.example.College.College;
 import info5100.university.example.Role.UserAccount;
+
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.UI.MainJFrame;
+
 
 /**
  *
  * @author alilovepeach
  */
 public class FacultyJFrame extends javax.swing.JFrame {
+
     private College college;
     private UserAccount userAccount;
+
 
     /**
      * Creates new form FacultyJFrame
      */
     public FacultyJFrame() {
         initComponents();
+
        
     }
     
@@ -32,6 +37,7 @@ public class FacultyJFrame extends javax.swing.JFrame {
         this.college = college;
         this.userAccount = userAccount;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -138,6 +144,7 @@ public class FacultyJFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(new GradeStudentsJPanel(college,userAccount));
     }//GEN-LAST:event_gradeBtnActionPerformed
 
+
     /**
      * @param args the command line arguments
      */
@@ -174,11 +181,13 @@ public class FacultyJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private javax.swing.JButton courseBtn;
     private javax.swing.JButton gradeBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton scheduleBtn;
+
     // End of variables declaration//GEN-END:variables
 }
