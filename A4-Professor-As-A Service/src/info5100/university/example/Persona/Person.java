@@ -10,44 +10,38 @@ package info5100.university.example.Persona;
  * @author kal bugrara
  */
 public class Person {
-
-    String nameOfPerson;
-    String id;
-
-    // unique id
-
-
-    public Person(String id) {
-        this.id = id;
+    String personId;
+    String name;
+    
+    public Person(){
         
     }
+    
+    public Person(String id, String name){
+        this.personId = id;
+        this.name = name;
 
-    public String getPersonId() {
-        return id;
     }
 
-    public String getNameOfPerson() {
-        return nameOfPerson;
+    public String getPersonid() {
+        return personId;
     }
 
-    public void setNameOfPerson(String nameOfPerson) {
-        this.nameOfPerson = nameOfPerson;
+    public void setPersonid(String personid) {
+        this.personId = personid;
     }
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString(){
+        return this.personId;
     }
     
-
-    public boolean isMatch(String id) {
-        if (getPersonId().equals(id)) {
-            return true;
-        }
-        return false;
-    }
-
 }

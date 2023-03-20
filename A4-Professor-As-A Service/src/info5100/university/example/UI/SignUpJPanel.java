@@ -80,9 +80,7 @@ public class SignUpJPanel extends javax.swing.JPanel {
         jLabel4.setText("Choose your role");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
 
-
         roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Professor", "System Admin", "Authority" }));
-
         roleComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 roleComboBoxActionPerformed(evt);

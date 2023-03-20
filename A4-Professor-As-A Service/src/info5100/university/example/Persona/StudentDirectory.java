@@ -13,33 +13,13 @@ import java.util.ArrayList;
  * @author kal bugrara
  */
 public class StudentDirectory {
+    ArrayList<Student> students;
 
-    Department department;
-    ArrayList<StudentProfile> studentlist;
-
-    public StudentDirectory(Department d) {
-
-        department = d;
-        studentlist = new ArrayList();
-
+    public ArrayList<Student> getStudents() {
+        return students;
     }
 
-    public StudentProfile newStudentProfile(Person p) {
-
-        StudentProfile sp = new StudentProfile(p);
-        studentlist.add(sp);
-        return sp;
+    public void addToStudents(Student student) {
+        this.students.add(student);
     }
-
-    public StudentProfile findStudent(String id) {
-
-        for (StudentProfile sp : studentlist) {
-
-            if (sp.isMatch(id)) {
-                return sp;
-            }
-        }
-            return null; //not found after going through the whole list
-         }
-    
 }

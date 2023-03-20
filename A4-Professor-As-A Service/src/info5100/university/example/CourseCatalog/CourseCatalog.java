@@ -6,6 +6,7 @@
 package info5100.university.example.CourseCatalog;
 
 import info5100.university.example.Department.Department;
+import info5100.university.example.Professsor.Professor;
 import java.util.ArrayList;
 
 /**
@@ -13,31 +14,32 @@ import java.util.ArrayList;
  * @author kal bugrara
  */
 public class CourseCatalog {
-    Department department;
-    String lastupdated;
-    ArrayList<Course> courselist; 
-    public CourseCatalog(Department d){
-        courselist = new ArrayList();
-        department = d;
+    ArrayList<Course> courses;
+    private Professor professor;
+    
+    public CourseCatalog(Professor p){
+        this.courses = new ArrayList<Course>();
+        this.professor = p;
     }
     
-    public ArrayList<Course> getCourseList(){
-        return courselist;
+    public ArrayList<Course> getCourses() {
+        return courses;
     }
-    
-    public Course newCourse(String n, String nm, int cr){
-        Course c = new Course(n, nm, cr);
-        courselist.add(c);
+
+    public Course createCourse(String name,String topic, String region, String language, int price){
+        Course c = new Course(name,topic,region,language,price);
+        this.courses.add(c);
         return c;
     }
     
-    public Course getCourseByNumber(String n){
-        
-        for( Course c: courselist){
-            
-            if(c.getCOurseNumber().equals(n)) return c;
+    public Course getCourseById(String id){
+        for (Course c : courses) {
+            if (c.getCourseId().equals(id))
+                return c;
         }
         return null;
     }
-
+    
+    
+    
 }
