@@ -6,6 +6,7 @@ package info5100.university.example.UI;
 
 import info5100.university.example.College.College;
 import info5100.university.example.Department.Department;
+import info5100.university.example.Role.AdminRole;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Role.UserAccount;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         this.college = College.getInstance();
+        this.setVisible(true);
     }
     
 
@@ -36,6 +38,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.college = college;
         this.uad = college.findDepartment("Information System").getUad();
         this.userAccount = userAccount;
+        this.uad.createUserAccount("admin", "admin", new AdminRole());
     }
     
 
@@ -150,6 +153,8 @@ public class MainJFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
+        
+
         //待验证的其他role--yanqi
 
     }//GEN-LAST:event_btnSignIn1ActionPerformed

@@ -48,6 +48,7 @@ public class Department {
         authoritydirectory = new AuthorityDirectory(this);
         degree = new Degree("MSIS");
         uad = new UserAccountDirectory(this);
+        
     }
 
     public void addCoreCourse(Course c) {
