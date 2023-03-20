@@ -6,6 +6,7 @@ package info5100.university.example.UI.FacultyJFrame;
 
 import info5100.university.example.College.College;
 import info5100.university.example.Role.UserAccount;
+import info5100.university.example.UI.MainJFrame;
 
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.UI.MainJFrame;
@@ -24,6 +25,8 @@ public class FacultyJFrame extends javax.swing.JFrame {
     /**
      * Creates new form FacultyJFrame
      */
+    private College college;
+    private UserAccount userAccount;
     public FacultyJFrame() {
         initComponents();
 
@@ -33,7 +36,6 @@ public class FacultyJFrame extends javax.swing.JFrame {
     public FacultyJFrame(College college, UserAccount userAccount){
         initComponents();
         this.setVisible(true);
-        
         this.college = college;
         this.userAccount = userAccount;
     }
@@ -47,6 +49,7 @@ public class FacultyJFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
@@ -123,6 +126,7 @@ public class FacultyJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -143,7 +147,6 @@ public class FacultyJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jSplitPane1.setRightComponent(new GradeStudentsJPanel(college,userAccount));
     }//GEN-LAST:event_gradeBtnActionPerformed
-
 
     /**
      * @param args the command line arguments
@@ -181,7 +184,6 @@ public class FacultyJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-
     private javax.swing.JButton courseBtn;
     private javax.swing.JButton gradeBtn;
     private javax.swing.JPanel jPanel1;

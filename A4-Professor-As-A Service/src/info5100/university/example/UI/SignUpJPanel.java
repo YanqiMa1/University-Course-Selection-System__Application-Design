@@ -88,6 +88,7 @@ public class SignUpJPanel extends javax.swing.JPanel {
                 roleComboBoxActionPerformed(evt);
             }
         });
+
         add(roleComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 80, -1));
 
         btnSignUp.setText("Sign Up");

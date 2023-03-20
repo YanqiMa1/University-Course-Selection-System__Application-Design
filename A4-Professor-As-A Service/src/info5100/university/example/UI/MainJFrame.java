@@ -5,6 +5,7 @@
 package info5100.university.example.UI;
 
 import info5100.university.example.College.College;
+import info5100.university.example.Department.Department;
 import info5100.university.example.Role.AdminRole;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Role.UserAccount;
@@ -22,7 +23,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private College college;
     private UserAccount userAccount;
     private UserAccountDirectory uad;
-    
+
     public MainJFrame() {
         initComponents();
         this.college = College.getInstance();
@@ -31,14 +32,15 @@ public class MainJFrame extends javax.swing.JFrame {
     
 
     public MainJFrame(College college, UserAccount userAccount){
-
         initComponents();
         this.setVisible(true);
-        
+
         this.college = college;
-        this.uad = college.newDepartment("Information System").getUad();
+        this.uad = college.findDepartment("Information System").getUad();
+        this.userAccount = userAccount;
         this.uad.createUserAccount("admin", "admin", new AdminRole());
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,9 +128,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
-        
 
-        jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));//这里应该是college还是department，还是都有
+        jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));
 
     }//GEN-LAST:event_btnSignUpActionPerformed
 
@@ -136,20 +137,20 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.uad = college.findDepartment("Information System").getUad();
 
+
         if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
             UserAccount studentUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
             studentUser.getRole().createWorkArea(this.college, studentUser);
-        }else if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null ){
+        } else if (this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
             UserAccount facultyUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
             facultyUser.getRole().createWorkArea(this.college, facultyUser);
-        }else if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null ){
+        } else if (this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
             UserAccount authorityUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
-            authorityUser.getRole().createWorkArea(this.college, authorityUser);}
-      
-        else{
+            authorityUser.getRole().createWorkArea(this.college, authorityUser);
+        } else {
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
         
