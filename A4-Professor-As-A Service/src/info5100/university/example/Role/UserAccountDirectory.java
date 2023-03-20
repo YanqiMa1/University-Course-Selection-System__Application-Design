@@ -18,19 +18,24 @@ import java.util.ArrayList;
 public class UserAccountDirectory {
 
     Department department;
+
+
     ArrayList<UserAccount> useraccountlist;
 //    ArrayList<UserAccount> facultylist;
+
 
     public UserAccountDirectory(Department d) {
 
         department = d;
-        useraccountlist = new ArrayList<UserAccount>();
+
+       
         
 
     }
 
     public ArrayList<UserAccount> getUseraccountlist() {
         return useraccountlist;
+
     }
      
     public UserAccount createUserAccount(String username, String password, Role role) {
@@ -77,10 +82,12 @@ public class UserAccountDirectory {
                 return ua;
             }
         }
+
         return null;
     }
     
     
+
       public UserAccount findByUsername(String username) {
         for(UserAccount ua: this.useraccountlist) {
             if(ua.getUsername().equals(username)) {
@@ -88,6 +95,7 @@ public class UserAccountDirectory {
             }
         }
         
+
         return null;
     }
 }

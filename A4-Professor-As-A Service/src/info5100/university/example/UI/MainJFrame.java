@@ -28,7 +28,8 @@ public class MainJFrame extends javax.swing.JFrame {
         this.college = College.getInstance();
     }
     
-    public MainJFrame(College college, UserAccount userAccount) {
+
+    public MainJFrame(College college, UserAccount userAccount){
         initComponents();
         this.setVisible(true);
 
@@ -126,12 +127,15 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));
+
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void btnSignIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignIn1ActionPerformed
         // TODO add your handling code here:
         this.uad = college.findDepartment("Information System").getUad();
-        if (this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
+
+
+        if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
             UserAccount studentUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
             studentUser.getRole().createWorkArea(this.college, studentUser);
@@ -146,6 +150,8 @@ public class MainJFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
+        //待验证的其他role--yanqi
+
     }//GEN-LAST:event_btnSignIn1ActionPerformed
 
     /**
