@@ -70,8 +70,18 @@ public class FacultyJFrame extends javax.swing.JFrame {
         });
 
         scheduleBtn.setText("MAKE SCHEDULE");
+        scheduleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scheduleBtnActionPerformed(evt);
+            }
+        });
 
         gradeBtn.setText("GRADE STUDENTS");
+        gradeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gradeBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,7 +96,7 @@ public class FacultyJFrame extends javax.swing.JFrame {
                 .addComponent(scheduleBtn)
                 .addGap(18, 18, 18)
                 .addComponent(gradeBtn)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +125,18 @@ public class FacultyJFrame extends javax.swing.JFrame {
 
     private void courseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseBtnActionPerformed
         // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new AddCourseJPanel(college,userAccount));
     }//GEN-LAST:event_courseBtnActionPerformed
+
+    private void scheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new MakeScheduleJPanel(college,userAccount));
+    }//GEN-LAST:event_scheduleBtnActionPerformed
+
+    private void gradeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new GradeStudentsJPanel(college,userAccount));
+    }//GEN-LAST:event_gradeBtnActionPerformed
 
     /**
      * @param args the command line arguments

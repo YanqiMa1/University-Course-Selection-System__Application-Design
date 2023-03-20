@@ -4,6 +4,9 @@
  */
 package info5100.university.example.UI.FacultyJFrame;
 
+import info5100.university.example.College.College;
+import info5100.university.example.Role.UserAccount;
+
 /**
  *
  * @author hp
@@ -13,7 +16,7 @@ public class AddCourseJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddCourseJPanel
      */
-    public AddCourseJPanel() {
+    public AddCourseJPanel(College college, UserAccount userAccount) {
         initComponents();
     }
 
@@ -43,7 +46,7 @@ public class AddCourseJPanel extends javax.swing.JPanel {
         createBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 204, 153));
+        setBackground(new java.awt.Color(255, 204, 102));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Course Name:");

@@ -4,6 +4,9 @@
  */
 package info5100.university.example.UI.FacultyJFrame;
 
+import info5100.university.example.College.College;
+import info5100.university.example.Role.UserAccount;
+
 /**
  *
  * @author hp
@@ -13,7 +16,7 @@ public class MakeScheduleJPanel extends javax.swing.JPanel {
     /**
      * Creates new form MakeScheduleJPanel
      */
-    public MakeScheduleJPanel() {
+    public MakeScheduleJPanel(College college, UserAccount userAccount) {
         initComponents();
     }
 
