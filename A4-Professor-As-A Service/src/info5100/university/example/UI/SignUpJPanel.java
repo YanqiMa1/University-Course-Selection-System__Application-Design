@@ -112,8 +112,11 @@ public class SignUpJPanel extends javax.swing.JPanel {
         UserAccountDirectory infoUad = info.getUad();
 
 
-        if (infoUad.accountExists(fieldUsername.getText())) {
 
+
+        if (infoUad.accountExists(fieldUsername.getText())) {
+            
+           
             JOptionPane.showMessageDialog(null, "This username has been taken.");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
@@ -145,8 +148,10 @@ public class SignUpJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Authority successfully registered.");
             }
         }
+    }
         
-        //待创建其他两个role--yanqi
+        
+
 
     }//GEN-LAST:event_btnSignUpActionPerformed
 
