@@ -7,23 +7,35 @@ package info5100.university.example.UI.FacultyJFrame;
 import info5100.university.example.College.College;
 import info5100.university.example.Role.UserAccount;
 
+import info5100.university.example.Role.UserAccountDirectory;
+import info5100.university.example.UI.MainJFrame;
+
+
 /**
  *
  * @author alilovepeach
  */
 public class FacultyJFrame extends javax.swing.JFrame {
 
+    private College college;
+    private UserAccount userAccount;
+
+
     /**
      * Creates new form FacultyJFrame
      */
     public FacultyJFrame() {
         initComponents();
-        this.setVisible(true);
+
+       
     }
     
-    public FacultyJFrame(College college, UserAccount userAccount) {
+    public FacultyJFrame(College college, UserAccount userAccount){
         initComponents();
         this.setVisible(true);
+        
+        this.college = college;
+        this.userAccount = userAccount;
     }
 
 
@@ -36,21 +48,102 @@ public class FacultyJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        logoutBtn = new javax.swing.JButton();
+        courseBtn = new javax.swing.JButton();
+        scheduleBtn = new javax.swing.JButton();
+        gradeBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 102));
+
+        logoutBtn.setText("LOG OUT");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+
+        courseBtn.setText("ADD COURSE");
+        courseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                courseBtnActionPerformed(evt);
+            }
+        });
+
+        scheduleBtn.setText("MAKE SCHEDULE");
+        scheduleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scheduleBtnActionPerformed(evt);
+            }
+        });
+
+        gradeBtn.setText("GRADE STUDENTS");
+        gradeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gradeBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(courseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(scheduleBtn)
+                .addGap(18, 18, 18)
+                .addComponent(gradeBtn)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(58, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logoutBtn)
+                    .addComponent(courseBtn)
+                    .addComponent(scheduleBtn)
+                    .addComponent(gradeBtn))
+                .addGap(41, 41, 41))
         );
+
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainJFrame mj = new MainJFrame(this.college);
+    }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void courseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new AddCourseJPanel(college,userAccount));
+    }//GEN-LAST:event_courseBtnActionPerformed
+
+    private void scheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new MakeScheduleJPanel(college,userAccount));
+    }//GEN-LAST:event_scheduleBtnActionPerformed
+
+    private void gradeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeBtnActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(new GradeStudentsJPanel(college,userAccount));
+    }//GEN-LAST:event_gradeBtnActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -88,5 +181,13 @@ public class FacultyJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
+    private javax.swing.JButton courseBtn;
+    private javax.swing.JButton gradeBtn;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JButton scheduleBtn;
+
     // End of variables declaration//GEN-END:variables
 }

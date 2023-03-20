@@ -19,6 +19,7 @@ public class UserAccountDirectory {
 
     Department department;
 
+
     ArrayList<UserAccount> useraccountlist;
 //    ArrayList<UserAccount> facultylist;
 
@@ -81,10 +82,12 @@ public class UserAccountDirectory {
                 return ua;
             }
         }
+
         return null;
     }
     
     
+
       public UserAccount findByUsername(String username) {
         for(UserAccount ua: this.useraccountlist) {
             if(ua.getUsername().equals(username)) {
@@ -92,6 +95,7 @@ public class UserAccountDirectory {
             }
         }
         
+
         return null;
     }
 }
