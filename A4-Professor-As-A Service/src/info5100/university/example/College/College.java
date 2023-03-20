@@ -19,6 +19,7 @@ public class College {
     public College(String name){
         departments = new ArrayList();
         this.name = name;
+        
     }
 
     public static College getInstance() {

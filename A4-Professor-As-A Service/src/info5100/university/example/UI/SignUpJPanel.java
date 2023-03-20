@@ -109,8 +109,12 @@ public class SignUpJPanel extends javax.swing.JPanel {
         Department info = this.college.findDepartment("Information System");
         UserAccountDirectory infoUad = info.getUad();
 
-        if (infoUad.accountExists(fieldUsername.getText())) {
-
+    if(fieldName.getText()!=null && fieldUsername.getText()!=null && fieldPassword.getText()!=null){
+            
+        
+        if (infoUad.findByUsername(fieldUsername.getText())!=null) {
+            
+            if(infoUad.accountExists(fieldUsername.getText())){
             JOptionPane.showMessageDialog(null, "This username has been taken.");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
@@ -137,9 +141,12 @@ public class SignUpJPanel extends javax.swing.JPanel {
                 info.getFacultydirectory().newFacultyProfile(p);
                 JOptionPane.showMessageDialog(null, "Authority successfully registered.");
             }
+        }}
+        }else{
+            JOptionPane.showMessageDialog(null, "Please fill all text!");
         }
         
-        //待创建其他两个role--yanqi
+
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void roleComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleComboBoxActionPerformed

@@ -65,6 +65,9 @@ public class UserAccountDirectory {
     }
     
     public Boolean accountExists(String username) {
+        if(this.useraccountlist.isEmpty()){
+            return false;
+        }else{
         for(UserAccount u: this.useraccountlist) {
             if(u.getUsername().equals(username)) {
                 return true;
@@ -73,6 +76,11 @@ public class UserAccountDirectory {
         
         return false;
     }
+    }
+    
+  
+    
+    
     
     
     public UserAccount authenticateUser(String name, String password) {
