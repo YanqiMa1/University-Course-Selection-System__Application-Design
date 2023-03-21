@@ -41,5 +41,21 @@ public class AuthorityDirectory {
         }
             return null; //not found after going through the whole list
          }
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    public ArrayList<AuthorityProfile> getAuthoritylist() {
+        return authoritylist;
+    }
+
+    public void setAuthoritylist(ArrayList<AuthorityProfile> authoritylist) {
+        this.authoritylist = authoritylist;
+    }
     
 }

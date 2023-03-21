@@ -5,6 +5,7 @@
 package info5100.university.example.Authority;
 
 import info5100.university.example.Persona.Person;
+import info5100.university.example.Persona.StudentProfile;
 import java.util.ArrayList;
 
 /**
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 public class AuthorityProfile {
 
     Person person;
+    ArrayList<StudentProfile> studentrequest;
 
     public AuthorityProfile(Person p) {  //could be company instead of just a name as a string
         person = p;
+        this.studentrequest=new  ArrayList<StudentProfile>();
     }
 
     public Person getPerson() {
@@ -26,6 +29,20 @@ public class AuthorityProfile {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+    public ArrayList<StudentProfile> getStudentrequest() {
+        return studentrequest;
+    }
+
+    public void setStudentrequest(ArrayList<StudentProfile> studentrequest) {
+        this.studentrequest = studentrequest;
+    }
+    
+    
+    
+    
+    
+    
 
     
     

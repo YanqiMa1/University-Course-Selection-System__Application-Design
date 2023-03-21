@@ -4,6 +4,8 @@
  */
 package info5100.university.example.UI.StudentWorkArea;
 
+import info5100.university.example.Authority.AuthorityDirectory;
+import info5100.university.example.Authority.AuthorityProfile;
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseCatalog.CourseLoad;
 import info5100.university.example.CourseCatalog.SeatAssignment;
@@ -11,6 +13,7 @@ import info5100.university.example.Persona.StudentProfile;
 import info5100.university.example.Persona.Transcript;
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,6 +40,7 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         this.pf = pf;
 
         populateTranscript();
+        populateDropdowns();
     }
 
     /**
@@ -80,7 +84,7 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         requestBtn = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 102));
@@ -130,6 +134,11 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 200, 20));
 
         requestBtn.setText("Request to graduate");
+        requestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestBtnActionPerformed(evt);
+            }
+        });
         add(requestBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 200, -1));
 
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 180, -1));
@@ -143,10 +152,24 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_RateFieldActionPerformed
 
+    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+        AuthorityProfile ap = (AuthorityProfile)jComboBox1.getSelectedItem();
+        ap.getStudentrequest().add(this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()));
+        jLabel3.setText("Pending···");
+    }//GEN-LAST:event_requestBtnActionPerformed
 
+public void populateDropdowns() {
+
+        ArrayList<AuthorityProfile> ad = this.pf.getAuthoritydirectory().getAuthoritylist();
+
+        for (AuthorityProfile ap : ad) {
+            jComboBox1.addItem(ap);
+        }
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField RateField;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
