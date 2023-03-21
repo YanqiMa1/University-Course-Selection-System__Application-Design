@@ -4,9 +4,8 @@
  */
 package info5100.university.example.UI;
 
-import info5100.university.example.College.College;
-import info5100.university.example.Department.Department;
-import info5100.university.example.Role.AdminRole;
+
+import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Role.UserAccount;
 import javax.swing.JOptionPane;
@@ -20,25 +19,23 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    private College college;
+//    private College college;
+    private Platform pf;
     private UserAccount userAccount;
     private UserAccountDirectory uad;
 
     public MainJFrame() {
         initComponents();
-        this.college = College.getInstance();
-        this.setVisible(true);
+        this.pf =Platform.getInstance();
     }
     
-
-    public MainJFrame(College college, UserAccount userAccount){
+    public MainJFrame(Platform pf, UserAccount userAccount) {
         initComponents();
         this.setVisible(true);
 
-        this.college = college;
-        this.uad = college.findDepartment("Information System").getUad();
+        this.pf = pf;
+        this.uad = pf.getUad();
         this.userAccount = userAccount;
-        this.uad.createUserAccount("admin", "admin", new AdminRole());
     }
     
 
@@ -99,6 +96,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel2.setForeground(new java.awt.Color(255, 102, 102));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -129,34 +129,27 @@ public class MainJFrame extends javax.swing.JFrame {
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
 
-        jSplitPane1.setRightComponent(new SignUpJPanel(this.college, userAccount));
-
+        jSplitPane1.setRightComponent(new SignUpJPanel(this.pf, userAccount));
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void btnSignIn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignIn1ActionPerformed
         // TODO add your handling code here:
-        this.uad = college.findDepartment("Information System").getUad();
-
-
-        if(this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
+        this.uad = pf.getUad();
+        if (this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
             UserAccount studentUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
-            studentUser.getRole().createWorkArea(this.college, studentUser);
+            studentUser.getRole().createWorkArea(this.pf, studentUser);
         } else if (this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
             UserAccount facultyUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
-            facultyUser.getRole().createWorkArea(this.college, facultyUser);
+            facultyUser.getRole().createWorkArea(this.pf, facultyUser);
         } else if (this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText()) != null) {
             UserAccount authorityUser = this.uad.authenticateUser(fieldUserName.getText(), fieldPassword.getText());
             this.setVisible(false);
-            authorityUser.getRole().createWorkArea(this.college, authorityUser);
+            authorityUser.getRole().createWorkArea(this.pf, authorityUser);
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Credentials");
         }
-        
-
-        //待验证的其他role--yanqi
-
     }//GEN-LAST:event_btnSignIn1ActionPerformed
 
     /**

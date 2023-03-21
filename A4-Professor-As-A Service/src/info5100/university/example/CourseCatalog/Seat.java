@@ -6,31 +6,32 @@ package info5100.university.example.CourseCatalog;
 
 /**
  *
- * @author hp
+ * @author Ma2017
  */
 public class Seat {
+
     private static int count = 0;
-    
+
     private String id; // unique id
-    private Boolean occupied; 
+    private Boolean occupied;
     private CourseOffer courseoffer;
     private SeatAssignment seatassignment; //links back to studentprofile
-    
-    public Seat(CourseOffer co){
+
+    public Seat(CourseOffer co) {
         this.id = "Seat" + count++;
         occupied = false;
         courseoffer = co;
-        
     }
-    
-    public Boolean isOccupied(){
+
+    public Boolean isOccupied() {
         return occupied;
 
     }
-    public SeatAssignment newSeatAssignment(CourseLoad cl){
-        
+
+    public SeatAssignment newSeatAssignment(CourseLoad cl) {
+
         seatassignment = new SeatAssignment(cl, this); //links seatassignment to seat
-        occupied = true;   
+        occupied = true;
         return seatassignment;
     }
 
@@ -57,5 +58,9 @@ public class Seat {
     public void setSeatassignment(SeatAssignment seatassignment) {
         this.seatassignment = seatassignment;
     }
-    
+
+    public int getCourseCredits() {
+        return courseoffer.getCreditHours();
+    }
+
 }

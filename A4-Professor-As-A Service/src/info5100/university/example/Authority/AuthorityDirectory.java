@@ -4,7 +4,7 @@
  */
 package info5100.university.example.Authority;
 
-import info5100.university.example.Department.Department;
+import info5100.university.example.Platform.Platform;
 import java.util.ArrayList;
 
 /**
@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class AuthorityDirectory {
     
-    Department department;
+    Platform platform;
     ArrayList<AuthorityProfile> authoritylist;
 
-    public AuthorityDirectory(Department d) {
+    public AuthorityDirectory(Platform p) {
 
-        department = d;
+        platform = p;
         authoritylist = new ArrayList<>();
 
     }

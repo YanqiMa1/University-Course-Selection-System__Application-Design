@@ -6,7 +6,7 @@
 package info5100.university.example.Persona.Faculty;
 
 import info5100.university.example.Persona.*;
-import info5100.university.example.Department.Department;
+import info5100.university.example.Platform.Platform;
 import java.util.ArrayList;
 
 /**
@@ -14,46 +14,46 @@ import java.util.ArrayList;
  * @author kal bugrara
  */
 public class FacultyDirectory {
+     Platform department;
+     ArrayList<FacultyProfile> professors;
 
-    Department department;
-    ArrayList<FacultyProfile> teacherlist;
-
-    public FacultyDirectory(Department d) {
+    public FacultyDirectory(Platform d) {
 
         department = d;
-        teacherlist = new ArrayList();
+        professors = new ArrayList();
 
     }
+    public ArrayList<FacultyProfile> getProfessors() {
+        return professors;
+    }
 
+    public void addToProfessors(FacultyProfile professor) {
+        this.professors.add(professor);
+    }
+    
+    public FacultyProfile findProfessorById(String id){
+        for (FacultyProfile p: this.professors){
+            if (p.getPerson().getPersonId().equals(id)){
+                return p;
+            }
+        }
+        
+        return null;
+    }
     public FacultyProfile newFacultyProfile(Person p) {
 
         FacultyProfile sp = new FacultyProfile(p);
-        teacherlist.add(sp);
+        professors.add(sp);
         return sp;
     }
-    
-    public FacultyProfile getTopProfessor(){
-        
-        double bestratingsofar = 0.0;
-        FacultyProfile BestProfSofar = null;
-        for(FacultyProfile fp: teacherlist)
-           if(fp.getProfAverageOverallRating()>bestratingsofar){
-           bestratingsofar = fp.getProfAverageOverallRating();
-           BestProfSofar = fp;
-           }
-        return BestProfSofar;
-        
-    }
 
-    public FacultyProfile findTeachingFaculty(String id) {
-
-        for (FacultyProfile sp : teacherlist) {
-
-            if (sp.isMatch(id)) {
-                return sp;
+    public FacultyProfile findProfessorByName(String profname) {
+        for (FacultyProfile p: this.professors){
+            if (p.getPerson().getNameOfPerson().equals(profname)){
+                return p;
             }
         }
-            return null; //not found after going through the whole list
-         }
-    
+        
+        return null;
+    }
 }

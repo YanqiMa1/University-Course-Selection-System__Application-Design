@@ -5,6 +5,7 @@
 package info5100.university.example.UI.AuthorityWorkArea;
 
 import info5100.university.example.College.College;
+import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Role.UserAccount;
 import info5100.university.example.UI.MainJFrame;
@@ -18,7 +19,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     /**
      * Creates new form AuthorityJFrame
      */
-    private College college;
+    private Platform pf;
     private UserAccount userAccount;
     
     public AuthorityJFrame() {
@@ -26,7 +27,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public AuthorityJFrame(College college, UserAccount userAccount) {
+    public AuthorityJFrame(Platform pf, UserAccount userAccount) {
         initComponents();
         this.setVisible(true);
     }
@@ -43,11 +44,9 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-
         jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,7 +60,6 @@ public class AuthorityJFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jButton2.setText("jButton2");
@@ -77,7 +75,6 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
 
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -86,7 +83,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGap(0, 497, Short.MAX_VALUE)
         );
 
         jSplitPane1.setRightComponent(jPanel4);
@@ -99,10 +96,8 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-
-        MainJFrame mainJFrame = new MainJFrame(this.college, this.userAccount);
+        MainJFrame mainJFrame = new MainJFrame(this.pf, this.userAccount);
         mainJFrame.setVisible(true);
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -142,11 +137,9 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSplitPane jSplitPane1;

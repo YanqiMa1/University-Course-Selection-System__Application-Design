@@ -7,7 +7,7 @@ package info5100.university.example.Role;
 
 import info5100.university.example.Role.UserAccount;
 import info5100.university.example.Persona.*;
-import info5100.university.example.Department.Department;
+import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.Role;
 import java.util.ArrayList;
 
@@ -17,25 +17,20 @@ import java.util.ArrayList;
  */
 public class UserAccountDirectory {
 
-    Department department;
-
-
+    Platform department;
     ArrayList<UserAccount> useraccountlist;
 //    ArrayList<UserAccount> facultylist;
 
-
-    public UserAccountDirectory(Department d) {
+    public UserAccountDirectory(Platform d) {
 
         department = d;
-
-       
+        useraccountlist = new ArrayList<UserAccount>();
         
 
     }
 
     public ArrayList<UserAccount> getUseraccountlist() {
         return useraccountlist;
-
     }
      
     public UserAccount createUserAccount(String username, String password, Role role) {
@@ -66,9 +61,6 @@ public class UserAccountDirectory {
     }
     
     public Boolean accountExists(String username) {
-        if(this.useraccountlist.isEmpty()){
-            return false;
-        }else{
         for(UserAccount u: this.useraccountlist) {
             if(u.getUsername().equals(username)) {
                 return true;
@@ -77,11 +69,6 @@ public class UserAccountDirectory {
         
         return false;
     }
-    }
-    
-  
-    
-    
     
     
     public UserAccount authenticateUser(String name, String password) {
@@ -90,12 +77,10 @@ public class UserAccountDirectory {
                 return ua;
             }
         }
-
         return null;
     }
     
     
-
       public UserAccount findByUsername(String username) {
         for(UserAccount ua: this.useraccountlist) {
             if(ua.getUsername().equals(username)) {
@@ -103,7 +88,6 @@ public class UserAccountDirectory {
             }
         }
         
-
         return null;
     }
 }

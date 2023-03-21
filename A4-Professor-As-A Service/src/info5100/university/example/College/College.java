@@ -5,7 +5,7 @@
  */
 package info5100.university.example.College;
 
-import info5100.university.example.Department.Department;
+import info5100.university.example.Platform.Platform;
 import java.util.ArrayList;
 
 /**
@@ -13,44 +13,41 @@ import java.util.ArrayList;
  * @author kal bugrara
  */
 public class College {
-    ArrayList<Department> departments;
+    ArrayList<Platform> departments;
     String name;
     
     public College(String name){
         departments = new ArrayList();
         this.name = name;
-        
     }
 
     public static College getInstance() {
         return new College("College of Engineering");
     }
     
-    public ArrayList<Department> getDepartments() {
+    public ArrayList<Platform> getDepartments() {
         return departments;
     }
 
-    public void setDepartments(ArrayList<Department> departments) {
+    public void setDepartments(ArrayList<Platform> departments) {
         this.departments = departments;
     }
     
     
-    public Department newDepartment(String n) {
-        Department d = new Department(n);
+    public Platform newDepartment(String n) {
+        Platform d = new Platform(n);
         departments.add(d);
         return d;
     }
     
-    public Department findDepartment(String n){
-        for (Department d: this.departments){
+    public Platform findDepartment(String n){
+        for (Platform d: this.departments){
             if (d.getName().equals(n)){
                 return d;
             }
         }
         return null;
     }
-
-   
     
     
     

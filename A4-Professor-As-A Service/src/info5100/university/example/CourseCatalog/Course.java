@@ -12,25 +12,31 @@ package info5100.university.example.CourseCatalog;
 public class Course {
 
     private static int count = 0;
-    
+
     private String courseId;
     private String name;
     private String topic;
     private String region;
     private String language;
-    private int price; //per credit hour 1500
+    private String profname;
+    private int price;
+    private int credit;//assume each course has 4 credit by defalut
+    private String term;
 
-   public Course(String name,String topic, String region, String language, int price) {
+    public Course(String name, String topic, String region, String language, int price, String profN) {
         this.courseId = "Course" + count++;
         this.name = name;
         this.topic = topic;
         this.region = region;
         this.language = language;
         this.price = price;
+        this.credit = 4;//assume each course has 4 credit by defalut
+        this.profname = profN;
+        this.term = " default";
 
     }
 
-     public static int getCount() {
+    public static int getCount() {
         return count;
     }
 
@@ -85,10 +91,39 @@ public class Course {
     public void setPrice(int price) {
         this.price = price;
     }
-    
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
+    }
+
+    public String getProfname() {
+        return profname;
+    }
+
+    public void setProfname(String profname) {
+        this.profname = profname;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
+    public int getCredits() {
+        return credit;
+
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.courseId;
     }
-    
+
 }

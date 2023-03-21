@@ -5,14 +5,10 @@
  */
 package info5100.university.example.Persona;
 
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  *
  * @author kal bugrara
  */
-public class Authority {
-    String name;
+public class StudentAccount {
+    
 }

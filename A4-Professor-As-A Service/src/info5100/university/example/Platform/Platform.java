@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package info5100.university.example.Department;
+package info5100.university.example.Platform;
 
 import info5100.university.example.Authority.AuthorityDirectory;
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseCatalog.CourseCatalog;
-import info5100.university.example.CourseSchedule.CourseLoad;
-import info5100.university.example.CourseSchedule.CourseOffer;
-import info5100.university.example.CourseSchedule.CourseSchedule;
+import info5100.university.example.CourseCatalog.CourseLoad;
+import info5100.university.example.CourseCatalog.CourseOffer;
+import info5100.university.example.CourseCatalog.CourseSchedule;
 import info5100.university.example.Degree.Degree;
-import info5100.university.example.Employer.EmployerDirectory;
 import info5100.university.example.Persona.Faculty.FacultyDirectory;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Persona.PersonDirectory;
@@ -24,7 +23,7 @@ import java.util.HashMap;
  *
  * @author kal bugrara
  */
-public class Department {
+public class Platform {
 
     String name;
     CourseCatalog coursecatalog;
@@ -32,23 +31,25 @@ public class Department {
     StudentDirectory studentdirectory;
     FacultyDirectory facultydirectory;
     AuthorityDirectory authoritydirectory;
-    EmployerDirectory employerdirectory;
     Degree degree;
     UserAccountDirectory uad;
-
     HashMap<String, CourseSchedule> mastercoursecatalog;
+    double collectionFee;
 
-    public Department(String n) {
+    public Platform(String n) {
         name = n;
         mastercoursecatalog = new HashMap<>();
-        coursecatalog = new CourseCatalog(this);
+        coursecatalog = new CourseCatalog();
         studentdirectory = new StudentDirectory(this); //pass the department object so it stays linked to it
         facultydirectory = new FacultyDirectory(this);
         persondirectory = new PersonDirectory();
         authoritydirectory = new AuthorityDirectory(this);
         degree = new Degree("MSIS");
         uad = new UserAccountDirectory(this);
-        
+    }
+    
+       public static Platform getInstance() {
+        return new Platform("Cloud Service Platform");
     }
 
     public void addCoreCourse(Course c) {
@@ -99,14 +100,7 @@ public class Department {
         this.facultydirectory = facultydirectory;
     }
 
-    public EmployerDirectory getEmployerdirectory() {
-        return employerdirectory;
-    }
-
-    public void setEmployerdirectory(EmployerDirectory employerdirectory) {
-        this.employerdirectory = employerdirectory;
-    }
-
+   
     public Degree getDegree() {
         return degree;
     }
@@ -154,10 +148,10 @@ public class Department {
         return coursecatalog;
     }
 
-    public Course newCourse(String n, String nm, int cr) {
-        Course c = coursecatalog.newCourse(n, nm, cr);
-        return c;
-    }
+//    public Course newCourse(String n, String nm, int cr) {
+//        Course c = coursecatalog.newCourse(n, nm, cr);
+//        return c;
+//    }
 
     public int calculateRevenuesBySemester(String semester) {
         CourseSchedule css = mastercoursecatalog.get(semester);
@@ -168,7 +162,15 @@ public class Department {
         StudentProfile sp = studentdirectory.findStudent(studentid);
         CourseLoad cl = sp.getCurrentCourseLoad();
         CourseSchedule cs = mastercoursecatalog.get(semester);
-        CourseOffer co = cs.getCourseOfferByNumber(cn);
-        co.assignEmptySeat(cl);
+//        CourseOffer co = cs.getCourseOfferByNumber(cn);
+//        co.assignEmptySeat(cl);
     }
+    
+    public double getCollectionFee(){
+        return collectionFee;
+    }
+    
+   public void addCollectionFee(double tuitionfee){
+       collectionFee += tuitionfee;
+   }
 }
