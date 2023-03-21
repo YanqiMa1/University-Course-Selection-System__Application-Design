@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 /**
  *
- * @author hp
+ * @author Ma2017
  */
 public class MasterCourseCatalog {
-    ArrayList<Course> courses;
+     ArrayList<Course> courses;
 
     public ArrayList<Course> getMasterCourses() {
         return courses;
@@ -20,4 +20,5 @@ public class MasterCourseCatalog {
     public void addToMasterCourses(Course course) {
         this.courses.add(course);
     }
+    
 }

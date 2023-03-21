@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package info5100.university.example.CourseCatalog;
-
-import info5100.university.example.Department.Department;
-import info5100.university.example.Professsor.Professor;
+import info5100.university.example.Platform.Platform;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
 import java.util.ArrayList;
 
 /**
@@ -15,19 +14,23 @@ import java.util.ArrayList;
  */
 public class CourseCatalog {
     ArrayList<Course> courses;
-    private Professor professor;
+    private FacultyProfile facultyProfile;
     
-    public CourseCatalog(Professor p){
+    public CourseCatalog(FacultyProfile fp){
         this.courses = new ArrayList<Course>();
-        this.professor = p;
+        this.facultyProfile = fp;
+    }
+      public CourseCatalog(){
+        this.courses = new ArrayList<Course>();
+      
     }
     
     public ArrayList<Course> getCourses() {
         return courses;
     }
 
-    public Course createCourse(String name,String topic, String region, String language, int price){
-        Course c = new Course(name,topic,region,language,price);
+    public Course createCourse(String name,String topic, String region, String language, int price,String profN){
+        Course c = new Course(name,topic,region,language,price,profN);
         this.courses.add(c);
         return c;
     }
@@ -39,7 +42,6 @@ public class CourseCatalog {
         }
         return null;
     }
-    
     
     
 }

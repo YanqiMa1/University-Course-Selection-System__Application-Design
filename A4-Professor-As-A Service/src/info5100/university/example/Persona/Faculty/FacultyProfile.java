@@ -5,57 +5,118 @@
  */
 package info5100.university.example.Persona.Faculty;
 
+import info5100.university.example.CourseCatalog.Course;
+import info5100.university.example.CourseCatalog.CourseCatalog;
+import info5100.university.example.CourseCatalog.CourseOffer;
+import info5100.university.example.CourseCatalog.CourseSchedule;
 import info5100.university.example.Persona.*;
-import info5100.university.example.CourseSchedule.CourseOffer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author kal bugrara
  */
-public class FacultyProfile {
+public class FacultyProfile{
 
-    Person person;
-    ArrayList <FacultyAssignment> facultyassignments; 
+
+   
+    private Person person;
+    private CourseCatalog courseCatalog;
+    private HashMap<String, CourseSchedule> allSchedules;
+    private double reputation = 0; //default
+    private double tuitionCollected;
+//    private Boolean accountStatus; //only professor role has this attribute
+    private ArrayList<StudentProfile> enrolledListForAllTerm;
     
     public FacultyProfile(Person p) {
-
         person = p;
-        facultyassignments = new ArrayList();
-    }
-    public  double getProfAverageOverallRating(){
-        
-        double sum = 0.0;
-        //for each facultyassignment extract class rating
-        //add them up and divide by the number of teaching assignmnet;
-        for(FacultyAssignment fa: facultyassignments){
-            
-            sum = sum + fa.getRating();
-            
-        }
-        //divide by the total number of faculty assignments
-        
-        return sum/(facultyassignments.size()*1.0); //this ensure we have double/double
-        
-    }
-
-    public FacultyAssignment AssignAsTeacher(CourseOffer co){
-        
-        FacultyAssignment fa = new FacultyAssignment(this, co);
-        facultyassignments.add(fa);
-        
-        return fa;
+        this.courseCatalog = new CourseCatalog(this);
+        this.allSchedules = new HashMap<String, CourseSchedule>();  
     }
     
-    public FacultyProfile getCourseOffer(String courseid){
-        return null; //complete it later
+    public Course createCourse(String name,String topic, String region, String language, int price,String pfoN){
+        Course c = this.courseCatalog.createCourse(name,topic,region,language,price,pfoN);
+        return c;
     }
+    
+    public CourseSchedule newCourseSchedule(String term) {
 
-    public boolean isMatch(String id) {
-        if (person.getPersonId().equals(id)) {
-            return true;
+        CourseSchedule cs = new CourseSchedule(term, this.courseCatalog);
+        this.allSchedules.put(term, cs);
+        return cs;
+    }
+    
+    //create schedule before create offer
+    public CourseOffer createCourseOffer(String term, String courseId){
+        CourseSchedule cs = this.getCourseScheduleByTerm(term);
+        CourseOffer co = cs.newCourseOffer(courseId,this);
+        
+        
+        return co;
+    }
+    
+    public CourseSchedule getCourseScheduleByTerm(String term) {
+
+        return allSchedules.get(term);
+
+    }
+    
+    public ArrayList<StudentProfile> getEnrolledListForAllTerm(){
+        
+        for (Map.Entry<String,CourseSchedule> termSchedule: this.allSchedules.entrySet()){
+            CourseSchedule cs = termSchedule.getValue();
+            
+            for (StudentProfile s: cs.getEnrolledListForTerm()){
+                this.enrolledListForAllTerm.add(s);
+            }
         }
-        return false;
+        return this.enrolledListForAllTerm;
+    }
+   
+
+    public CourseCatalog getCourseCatalog() {
+        return courseCatalog;
     }
 
+    public void setCourseCatalog(CourseCatalog courseCatalog) {
+        this.courseCatalog = courseCatalog;
+    }
+
+
+    public double getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(int reputation) {
+        this.reputation = reputation;
+    }
+
+    public double getTuitionCollected() {
+        return tuitionCollected;
+    }
+
+    public void setTuitionCollected(int tuitionCollected) {
+        this.tuitionCollected = tuitionCollected;
+    }
+
+    public HashMap<String, CourseSchedule> getAllSchedules() {
+        return allSchedules;
+    }
+
+    public void setAllSchedules(HashMap<String, CourseSchedule> schedules) {
+        this.allSchedules = schedules;
+    }
+
+    
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    
 }

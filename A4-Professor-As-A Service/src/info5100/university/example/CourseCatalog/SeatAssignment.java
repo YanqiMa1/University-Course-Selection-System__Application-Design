@@ -6,18 +6,21 @@ package info5100.university.example.CourseCatalog;
 
 /**
  *
- * @author hp
+ * @author Ma2017
  */
 public class SeatAssignment {
+
     Seat seat;
     CourseLoad courseload;
-    String grade = "ungraded";
+    float grade ;
+    Course course;
     
     public SeatAssignment(CourseLoad cl, Seat s) {
         seat = s;
         courseload = cl;
+        grade = 0;
     }
-    
+
     public void assignSeatToStudent(CourseLoad cl) {
         courseload = cl;
     }
@@ -38,13 +41,30 @@ public class SeatAssignment {
         this.courseload = courseload;
     }
 
-    public String getGrade() {
+    public float getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(float grade) {
         this.grade = grade;
     }
     
-     
+    public int getCreditHours(){
+        return seat.getCourseCredits();
+       
+    }
+
+    public float GetCourseStudentScore() {
+        return getCreditHours() * grade;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+    
+
 }

@@ -4,34 +4,38 @@
  */
 package info5100.university.example.CourseCatalog;
 
-import info5100.university.example.Persona.Student;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
+import info5100.university.example.Persona.StudentProfile;
 import java.util.ArrayList;
 
 /**
  *
- * @author hp
+ * @author Ma2017
  */
 public class CourseSchedule {
+
     private String term;
     private CourseCatalog courseCatalog;
     private ArrayList<CourseOffer> schedule;
-    private ArrayList<Student> enrolledListForTerm;
-    
-    public CourseSchedule(String t,CourseCatalog cc){
+    private ArrayList<StudentProfile> enrolledListForTerm;
+
+    public CourseSchedule(String t, CourseCatalog cc) {
         this.term = t;
         this.courseCatalog = cc;
         schedule = new ArrayList<CourseOffer>();
-        enrolledListForTerm = new ArrayList<Student>();
+        enrolledListForTerm = new ArrayList<StudentProfile>();
     }
-    
-    public CourseOffer newCourseOffer(String courseId) {
+
+    public CourseOffer newCourseOffer(String courseId, FacultyProfile prof) {
         Course c = courseCatalog.getCourseById(courseId);
-        if (c == null)
+        if (c == null) {
             return null;
-        
-        CourseOffer co = new CourseOffer(c);
-        schedule.add(co);
-        return co;
+        } else {
+            CourseOffer co = new CourseOffer(c, prof);
+            schedule.add(co);
+            return co;
+        }
+
     }
 
     public CourseOffer getCourseOfferByCourseId(String id) {
@@ -44,10 +48,10 @@ public class CourseSchedule {
         }
         return null;
     }
-    
-    public ArrayList<Student> getEnrolledListForTerm(){
-        for (CourseOffer co: schedule){
-            for (Student s: co.getEnrolledStudentList()){
+
+    public ArrayList<StudentProfile> getEnrolledListForTerm() {
+        for (CourseOffer co : schedule) {
+            for (StudentProfile s : co.getEnrolledStudentList()) {
                 this.enrolledListForTerm.add(s);
             }
         }
@@ -87,6 +91,5 @@ public class CourseSchedule {
     public void setSchedule(ArrayList<CourseOffer> schedule) {
         this.schedule = schedule;
     }
-    
-    
+
 }

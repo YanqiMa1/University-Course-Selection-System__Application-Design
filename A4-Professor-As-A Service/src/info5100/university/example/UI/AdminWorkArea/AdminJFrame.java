@@ -4,9 +4,8 @@
  */
 package info5100.university.example.UI.AdminWorkArea;
 
-import info5100.university.example.College.College;
+import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
-import info5100.university.example.UI.StudentWorkArea.TranscriptJPanel;
 
 /**
  *
@@ -17,16 +16,16 @@ public class AdminJFrame extends javax.swing.JFrame {
     /**
      * Creates new form AdminJFrame
      */
-    private College college;
-    private UserAccount userAccount; 
-    
+    private Platform pf;
+    private UserAccount ua;
     public AdminJFrame() {
         initComponents();
     }
     
-    public AdminJFrame(College college, UserAccount userAccount) {
+    public AdminJFrame(Platform platform,UserAccount useraccount) {
         initComponents();
-        this.setVisible(true);
+        this.pf=platform;
+        this.ua=useraccount;
     }
 
     /**
@@ -38,46 +37,74 @@ public class AdminJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        logoutBtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        showBtn = new javax.swing.JButton();
         logoutBtn2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        showBtn1 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
-        logoutBtn.setText("log out");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        showBtn.setText("ShowPerformance");
-        showBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(showBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, -1, -1));
-
         logoutBtn2.setText("log out");
         jPanel1.add(logoutBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
+        showBtn1.setText("ShowPerformance");
+        showBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(showBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, -1, -1));
+
         jSplitPane1.setLeftComponent(jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jSplitPane1.setRightComponent(jPanel2);
+        jPanel3.setBackground(new java.awt.Color(153, 153, 255));
 
-        getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 310));
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 377, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 452, Short.MAX_VALUE)
+        );
+
+        jSplitPane1.setRightComponent(jPanel3);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void showBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtnActionPerformed
-     jSplitPane1.setRightComponent(new ShowJPanel(college,userAccount)); 
-    }//GEN-LAST:event_showBtnActionPerformed
+    private void showBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showBtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,9 +144,9 @@ public class AdminJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JButton logoutBtn;
     private javax.swing.JButton logoutBtn2;
-    private javax.swing.JButton showBtn;
+    private javax.swing.JButton showBtn1;
     // End of variables declaration//GEN-END:variables
 }

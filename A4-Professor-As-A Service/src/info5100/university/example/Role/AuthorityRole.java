@@ -4,7 +4,8 @@
  */
 package info5100.university.example.Role;
 
-import info5100.university.example.College.College;
+
+import info5100.university.example.Platform.Platform;
 import info5100.university.example.UI.AuthorityWorkArea.AuthorityJFrame;
 import javax.swing.JFrame;
 
@@ -15,7 +16,7 @@ import javax.swing.JFrame;
 public class AuthorityRole extends Role{
     
     @Override
-    public JFrame createWorkArea(College college, UserAccount useraccount) {
-        return new AuthorityJFrame(college, useraccount);
+    public JFrame createWorkArea(Platform pf,UserAccount useraccount) {
+        return new AuthorityJFrame(pf, useraccount);
     }
 }

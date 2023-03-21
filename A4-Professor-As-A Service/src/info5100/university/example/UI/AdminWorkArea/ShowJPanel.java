@@ -4,7 +4,7 @@
  */
 package info5100.university.example.UI.AdminWorkArea;
 
-import info5100.university.example.College.College;
+import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
 
 /**
@@ -16,19 +16,18 @@ public class ShowJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ShowJPanel
      */
-  
-    private College college;
-    private UserAccount userAccount; 
-    
+    private Platform pf;
+    private UserAccount ua;
     public ShowJPanel() {
         initComponents();
     }
     
-    public ShowJPanel(College college, UserAccount userAccount) {
+    public ShowJPanel(Platform platform,UserAccount useraccount) {
         initComponents();
-        this.setVisible(true);
+        this.pf=platform;
+        this.ua=useraccount;
     }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,19 +37,59 @@ public class ShowJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableS = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableP = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableP1 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableP2 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableS = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableP = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 153, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTableP1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Prof Name", "Prof ID", "Prof Revenue"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTableP1);
+
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 261, 160));
+
+        jTableP2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CourseName", "CourseNum", "language"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTableP2);
+
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 261, 160));
 
         jTableS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,10 +108,6 @@ public class ShowJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTableS);
-        if (jTableS.getColumnModel().getColumnCount() > 0) {
-            jTableS.getColumnModel().getColumn(1).setHeaderValue("CourseNum");
-            jTableS.getColumnModel().getColumn(2).setHeaderValue("language");
-        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 261, 160));
 
@@ -95,54 +130,6 @@ public class ShowJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jTableP);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 261, 160));
-
-        jTableP1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Prof Name", "Prof ID", "Prof Revenue"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTableP1);
-        if (jTableP1.getColumnModel().getColumnCount() > 0) {
-            jTableP1.getColumnModel().getColumn(1).setHeaderValue("CourseNum");
-            jTableP1.getColumnModel().getColumn(2).setHeaderValue("language");
-        }
-
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 261, 160));
-
-        jTableP2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "CourseName", "CourseNum", "language"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTableP2);
-        if (jTableP2.getColumnModel().getColumnCount() > 0) {
-            jTableP2.getColumnModel().getColumn(1).setHeaderValue("CourseNum");
-            jTableP2.getColumnModel().getColumn(2).setHeaderValue("language");
-        }
-
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 261, 160));
 
         jLabel1.setText("Total Revenue of the platform:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 200, -1));

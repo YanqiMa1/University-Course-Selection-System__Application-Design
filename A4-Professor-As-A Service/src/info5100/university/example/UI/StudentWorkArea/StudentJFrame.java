@@ -4,7 +4,8 @@
  */
 package info5100.university.example.UI.StudentWorkArea;
 
-import info5100.university.example.College.College;
+
+import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
 import info5100.university.example.UI.MainJFrame;
 
@@ -17,18 +18,18 @@ public class StudentJFrame extends javax.swing.JFrame {
     /**
      * Creates new form StudentJFrame
      */
-    private College college;
+    private Platform pf;
     private UserAccount userAccount; 
     public StudentJFrame() {
         initComponents();
         this.setVisible(true);
     }
     
-    public StudentJFrame(College college, UserAccount userAccount) {
+    public StudentJFrame(Platform pf, UserAccount userAccount) {
         initComponents();
         this.setVisible(true);
         
-        this.college = college;
+        this.pf = pf;
         this.userAccount = userAccount;
     }
 
@@ -42,30 +43,25 @@ public class StudentJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
         logoutBtn = new javax.swing.JButton();
-        transBtn = new javax.swing.JButton();
         registerCourseBtn = new javax.swing.JButton();
+        transBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
-        jPanel2.setForeground(new java.awt.Color(255, 255, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logoutBtn.setText("log out");
-        jPanel2.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
-
-        transBtn.setText("Transcript");
-        transBtn.addActionListener(new java.awt.event.ActionListener() {
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transBtnActionPerformed(evt);
+                logoutBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(transBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 120, -1));
+        jPanel2.add(logoutBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         registerCourseBtn.setText("register course");
         registerCourseBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -75,48 +71,49 @@ public class StudentJFrame extends javax.swing.JFrame {
         });
         jPanel2.add(registerCourseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, -1, -1));
 
+        transBtn.setText("Transcript");
+        transBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transBtnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(transBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 120, -1));
+
         jSplitPane1.setLeftComponent(jPanel2);
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jSplitPane1.setRightComponent(jPanel3);
-
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        jButton1.setText("Log Out");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, java.awt.BorderLayout.PAGE_START);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void registerCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCourseBtnActionPerformed
+        jSplitPane1.setRightComponent(new RegisterJPanel(this.pf,userAccount));
+    }//GEN-LAST:event_registerCourseBtnActionPerformed
 
     private void transBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transBtnActionPerformed
-         jSplitPane1.setRightComponent(new TranscriptJPanel(college,userAccount)); 
+        jSplitPane1.setRightComponent(new TranscriptJPanel(this.pf,userAccount));
     }//GEN-LAST:event_transBtnActionPerformed
 
-    private void registerCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerCourseBtnActionPerformed
-         jSplitPane1.setRightComponent(new RegisterCourseJPanel(college,userAccount)); 
-    }//GEN-LAST:event_registerCourseBtnActionPerformed
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        this.setVisible(false);
+        MainJFrame mainJFrame = new MainJFrame(this.pf, this.userAccount);
+        mainJFrame.setVisible(true);
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +151,6 @@ public class StudentJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -162,6 +158,5 @@ public class StudentJFrame extends javax.swing.JFrame {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton registerCourseBtn;
     private javax.swing.JButton transBtn;
-
     // End of variables declaration//GEN-END:variables
 }

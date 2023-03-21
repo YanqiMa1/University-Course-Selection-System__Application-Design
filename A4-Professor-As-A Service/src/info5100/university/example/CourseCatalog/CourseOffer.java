@@ -4,24 +4,25 @@
  */
 package info5100.university.example.CourseCatalog;
 
-import info5100.university.example.Persona.Student;
-import info5100.university.example.Professsor.Professor;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
+import info5100.university.example.Persona.StudentProfile;
 import java.util.ArrayList;
 
 /**
  *
- * @author hp
+ * @author Ma2017
  */
 public class CourseOffer {
     private Course course;
     private ArrayList<Seat> seatlist;
-    private Professor professor;
-    private ArrayList<Student> enrolledStudentList;
+    private FacultyProfile professor;
+    private ArrayList<StudentProfile> enrolledStudentList;
     
-    public CourseOffer(Course c) {
+    public CourseOffer(Course c,FacultyProfile prof) {
         course = c;
         seatlist = new ArrayList<Seat>();
-        enrolledStudentList = new ArrayList<Student>();
+        enrolledStudentList = new ArrayList<StudentProfile>();
+        professor=prof;
     }
     
     public void generatSeats(int numOfSeats) {
@@ -65,7 +66,7 @@ public class CourseOffer {
         return sum;
     }
     
-    public ArrayList<Student> getEnrolledStudentList(){
+    public ArrayList<StudentProfile> getEnrolledStudentList(){
         
         for (Seat s : seatlist) {
             if (s.isOccupied() == true) {
@@ -92,13 +93,18 @@ public class CourseOffer {
         this.seatlist = seatlist;
     }
 
-    public Professor getProfessor() {
+    public FacultyProfile getProfessor() {
         return professor;
     }
 
-    public void setProfessor(Professor professor) {
+    public void setProfessor( FacultyProfile professor) {
         this.professor = professor;
     }
+    
+      public int getCreditHours(){
+        return course.getCredits();
+    }
+
     
     
 }

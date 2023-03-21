@@ -4,7 +4,8 @@
  */
 package info5100.university.example.Role;
 
-import info5100.university.example.College.College;
+
+import info5100.university.example.Platform.Platform;
 import javax.swing.JFrame;
 
 /**
@@ -13,13 +14,11 @@ import javax.swing.JFrame;
  */
 public abstract class Role {
 
-
     static String[] roles = {"Student", "Professor", "Authority"};
-
 
     public static String[] getRoles() {
         return roles;
     }
 
-    public abstract JFrame createWorkArea(College college, UserAccount useraccount);
+    public abstract JFrame createWorkArea(Platform pf, UserAccount useraccount);
 }

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package info5100.university.example.Department;
+package info5100.university.example.Platform;
 
-import info5100.university.example.CourseSchedule.CourseSchedule;
+
+import info5100.university.example.CourseCatalog.CourseSchedule;
 import java.lang.*;
 import java.util.HashMap;
 /**
