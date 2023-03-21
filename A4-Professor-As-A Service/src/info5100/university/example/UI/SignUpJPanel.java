@@ -7,6 +7,7 @@ package info5100.university.example.UI;
 
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Persona.Person;
+import info5100.university.example.Role.AuthorityRole;
 import info5100.university.example.Role.FacultyRole;
 import info5100.university.example.Role.StudentRole;
 import info5100.university.example.Role.UserAccount;
@@ -124,10 +125,10 @@ public class SignUpJPanel extends javax.swing.JPanel {
             }
             
             if (roleComboBox.getSelectedItem().equals("Authority")) {
-                UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new FacultyRole());
+                UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new AuthorityRole());
                 Person p = pf.getPersondirectory().newPerson(user.getAccountId());
                 p.setNameOfPerson(fieldName.getText());
-                pf.getFacultydirectory().newFacultyProfile(p);
+                pf.getAuthoritydirectory().newAuthorityProfile(p);
                 JOptionPane.showMessageDialog(null, "Authority successfully registered.");
             }
         }

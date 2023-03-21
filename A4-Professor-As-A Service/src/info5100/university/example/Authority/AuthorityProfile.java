@@ -13,19 +13,20 @@ import java.util.ArrayList;
  */
 public class AuthorityProfile {
 
-    String name;
+    Person person;
 
-    public AuthorityProfile(String n) {  //could be company instead of just a name as a string
-        name = n;
+    public AuthorityProfile(Person p) {  //could be company instead of just a name as a string
+        person = p;
     }
 
-    public String getName() {
-        return name;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPerson(Person person) {
+        this.person = person;
     }
+
     
     
 }

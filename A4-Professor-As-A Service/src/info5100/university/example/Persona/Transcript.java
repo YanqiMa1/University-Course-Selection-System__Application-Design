@@ -20,10 +20,12 @@ public class Transcript {
     StudentProfile student;
     HashMap<String, CourseLoad> courseloadlist;
     CourseLoad currentcourseload;
+    String graduateStatus;
 
     public Transcript(StudentProfile sp) {
         student = sp;
         courseloadlist = new HashMap();
+        graduateStatus = "pending";
 
     }
 
@@ -77,6 +79,15 @@ public class Transcript {
         this.currentcourseload = currentcourseload;
     }
 
+    public String getGraduateStatus() {
+        return graduateStatus;
+    }
+
+    public void setGraduateStatus(String graduateStatus) {
+        this.graduateStatus = graduateStatus;
+    }
+
+    
 //    public float getStudentTotalScore() {
 //
 //        float sum = 0;
