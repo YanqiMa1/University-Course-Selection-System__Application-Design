@@ -5,6 +5,7 @@
 package info5100.university.example.UI.AuthorityWorkArea;
 
 import info5100.university.example.College.College;
+import info5100.university.example.Persona.Transcript;
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Role.UserAccount;
@@ -91,6 +92,11 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         jPanel1.add(btnAccept, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 200, -1, -1));
 
         btnReject.setText("Reject");
+        btnReject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRejectActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnReject, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, -1, -1));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -100,7 +106,12 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = jTable1.getSelectedRow();
+
+        Transcript tp = (Transcript) jTable1.getValueAt(selectedRow, 2);
+        tp.setGraduateStatus("Graduate");
+
+        populate();
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
@@ -110,6 +121,33 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         mainJFrame.setVisible(true);
     }//GEN-LAST:event_btnLogOutActionPerformed
 
+    private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow();
+
+        Transcript tp = (Transcript) jTable1.getValueAt(selectedRow, 2);
+        tp.setGraduateStatus("Reject");
+
+        populate();
+    }//GEN-LAST:event_btnRejectActionPerformed
+
+    private void populate(){
+//        if (this.branch.getLibrary().getRrd().getRentalRequestList().size() > 0) {
+//            rrTableModel.setRowCount(0);
+//            for (RentalRequest rr : this.branch.getLibrary().getRrd().getRentalRequestList()) {
+//
+//                Object[] row = new Object[6];
+//
+//                row[0] = rr;
+//                row[1] = rr.getBook().getName();
+//                row[2] = rr.getDuration();
+//                row[3] = rr.getPrice();
+//                row[4] = rr.getStatus();
+//
+//                rrTableModel.addRow(row);
+//            }
+//        }
+    }
     /**
      * @param args the command line arguments
      */

@@ -4,6 +4,7 @@
  */
 package info5100.university.example.Authority;
 
+import info5100.university.example.Persona.Person;
 import info5100.university.example.Platform.Platform;
 import java.util.ArrayList;
 
@@ -23,9 +24,9 @@ public class AuthorityDirectory {
 
     }
 
-    public AuthorityProfile newAuthorityProfile(String n) {
+    public AuthorityProfile newAuthorityProfile(Person p) {
 
-        AuthorityProfile sp = new AuthorityProfile(n);
+        AuthorityProfile sp = new AuthorityProfile(p);
         authoritylist.add(sp);
         return sp;
     }
@@ -34,7 +35,7 @@ public class AuthorityDirectory {
 
         for (AuthorityProfile ap : authoritylist) {
 
-            if (ap.getName().equals(n)) {
+            if (ap.getPerson().getNameOfPerson().equals(n)) {
                 return ap;
             }
         }
