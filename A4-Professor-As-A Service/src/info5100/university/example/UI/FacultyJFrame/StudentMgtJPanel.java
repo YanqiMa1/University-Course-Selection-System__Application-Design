@@ -110,10 +110,7 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Student ID", "Student Name", "Grade Status"
@@ -170,8 +167,8 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 
     private void comboCourseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboCourseFocusLost
         // TODO add your handling code here:
-        fieldCourseName.setText(this.selectedCourse.getName());
-        populateStudentTable();
+//        fieldCourseName.setText(this.selectedCourse.getName());
+//        populateStudentTable();
     }//GEN-LAST:event_comboCourseFocusLost
 
     private void fieldCourseNameInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_fieldCourseNameInputMethodTextChanged
