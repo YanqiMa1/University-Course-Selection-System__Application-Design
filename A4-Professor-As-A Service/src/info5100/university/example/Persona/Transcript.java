@@ -87,6 +87,20 @@ public class Transcript {
         this.graduateStatus = graduateStatus;
     }
 
+    public int getTotalPassedCourses() {
+        int passedCourses = 0;
+
+        for (CourseLoad courseLoad : courseloadlist.values()) {
+            for (SeatAssignment seatAssignment : courseLoad.getSeatassignments()) {
+                if (seatAssignment.getGrade() >= 3.0) {
+                    passedCourses++;
+                }
+            }
+        }
+
+        return passedCourses;
+    }
+
 //    public float getStudentTotalScore() {
 //
 //        float sum = 0;
