@@ -35,6 +35,7 @@ public class FacultyProfile {
         person = p;
         this.courseCatalog = new CourseCatalog(this);
         this.allSchedules = new HashMap<String, CourseSchedule>();
+        this.enrolledListForAllTerm = new ArrayList<StudentProfile>();
     }
 
     public Course createCourse(String name, String topic, String region, String language, int price, String pfoN) {
@@ -73,6 +74,10 @@ public class FacultyProfile {
             }
         }
         return this.enrolledListForAllTerm;
+    }
+    
+    public ArrayList<StudentProfile> getEnrolledListForAllTermOnly() {
+        return enrolledListForAllTerm;
     }
 
     public ArrayList<StudentProfile> getEnrolledListForAllTermOnly() {
