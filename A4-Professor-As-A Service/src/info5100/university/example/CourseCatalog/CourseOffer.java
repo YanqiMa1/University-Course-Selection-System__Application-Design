@@ -68,16 +68,21 @@ public class CourseOffer {
         return sum;
     }
     
-    public ArrayList<StudentProfile> getEnrolledStudentList(){
-        
-        for (Seat s : seatlist) {
-            if (s.isOccupied() == true) {
-                this.enrolledStudentList.add(s.getSeatassignment().getCourseload().getStudent());
-            }
-
-        }
-        return this.enrolledStudentList;
+//    public ArrayList<StudentProfile> getEnrolledStudentList(){
+//        
+//        for (Seat s : seatlist) {
+//            if (s.isOccupied() == true) {
+//                this.enrolledStudentList.add(s.getSeatassignment().getCourseload().getStudent());
+//            }
+//
+//        }
+//        return this.enrolledStudentList;
+//    }
+    
+    public ArrayList<StudentProfile> getEnrolledStudentListOnly(){
+         return this.enrolledStudentList;
     }
+    
 
     public Course getCourse() {
         return course;

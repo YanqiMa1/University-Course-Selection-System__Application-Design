@@ -17,6 +17,7 @@ import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,6 +34,7 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
     private FacultyProfile professor;
     private DefaultTableModel studentTableModel;
     private Course selectedCourse;
+    private String selectedTerm;
 
     public StudentMgtJPanel() {
         initComponents();
@@ -42,25 +44,18 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
     public StudentMgtJPanel(Platform platform, UserAccount useraccount) {
         initComponents();
         this.setVisible(true);
-        fieldCourseName.setEnabled(false);
         this.platform = platform;
         this.ua = useraccount;
         this.professor = this.platform.getFacultydirectory().findProfessorById(ua.getAccountId());
         this.studentTableModel = (DefaultTableModel) studentTable.getModel();
         this.selectedCourse = (Course) comboCourse.getSelectedItem();
+        this.selectedTerm = (String) jComboBox2.getSelectedItem();
+
 //        rating.setText(String.valueOf(this.professor.getReputation()));
-        
         populateDropdowns();
-        populateStudentTable();
-        populateCourseCombo();
         populateRateOfPro();
+        populateStudentTable();
 
-    }
-
-    public void populateCourseCombo() {
-        for (Course c : this.professor.getCourseCatalog().getCourses()) {
-            comboCourse.addItem(c.getName());
-        }
     }
 
     /**
@@ -76,13 +71,12 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         studentTable = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        fieldCourseName = new javax.swing.JTextField();
         gradeBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        fieldRep = new javax.swing.JTextField();
         rating = new javax.swing.JLabel();
-        gradeField = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(153, 255, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,21 +97,21 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
                 comboCourseActionPerformed(evt);
             }
         });
-        add(comboCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 330, -1));
+        add(comboCourse, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 330, -1));
 
-        jLabel1.setText("Course");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
+        jLabel1.setText("Term");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, -1, -1));
 
         studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Student ID", "Student Name", "Grade Status"
+                "Student Name", "Student ID", "Grade Status", "Term"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -126,24 +120,7 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(studentTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 380, 340));
-
-        jLabel2.setText("Enroll List for my course");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
-
-        fieldCourseName.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                fieldCourseNameInputMethodTextChanged(evt);
-            }
-        });
-        fieldCourseName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldCourseNameActionPerformed(evt);
-            }
-        });
-        add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 230, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 470, 340));
 
         gradeBtn.setText("grade");
         gradeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -151,22 +128,32 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
                 gradeBtnActionPerformed(evt);
             }
         });
-        add(gradeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, -1));
+        add(gradeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, -1, -1));
 
         jLabel3.setText("My rating from students:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 20));
 
-        fieldRep.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        add(fieldRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 130, 60));
-
         rating.setText("0");
         add(rating, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, -1));
-        add(gradeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 140, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "F" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 160, -1));
+
+        jLabel2.setText("Course");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022Fall", "2023Spring", "2023Summer" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCourseItemStateChanged
         // TODO add your handling code here:
-//        fieldCourseName.setText((String) comboCourse.getSelectedItem());
+        populateStudentTable();
 
     }//GEN-LAST:event_comboCourseItemStateChanged
 
@@ -176,27 +163,37 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 //        populateStudentTable();
     }//GEN-LAST:event_comboCourseFocusLost
 
-    private void fieldCourseNameInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_fieldCourseNameInputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldCourseNameInputMethodTextChanged
-
     private void gradeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeBtnActionPerformed
         // TODO add your handling code here:
         int selectedRow = studentTable.getSelectedRow();
         StudentProfile student = (StudentProfile) studentTable.getValueAt(selectedRow, 0);
 
-        String courseName = fieldCourseName.getText();
+        String courseName = this.selectedCourse.getName();
 
-        if (!courseName.isEmpty()) {
+        if (selectedRow >= 0) {
             for (Map.Entry<String, CourseLoad> courseLoads : student.getTranscript().getCourseloadlist().entrySet()) {
                 CourseLoad cl = courseLoads.getValue();
                 for (SeatAssignment sa : cl.getSeatassignments()) {
                     if (sa.getSeat().getCourseoffer().getCourse().getName().equals(courseName)) {
-                        sa.setGrade(Float.valueOf(gradeField.getText()));
+                        float g;
+                        if (jComboBox1.getSelectedItem().equals("A")) {
+                            g = 4.0f;
+                        } else if (jComboBox1.getSelectedItem().equals("B")) {
+                            g = 3.0f;
+                        } else if (jComboBox1.getSelectedItem().equals("C")) {
+                            g = 2.0f;
+                        } else {
+                            g = 0.0f;
+                        }
+
+                        sa.setGrade(g);
                         break;
                     }
                 }
             }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a student");
         }
 
         populateStudentTable();
@@ -206,37 +203,58 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCourseActionPerformed
 
-    private void fieldCourseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCourseNameActionPerformed
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldCourseNameActionPerformed
+    }//GEN-LAST:event_jComboBox2ActionPerformed
 
     public void populateStudentTable() {
-        if (this.professor.getEnrolledListForAllTerm().size() > 0) {
+        if (this.professor.getEnrolledListForAllTermOnly().size() > 0) {
             studentTableModel.setRowCount(0);
+            CourseSchedule cs = this.professor.getCourseScheduleByTerm(selectedTerm);
+            for (CourseOffer co : cs.getSchedule()) {
+                if (co.getCourse().equals(this.selectedCourse)) {
+                    for (StudentProfile student : co.getEnrolledStudentListOnly()) {
+                            
 
-            for (Map.Entry<String, CourseSchedule> termSchedule : this.professor.getAllSchedules().entrySet()) {
-                CourseSchedule cs = termSchedule.getValue();
-                ArrayList<CourseOffer> offers = cs.getSchedule();
-
-                for (CourseOffer co : offers) {
-//                    ArrayList<Student> enrolledStudentList = co.getEnrolledStudentList();
-                    for (Seat s : co.getSeatlist()) {
-                        if (s.isOccupied() == true) {
-
-                            Object[] row = new Object[3];
-
-                            row[0] = s.getSeatassignment().getCourseload().getStudent().getPerson().getPersonId();
-                            row[1] = s.getSeatassignment().getCourseload().getStudent().getPerson().getNameOfPerson();
-                            row[2] = s.getSeatassignment().getGrade();
+                            Object[] row = new Object[4];
+                   
+                            row[0] = student;
+                            row[1] = student.getPerson().getPersonId();
+                            row[2] = student.getTranscript().getCourseLoadBySemester(selectedTerm).findSeatAssignmentByCourse(selectedCourse).getGrade();
+                            row[3] = cs.getTerm();
 
                             studentTableModel.addRow(row);
                         }
                     }
-                }
-            }
 
-        }
+                }
+
+            }
     }
+
+//            for (CourseSchedule sc : this.professor.getAllSchedules().entrySet()) {
+//                CourseSchedule cs = termSchedule.getValue();
+//                ArrayList<CourseOffer> offers = cs.getSchedule();
+//
+//                for (CourseOffer co : offers) {
+////                    ArrayList<Student> enrolledStudentList = co.getEnrolledStudentList();
+//                    for (Seat s : co.getSeatlist()) {
+//                        if (s.isOccupied() == true) {
+//
+//                            Object[] row = new Object[4];
+//
+//                            row[0] = s.getSeatassignment().getCourseload().getStudent();
+//                            row[1] = s.getSeatassignment().getCourseload().getStudent().getPerson().getPersonId();
+//                            row[2] = s.getSeatassignment().getGrade();
+//                            row[3] = cs.getTerm();
+//
+//                            studentTableModel.addRow(row);
+//                        }
+//                    }
+//                }
+//            }
+        
+    
 
 //    public void populateStudentsForCourse() {
 //        if (this.professor.getEnrolledListForAllTerm().size() > 0) {
@@ -278,10 +296,9 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox comboCourse;
-    private javax.swing.JTextField fieldCourseName;
-    private javax.swing.JTextField fieldRep;
     private javax.swing.JButton gradeBtn;
-    private javax.swing.JTextField gradeField;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

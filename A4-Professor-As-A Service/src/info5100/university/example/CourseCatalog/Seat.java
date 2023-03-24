@@ -29,7 +29,7 @@ public class Seat {
     }
 
     public SeatAssignment newSeatAssignment(CourseLoad cl) {
-
+        
         seatassignment = new SeatAssignment(cl, this); //links seatassignment to seat
         occupied = true;
         return seatassignment;

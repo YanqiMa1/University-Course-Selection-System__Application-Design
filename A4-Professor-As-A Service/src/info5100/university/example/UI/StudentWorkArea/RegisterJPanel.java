@@ -163,18 +163,17 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         int selectedRow = jTable2.getSelectedRow();
-        
-        if(selectedRow >= 0) {
-            
+
+        if (selectedRow >= 0) {
+
             // we will delete the object
-            Course c = (Course)jTable2.getValueAt(selectedRow, 0);
-            
+            Course c = (Course) jTable2.getValueAt(selectedRow, 0);
+
             this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm(c.getTerm()).deleteSeatAssignment(c);
-               
-            
-           populateRegisteredCourse();
+
+            populateRegisteredCourse();
         } else {
-            
+
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
@@ -255,19 +254,23 @@ public class RegisterJPanel extends javax.swing.JPanel {
         if (sp.getTranscript().getCourseLoadBySemester(term) != null) {
             col = sp.getTranscript().getCourseLoadBySemester(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
-
+            if (c.getTerm().equals(term)) {
+                CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
+                SeatAssignment seatA = col.newSeatAssignment(cof);
+                populateRegisteredCourse();
+            } else {
+                JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
+            }
         } else {
             col = sp.newCourseLoad(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
-            
-        }
-
-        if (c.getTerm().equals(term)) {
-            CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
-            SeatAssignment seatA = col.newSeatAssignment(cof);
-            populateRegisteredCourse();
-        } else {
-            JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
+            if (c.getTerm().equals(term)) {
+                CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
+                SeatAssignment seatA = col.newSeatAssignment(cof);
+                populateRegisteredCourse();
+            } else {
+                JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
+            }
         }
 
 

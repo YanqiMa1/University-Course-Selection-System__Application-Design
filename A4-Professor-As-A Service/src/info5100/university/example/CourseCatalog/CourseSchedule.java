@@ -49,14 +49,18 @@ public class CourseSchedule {
         return null;
     }
 
-    public ArrayList<StudentProfile> getEnrolledListForTerm() {
-        for (CourseOffer co : schedule) {
-            for (StudentProfile s : co.getEnrolledStudentList()) {
-                this.enrolledListForTerm.add(s);
-            }
-        }
-        return this.enrolledListForTerm;
-    }
+//    public ArrayList<StudentProfile> getEnrolledListForTerm() {
+//        for (CourseOffer co : schedule) {
+//            for (StudentProfile s : co.getEnrolledStudentList()) {
+//                this.enrolledListForTerm.add(s);
+//            }
+//        }
+//        return this.enrolledListForTerm;
+//    }
+    
+     public ArrayList<StudentProfile> getEnrolledListForTermOnly() {
+     return this.enrolledListForTerm;
+     }
 
     public int calculateTotalRevenues() {
         int sum = 0;
