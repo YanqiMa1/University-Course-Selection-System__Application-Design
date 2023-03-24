@@ -7,8 +7,10 @@ package info5100.university.example.Persona.Faculty;
 
 import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseCatalog.CourseCatalog;
+import info5100.university.example.CourseCatalog.CourseLoad;
 import info5100.university.example.CourseCatalog.CourseOffer;
 import info5100.university.example.CourseCatalog.CourseSchedule;
+import info5100.university.example.CourseCatalog.SeatAssignment;
 import info5100.university.example.Persona.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,6 +80,10 @@ public class FacultyProfile {
         return enrolledListForAllTerm;
     }
 
+    public ArrayList<StudentProfile> getEnrolledListForAllTermOnly() {
+        return this.enrolledListForAllTerm;
+    }
+
     public CourseCatalog getCourseCatalog() {
         return courseCatalog;
     }
@@ -87,7 +93,17 @@ public class FacultyProfile {
     }
 
     public double getReputation() {
-        return reputation;
+        double sum = 0;
+        int count = 0;
+        for (StudentProfile s : this.getEnrolledListForAllTermOnly()) {
+            for (CourseLoad col : s.getTranscript().getCourseloadlist().values()) {
+                for (SeatAssignment sa : col.getSeatassignments()) { //go around all the seatassignments for all the students that registered for this professor
+                    sum = sum + sa.getRateOfProf();
+                    count++;
+                }
+            }
+        }
+        return this.reputation = sum / count;
     }
 
     public void setReputation(double reputation) {

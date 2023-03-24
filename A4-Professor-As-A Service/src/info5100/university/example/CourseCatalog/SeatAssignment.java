@@ -14,6 +14,7 @@ public class SeatAssignment {
     CourseLoad courseload;
     float grade;
     Course course;
+    double rateOfProf;
 
     public SeatAssignment(CourseLoad cl, Seat s) {
         seat = s;
@@ -66,4 +67,13 @@ public class SeatAssignment {
         this.course = course;
     }
 
+    public double getRateOfProf() {
+        return rateOfProf;
+    }
+
+    public void setRateOfProf(double rateOfProf) {
+        this.rateOfProf = rateOfProf;
+    }
+
+    
 }

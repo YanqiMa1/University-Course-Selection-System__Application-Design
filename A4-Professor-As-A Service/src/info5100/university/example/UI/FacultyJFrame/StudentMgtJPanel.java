@@ -46,15 +46,15 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         this.platform = platform;
         this.ua = useraccount;
         this.professor = this.platform.getFacultydirectory().findProfessorById(ua.getAccountId());
-
         this.studentTableModel = (DefaultTableModel) studentTable.getModel();
+        this.selectedCourse = (Course) comboCourse.getSelectedItem();
+//        rating.setText(String.valueOf(this.professor.getReputation()));
+        
         populateDropdowns();
         populateStudentTable();
         populateCourseCombo();
+        populateRateOfPro();
 
-        this.selectedCourse = (Course) comboCourse.getSelectedItem();
-
-        rating.setText(String.valueOf(this.professor.getReputation()));
     }
 
     public void populateCourseCombo() {
@@ -138,6 +138,11 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
                 fieldCourseNameInputMethodTextChanged(evt);
             }
         });
+        fieldCourseName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldCourseNameActionPerformed(evt);
+            }
+        });
         add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 230, -1));
 
         gradeBtn.setText("grade");
@@ -149,13 +154,13 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         add(gradeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, -1));
 
         jLabel3.setText("My rating from students:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, -1, 20));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 20));
 
         fieldRep.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         add(fieldRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 130, 60));
 
         rating.setText("0");
-        add(rating, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 40, -1));
+        add(rating, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 40, -1));
         add(gradeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -200,6 +205,10 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
     private void comboCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCourseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCourseActionPerformed
+
+    private void fieldCourseNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldCourseNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldCourseNameActionPerformed
 
     public void populateStudentTable() {
         if (this.professor.getEnrolledListForAllTerm().size() > 0) {
@@ -259,10 +268,9 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 //
 //        }
 //    }
-
     public void populateDropdowns() {
-        for(CourseSchedule cs :this.professor.getAllSchedules().values()){
-            for(CourseOffer co :cs.getSchedule()){
+        for (CourseSchedule cs : this.professor.getAllSchedules().values()) {
+            for (CourseOffer co : cs.getSchedule()) {
                 comboCourse.addItem(co.getCourse());
             }
         }
@@ -281,4 +289,9 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel rating;
     private javax.swing.JTable studentTable;
     // End of variables declaration//GEN-END:variables
+
+    private void populateRateOfPro() {
+        FacultyProfile fp = this.platform.getFacultydirectory().findProfessorById(this.ua.getAccountId());
+        rating.setText(String.valueOf(fp.getReputation()));
+    }
 }
