@@ -18,10 +18,8 @@ import java.util.Map;
  *
  * @author kal bugrara
  */
-public class FacultyProfile{
+public class FacultyProfile {
 
-
-   
     private Person person;
     private CourseCatalog courseCatalog;
     private HashMap<String, CourseSchedule> allSchedules;
@@ -29,52 +27,51 @@ public class FacultyProfile{
     private double tuitionCollected;
 //    private Boolean accountStatus; //only professor role has this attribute
     private ArrayList<StudentProfile> enrolledListForAllTerm;
-    
+    private ArrayList<StudentProfile> enrolledList;
+
     public FacultyProfile(Person p) {
         person = p;
         this.courseCatalog = new CourseCatalog(this);
-        this.allSchedules = new HashMap<String, CourseSchedule>();  
+        this.allSchedules = new HashMap<String, CourseSchedule>();
     }
-    
-    public Course createCourse(String name,String topic, String region, String language, int price,String pfoN){
-        Course c = this.courseCatalog.createCourse(name,topic,region,language,price,pfoN);
+
+    public Course createCourse(String name, String topic, String region, String language, int price, String pfoN) {
+        Course c = this.courseCatalog.createCourse(name, topic, region, language, price, pfoN);
         return c;
     }
-    
+
     public CourseSchedule newCourseSchedule(String term) {
 
         CourseSchedule cs = new CourseSchedule(term, this.courseCatalog);
         this.allSchedules.put(term, cs);
         return cs;
     }
-    
+
     //create schedule before create offer
-    public CourseOffer createCourseOffer(String term, String courseId){
+    public CourseOffer createCourseOffer(String term, String courseId) {
         CourseSchedule cs = this.getCourseScheduleByTerm(term);
-        CourseOffer co = cs.newCourseOffer(courseId,this);
-        
-        
+        CourseOffer co = cs.newCourseOffer(courseId, this);
+
         return co;
     }
-    
+
     public CourseSchedule getCourseScheduleByTerm(String term) {
 
         return allSchedules.get(term);
 
     }
-    
-    public ArrayList<StudentProfile> getEnrolledListForAllTerm(){
-        
-        for (Map.Entry<String,CourseSchedule> termSchedule: this.allSchedules.entrySet()){
+
+    public ArrayList<StudentProfile> getEnrolledListForAllTerm() {
+
+        for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
             CourseSchedule cs = termSchedule.getValue();
-            
-            for (StudentProfile s: cs.getEnrolledListForTerm()){
+
+            for (StudentProfile s : cs.getEnrolledListForTerm()) {
                 this.enrolledListForAllTerm.add(s);
             }
         }
         return this.enrolledListForAllTerm;
     }
-   
 
     public CourseCatalog getCourseCatalog() {
         return courseCatalog;
@@ -84,12 +81,11 @@ public class FacultyProfile{
         this.courseCatalog = courseCatalog;
     }
 
-
     public double getReputation() {
         return reputation;
     }
 
-    public void setReputation(int reputation) {
+    public void setReputation(double reputation) {
         this.reputation = reputation;
     }
 
@@ -109,7 +105,6 @@ public class FacultyProfile{
         this.allSchedules = schedules;
     }
 
-    
     public Person getPerson() {
         return person;
     }
@@ -118,5 +113,12 @@ public class FacultyProfile{
         this.person = person;
     }
 
-    
+    public ArrayList<StudentProfile> getEnrolledList() {
+        return enrolledList;
+    }
+
+    public void setEnrolledList(ArrayList<StudentProfile> enrolledList) {
+        this.enrolledList = enrolledList;
+    }
+
 }

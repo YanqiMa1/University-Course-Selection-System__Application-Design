@@ -242,9 +242,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
         if (sp.getTranscript().getCourseLoadBySemester(term) != null) {
             col = sp.getTranscript().getCourseLoadBySemester(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
+
         } else {
             col = sp.newCourseLoad(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
+            
         }
 
         if (c.getTerm().equals(term)) {

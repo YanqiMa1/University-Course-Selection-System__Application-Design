@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/AuthorityWorkArea/AuthorityJFrame.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/TranscriptJPanel.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Authority/AuthorityProfile.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Persona/Faculty/FacultyProfile.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/RegisterJPanel.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/FacultyJFrame/StudentMgtJPanel.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/FacultyJFrame/ProfessorAnalyticsJPanel.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/UI/StudentWorkArea/StudentJFrame.java</file>
+            <file>file:/F:/5100assignments/GroupRepo/A4-Professor-As-A%20Service/src/info5100/university/example/Authority/AuthorityDirectory.java</file>
+        </group>
     </open-files>
 </project-private>
