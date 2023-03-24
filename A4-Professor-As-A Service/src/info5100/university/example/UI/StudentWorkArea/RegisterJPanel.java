@@ -123,7 +123,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "CourseName", "CourseNumber"
+                "CourseNum", "CourseName"
             }
         ) {
             Class[] types = new Class [] {
@@ -308,7 +308,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
             Object[] row = new Object[2];
             row[0] = c;
-            row[1] = c.getCourseId();
+            row[1] = c.getName();
 
             model.addRow(row);
 
