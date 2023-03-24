@@ -69,7 +69,7 @@ public class StudentJFrame extends javax.swing.JFrame {
                 registerCourseBtnActionPerformed(evt);
             }
         });
-        jPanel2.add(registerCourseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, -1, -1));
+        jPanel2.add(registerCourseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 120, -1));
 
         transBtn.setText("Transcript");
         transBtn.addActionListener(new java.awt.event.ActionListener() {

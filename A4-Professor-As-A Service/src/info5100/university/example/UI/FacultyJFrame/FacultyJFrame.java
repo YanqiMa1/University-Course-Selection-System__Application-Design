@@ -90,6 +90,8 @@ public class FacultyJFrame extends javax.swing.JFrame {
         jPanel2.add(stuBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 180, -1));
 
         jSplitPane1.setLeftComponent(jPanel2);
+
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
         jSplitPane1.setRightComponent(jPanel1);
 
         getContentPane().add(jSplitPane1, java.awt.BorderLayout.CENTER);

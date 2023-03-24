@@ -41,6 +41,8 @@ public class CourseOffer {
         }
         return null;
     }
+    
+ 
 
     public SeatAssignment assignEmptySeat(CourseLoad cl) {
 
