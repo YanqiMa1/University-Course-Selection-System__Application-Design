@@ -263,7 +263,7 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
     public void populateDropdowns() {
         for(CourseSchedule cs :this.professor.getAllSchedules().values()){
             for(CourseOffer co :cs.getSchedule()){
-                comboCourse.addItem(co.getCourse());
+                comboCourse.addItem(co.getCourse()  );
             }
         }
     }
