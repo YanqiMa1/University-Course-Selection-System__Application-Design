@@ -6,6 +6,7 @@ package info5100.university.example.UI.AdminWorkArea;
 
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
+import info5100.university.example.UI.FacultyJFrame.CourseMgtJPanel;
 
 /**
  *
@@ -22,10 +23,10 @@ public class AdminJFrame extends javax.swing.JFrame {
         initComponents();
     }
     
-    public AdminJFrame(Platform platform,UserAccount useraccount) {
+    public AdminJFrame(Platform platform,UserAccount userAccount) {
         initComponents();
         this.pf=platform;
-        this.ua=useraccount;
+        this.ua=userAccount;
     }
 
     /**
@@ -104,6 +105,8 @@ public class AdminJFrame extends javax.swing.JFrame {
 
     private void showBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtn1ActionPerformed
         // TODO add your handling code here:
+        
+        jSplitPane1.setRightComponent(new ShowJPanel(pf,ua));
     }//GEN-LAST:event_showBtn1ActionPerformed
 
     /**

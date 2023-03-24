@@ -81,7 +81,7 @@ public class SignUpJPanel extends javax.swing.JPanel {
         jLabel4.setText("Choose your role");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, -1, -1));
 
-        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Professor", "Authority" }));
+        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Professor", "Student", "Authority" }));
         add(roleComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 140, -1));
 
         btnSignUp.setText("Sign Up");
@@ -106,6 +106,8 @@ public class SignUpJPanel extends javax.swing.JPanel {
         UserAccountDirectory infoUad = this.pf.getUad();
         if (infoUad.accountExists(fieldUsername.getText())) {
             JOptionPane.showMessageDialog(null, "This username has been taken.");
+        } else if(pf.getPersondirectory().nameExists(fieldName.getText())){
+            JOptionPane.showMessageDialog(null, "This name is already exist.");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
                 UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new StudentRole());
