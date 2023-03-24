@@ -38,7 +38,7 @@ public class Transcript {
 
     public CourseLoad newCourseLoad(String sem) {
 
-        currentcourseload = new CourseLoad(sem,student);
+        currentcourseload = new CourseLoad(sem, student);
         courseloadlist.put(sem, currentcourseload);
         return currentcourseload;
     }
@@ -54,7 +54,7 @@ public class Transcript {
         return courseloadlist.get(semester);
 
     }
-    
+
     public StudentProfile getStudent() {
         return student;
     }
@@ -87,7 +87,6 @@ public class Transcript {
         this.graduateStatus = graduateStatus;
     }
 
-    
 //    public float getStudentTotalScore() {
 //
 //        float sum = 0;
@@ -113,7 +112,6 @@ public class Transcript {
     //generate a list of all courses taken so far (seetassignments) 
     //from multiple semesters (course loads)
     //from seat assignments we will be able to access the course offers
-
 //    public ArrayList<SeatAssignment> getCourseList() {
 //        ArrayList temp2;
 //        temp2 = new ArrayList();
@@ -125,7 +123,7 @@ public class Transcript {
 //        return temp2;
 //
 //    }
-     public float getStudentTotalScore() {
+    public float getStudentTotalScore() {
 
         float sum = 0;
 
@@ -135,7 +133,5 @@ public class Transcript {
         }
         return sum;
     }
-
-    
 
 }

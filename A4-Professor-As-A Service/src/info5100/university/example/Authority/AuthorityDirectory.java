@@ -31,11 +31,23 @@ public class AuthorityDirectory {
         return sp;
     }
 
-    public AuthorityProfile findAuthorityProfile(String n) {
+    public AuthorityProfile findAuthorityProfileByName(String n) {
 
         for (AuthorityProfile ap : authoritylist) {
 
             if (ap.getPerson().getNameOfPerson().equals(n)) {
+                return ap;
+            }
+        }
+            return null; //not found after going through the whole list
+         }
+    
+    
+    public AuthorityProfile findAuthorityProfileById(String id) {
+
+        for (AuthorityProfile ap : authoritylist) {
+
+            if (ap.getPerson().getPersonId().equals(id)) {
                 return ap;
             }
         }

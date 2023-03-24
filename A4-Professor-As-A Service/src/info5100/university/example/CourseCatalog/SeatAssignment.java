@@ -12,9 +12,9 @@ public class SeatAssignment {
 
     Seat seat;
     CourseLoad courseload;
-    float grade ;
+    float grade;
     Course course;
-    
+
     public SeatAssignment(CourseLoad cl, Seat s) {
         seat = s;
         courseload = cl;
@@ -48,10 +48,10 @@ public class SeatAssignment {
     public void setGrade(float grade) {
         this.grade = grade;
     }
-    
-    public int getCreditHours(){
+
+    public int getCreditHours() {
         return seat.getCourseCredits();
-       
+
     }
 
     public float GetCourseStudentScore() {
@@ -65,6 +65,13 @@ public class SeatAssignment {
     public void setCourse(Course course) {
         this.course = course;
     }
-    
+
+    public boolean isPass() {
+        if (getGrade() >= 3.0f) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
