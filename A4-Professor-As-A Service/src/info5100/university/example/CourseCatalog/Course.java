@@ -120,7 +120,7 @@ public class Course {
         return credit;
 
     }
-
+    
     @Override
     public String toString() {
         return this.courseId;

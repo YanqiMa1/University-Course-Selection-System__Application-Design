@@ -4,7 +4,9 @@
  */
 package info5100.university.example.UI.AuthorityWorkArea;
 
+import info5100.university.example.Authority.AuthorityProfile;
 import info5100.university.example.College.College;
+import info5100.university.example.Persona.StudentProfile;
 import info5100.university.example.Persona.Transcript;
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccountDirectory;
@@ -36,6 +38,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         this.pf = pf;
         this.userAccount = userAccount;
         this.requestTableModel = (DefaultTableModel) jTable1.getModel();
+        populate();
     }
 
     /**
@@ -78,7 +81,15 @@ public class AuthorityJFrame extends javax.swing.JFrame {
             new String [] {
                 "Student Name", "Total Course Num", "Status"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
@@ -108,8 +119,8 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
 
-        Transcript tp = (Transcript) jTable1.getValueAt(selectedRow, 2);
-        tp.setGraduateStatus("Graduate");
+        StudentProfile sp = (StudentProfile) jTable1.getValueAt(selectedRow, 0);
+        sp.getTranscript().setGraduateStatus("Graduate");
 
         populate();
     }//GEN-LAST:event_btnAcceptActionPerformed
@@ -125,28 +136,27 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectedRow = jTable1.getSelectedRow();
 
-        Transcript tp = (Transcript) jTable1.getValueAt(selectedRow, 2);
-        tp.setGraduateStatus("Reject");
+        StudentProfile sp = (StudentProfile) jTable1.getValueAt(selectedRow, 0);
+        sp.getTranscript().setGraduateStatus("Reject");
 
         populate();
     }//GEN-LAST:event_btnRejectActionPerformed
 
     private void populate(){
-//        if (this.branch.getLibrary().getRrd().getRentalRequestList().size() > 0) {
-//            rrTableModel.setRowCount(0);
-//            for (RentalRequest rr : this.branch.getLibrary().getRrd().getRentalRequestList()) {
-//
-//                Object[] row = new Object[6];
-//
-//                row[0] = rr;
-//                row[1] = rr.getBook().getName();
-//                row[2] = rr.getDuration();
-//                row[3] = rr.getPrice();
-//                row[4] = rr.getStatus();
-//
-//                rrTableModel.addRow(row);
-//            }
-//        }
+        AuthorityProfile ap = this.pf.getAuthoritydirectory().findAuthorityProfileById(userAccount.getAccountId());
+        if (ap.getStudentrequest().size() > 0) {
+            requestTableModel.setRowCount(0);
+            for (StudentProfile sp : ap.getStudentrequest()) {
+
+                Object[] row = new Object[3];
+
+                row[0] = sp;
+                row[1] = sp.getCourseLoads();
+                row[2] = sp.getTranscript().getGraduateStatus();
+
+                requestTableModel.addRow(row);
+            }
+        }
     }
     /**
      * @param args the command line arguments

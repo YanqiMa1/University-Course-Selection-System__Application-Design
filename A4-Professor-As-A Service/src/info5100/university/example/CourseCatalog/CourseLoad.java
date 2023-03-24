@@ -38,7 +38,7 @@ public class CourseLoad {
         SeatAssignment sa = seat.newSeatAssignment(this);
         this.registeredCourses.add(co.getCourse());
         seatassignments.add(sa);  //add to students course 
-        sa.setCourse(co.getCourse()); 
+        sa.setCourse(co.getCourse());
         return sa;
 
     }
@@ -72,6 +72,14 @@ public class CourseLoad {
         float sum = 0;
         for (SeatAssignment sa : seatassignments) {
             sum = sum + sa.GetCourseStudentScore();
+        }
+        return sum;
+    }
+
+    public int totalCourseTaken() {
+        int sum = 0;
+        for (int i = 0; i<sum; i++) {
+            sum = sum + registeredCourses.size();
         }
         return sum;
     }
