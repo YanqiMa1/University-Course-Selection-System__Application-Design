@@ -80,10 +80,6 @@ public class FacultyProfile {
         return enrolledListForAllTerm;
     }
 
-    public ArrayList<StudentProfile> getEnrolledListForAllTermOnly() {
-        return this.enrolledListForAllTerm;
-    }
-
     public CourseCatalog getCourseCatalog() {
         return courseCatalog;
     }

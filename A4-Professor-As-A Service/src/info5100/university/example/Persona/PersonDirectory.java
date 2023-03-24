@@ -5,6 +5,7 @@
  */
 package info5100.university.example.Persona;
 
+import info5100.university.example.Role.UserAccount;
 import java.util.ArrayList;
 
 /**
@@ -39,4 +40,14 @@ public class PersonDirectory {
             return null; //not found after going through the whole list
          }
     
+      
+    public Boolean nameExists(String name) {
+        for(Person p : personlist) {
+            if(p.getNameOfPerson().equals(name)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
