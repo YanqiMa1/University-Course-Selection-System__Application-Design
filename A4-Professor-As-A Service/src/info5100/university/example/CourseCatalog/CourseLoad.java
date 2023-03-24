@@ -38,9 +38,28 @@ public class CourseLoad {
         SeatAssignment sa = seat.newSeatAssignment(this);
         this.registeredCourses.add(co.getCourse());
         seatassignments.add(sa);  //add to students course 
-        sa.setCourse(co.getCourse()); 
+        sa.setCourse(co.getCourse());
         return sa;
 
+    }
+
+    public void deleteSeatAssignment(Course c) {
+        
+        SeatAssignment sa = this.findSeatAssignmentByCourse(c);
+        sa.getSeat().setOccupied(false);
+        this.seatassignments.remove(sa);
+        this.registeredCourses.remove(c);
+
+    }
+    
+    public SeatAssignment findSeatAssignmentByCourse(Course c){
+      
+        for(SeatAssignment sa : this.seatassignments){
+            if(sa.getCourse().equals(c)){
+               return sa;
+            }
+        }
+        return null;
     }
 
     public void registerStudent(SeatAssignment sa) {

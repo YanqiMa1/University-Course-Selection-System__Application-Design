@@ -108,7 +108,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 650, 220));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 650, 220));
 
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +116,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 deleteBtnActionPerformed(evt);
             }
         });
-        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 450, 100, -1));
+        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, 100, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,7 +127,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -144,17 +144,17 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 registerBtn1ActionPerformed(evt);
             }
         });
-        add(registerBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, 100, -1));
+        add(registerBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel2.setText("choose Semester you need to register");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 260, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 260, 20));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "professor name", "topic", "region", "language" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         semesterCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022Fall", "2023Spring", "2023Summer" }));
-        add(semesterCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 120, -1));
+        add(semesterCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 120, -1));
 
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel3.setText("Registed Plan");
@@ -162,7 +162,20 @@ public class RegisterJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = jTable2.getSelectedRow();
+        
+        if(selectedRow >= 0) {
+            
+            // we will delete the object
+            Course c = (Course)jTable2.getValueAt(selectedRow, 0);
+            
+            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm(c.getTerm()).deleteSeatAssignment(c);
+               
+            
+           populateRegisteredCourse();
+        } else {
+            
+        }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -294,7 +307,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         for (Course c : coload.getRegisteredCourses()) {
 
             Object[] row = new Object[2];
-            row[0] = c.getName();
+            row[0] = c;
             row[1] = c.getCourseId();
 
             model.addRow(row);

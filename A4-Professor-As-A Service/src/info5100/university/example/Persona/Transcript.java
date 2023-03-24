@@ -86,6 +86,8 @@ public class Transcript {
     public void setGraduateStatus(String graduateStatus) {
         this.graduateStatus = graduateStatus;
     }
+    
+  
 
     
 //    public float getStudentTotalScore() {
