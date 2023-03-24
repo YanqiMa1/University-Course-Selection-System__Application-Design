@@ -151,7 +151,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
                 Object[] row = new Object[3];
 
                 row[0] = sp;
-                row[1] = sp.getCourseLoads();
+                row[1] = sp.getTranscript().getTotalPassedCourses();
                 row[2] = sp.getTranscript().getGraduateStatus();
 
                 requestTableModel.addRow(row);

@@ -66,12 +66,4 @@ public class SeatAssignment {
         this.course = course;
     }
 
-    public boolean isPass() {
-        if (getGrade() >= 3.0f) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }
