@@ -179,8 +179,11 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     private void rateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateBtnActionPerformed
         int selectedRow = jTable1.getSelectedRow();
         Course c = (Course) jTable1.getValueAt(selectedRow, 0);
-        FacultyProfile fp = pf.getFacultydirectory().findProfessorByName(c.getProfname());
-        fp.setReputation(Double.valueOf(RateField.getText()));
+        StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
+        CourseLoad col = sp.getCourseLoadByTerm(c.getTerm());
+        //FIND THE SEATASSIGNMENT TO ASSIGN THE RATE TO THIS COURSE
+        SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
+        aimedSa.setRateOfProf(Double.valueOf(RateField.getText()));        
         populateTranscript();
         
     }//GEN-LAST:event_rateBtnActionPerformed
