@@ -19,7 +19,8 @@ public class SeatAssignment {
     public SeatAssignment(CourseLoad cl, Seat s) {
         seat = s;
         courseload = cl;
-        grade = 0;
+        grade = 0.0f;
+        rateOfProf = 0.0;
     }
 
     public void assignSeatToStudent(CourseLoad cl) {

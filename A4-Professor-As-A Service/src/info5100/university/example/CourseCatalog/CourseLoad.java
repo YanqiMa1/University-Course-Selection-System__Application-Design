@@ -37,6 +37,7 @@ public class CourseLoad {
         }
         SeatAssignment sa = seat.newSeatAssignment(this);
         this.registeredCourses.add(co.getCourse());
+        co.getEnrolledStudentListOnly().add(student);
         seatassignments.add(sa);  //add to students course 
         sa.setCourse(co.getCourse());
         return sa;
