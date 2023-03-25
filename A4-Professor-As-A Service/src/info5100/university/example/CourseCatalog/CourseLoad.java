@@ -6,6 +6,7 @@ package info5100.university.example.CourseCatalog;
 
 import info5100.university.example.Persona.StudentProfile;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,6 +34,7 @@ public class CourseLoad {
 
         Seat seat = co.getEmptySeat();
         if (seat == null) {
+            JOptionPane.showMessageDialog(null, "No Seat Available");
             return null;
         }
         SeatAssignment sa = seat.newSeatAssignment(this);
