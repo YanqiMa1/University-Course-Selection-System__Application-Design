@@ -109,7 +109,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 690, 220));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 690, 220));
 
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -145,21 +145,21 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 registerBtn1ActionPerformed(evt);
             }
         });
-        add(registerBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 100, -1));
+        add(registerBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel2.setText("choose Semester you need to register");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 260, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 260, 20));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "professor name", "topic", "region", "language" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         semesterCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022Fall", "2023Spring", "2023Summer" }));
-        add(semesterCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 120, -1));
+        add(semesterCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, 120, -1));
 
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel3.setText("Registed Plan");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 200, 20));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 200, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -326,7 +326,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             row[5] = c.getLanguage();
             row[6] = c.getCredit();
             row[7] = c.getPrice();
-            row[8] = c.getProfname();
+            row[8] =this.pf.getFacultydirectory().findProfessorByName( c.getProfname()).getReputation();
 
             model.addRow(row);
 

@@ -38,12 +38,9 @@ public class AuthorityProfile {
         this.studentrequest = studentrequest;
     }
     
-    
-    
-    
-    
-    
-
-    
+    @Override
+    public String toString() {
+        return this.getPerson().getNameOfPerson();
+    }
     
 }
