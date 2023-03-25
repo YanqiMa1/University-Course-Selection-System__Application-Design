@@ -6,6 +6,9 @@ package info5100.university.example.UI.AuthorityWorkArea;
 
 import info5100.university.example.Authority.AuthorityProfile;
 import info5100.university.example.College.College;
+import info5100.university.example.CourseCatalog.Course;
+import info5100.university.example.CourseCatalog.CourseLoad;
+import info5100.university.example.CourseCatalog.SeatAssignment;
 import info5100.university.example.Persona.StudentProfile;
 import info5100.university.example.Persona.Transcript;
 import info5100.university.example.Platform.Platform;
@@ -26,6 +29,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     private Platform pf;
     private UserAccount userAccount;
     DefaultTableModel requestTableModel;
+    DefaultTableModel stuTranscriptTableModel;
     
     public AuthorityJFrame() {
         initComponents();
@@ -37,8 +41,9 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         this.setVisible(true);
         this.pf = pf;
         this.userAccount = userAccount;
-        this.requestTableModel = (DefaultTableModel) jTable1.getModel();
-        populate();
+        this.requestTableModel = (DefaultTableModel) requestTable.getModel();
+        this.stuTranscriptTableModel = (DefaultTableModel) stuTranscriptTable.getModel();
+        populateRequestTable();
     }
 
     /**
@@ -53,9 +58,12 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnLogOut = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        requestTable = new javax.swing.JTable();
         btnAccept = new javax.swing.JButton();
         btnReject = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        stuTranscriptTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 255));
@@ -71,7 +79,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        requestTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -90,9 +98,14 @@ public class AuthorityJFrame extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        requestTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                requestTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(requestTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, 170));
 
         btnAccept.setText("Accept");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +123,29 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         });
         jPanel1.add(btnReject, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, -1, -1));
 
+        stuTranscriptTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CourseNumber", "CourseName", "Semester", "Professor", "Grade"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(stuTranscriptTable);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 600, 210));
+
+        jLabel1.setText("Student Transcript Table");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, -1));
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -117,12 +153,12 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = requestTable.getSelectedRow();
 
-        StudentProfile sp = (StudentProfile) jTable1.getValueAt(selectedRow, 0);
+        StudentProfile sp = (StudentProfile) requestTable.getValueAt(selectedRow, 0);
         sp.getTranscript().setGraduateStatus("Graduate");
 
-        populate();
+        populateRequestTable();
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
@@ -134,15 +170,21 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
+        int selectedRow = requestTable.getSelectedRow();
 
-        StudentProfile sp = (StudentProfile) jTable1.getValueAt(selectedRow, 0);
+        StudentProfile sp = (StudentProfile) requestTable.getValueAt(selectedRow, 0);
         sp.getTranscript().setGraduateStatus("Reject");
 
-        populate();
+        populateRequestTable();
     }//GEN-LAST:event_btnRejectActionPerformed
 
-    private void populate(){
+    private void requestTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestTableMouseClicked
+        // TODO add your handling code here:
+        
+        populateStudentTranscriptTable();
+    }//GEN-LAST:event_requestTableMouseClicked
+
+    private void populateRequestTable(){
         AuthorityProfile ap = this.pf.getAuthoritydirectory().findAuthorityProfileById(userAccount.getAccountId());
         if (ap.getStudentrequest().size() > 0) {
             requestTableModel.setRowCount(0);
@@ -158,6 +200,28 @@ public class AuthorityJFrame extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void populateStudentTranscriptTable(){
+        int selectedStudentRow = requestTable.getSelectedRow();
+        StudentProfile sp = (StudentProfile) requestTable.getValueAt(selectedStudentRow, 0);
+        Transcript t = sp.getTranscript();
+        
+        for (CourseLoad cl : t.getCourseloadlist().values()) {
+            for (SeatAssignment a : cl.getSeatassignments()) {
+                Course c = a.getCourse();
+
+                Object[] row = new Object[5];
+                row[0] = c;
+                row[1] = c.getName();
+                row[2] = cl.getTerm();
+                row[3] = c.getProfname();
+                row[4] = a.getGrade();
+                stuTranscriptTableModel.addRow(row);
+            }
+
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -200,8 +264,11 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnReject;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable requestTable;
+    private javax.swing.JTable stuTranscriptTable;
     // End of variables declaration//GEN-END:variables
 }

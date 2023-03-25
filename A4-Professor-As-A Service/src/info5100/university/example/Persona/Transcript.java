@@ -26,7 +26,7 @@ public class Transcript {
     public Transcript(StudentProfile sp) {
         student = sp;
         courseloadlist = new HashMap();
-        graduateStatus = "pending";
+        graduateStatus = "Not ready to graduate";
 
     }
 

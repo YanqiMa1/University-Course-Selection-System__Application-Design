@@ -44,6 +44,9 @@ public class TranscriptJPanel extends javax.swing.JPanel {
 
         populateTranscript();
         populateDropdowns();
+        
+        Transcript ts =  this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
+        jLabel3.setText(ts.getGraduateStatus());
     }
 
     /**
