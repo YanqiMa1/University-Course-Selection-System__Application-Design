@@ -223,6 +223,30 @@ public class FacultyProfile {
         this.isSubscript = isSubscript;
     }
 
-    
+    public void updateReputation() {
+    double sum = 0;
+    int count = 0;
+
+    for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
+        CourseSchedule cs = termSchedule.getValue();
+        for (CourseOffer co : cs.getSchedule()) {
+            for (Seat s : co.getSeatlist()) {
+                if (s.getOccupied() && s.getSeatassignment().getRateOfProf() != 0) {
+                    double rating = s.getSeatassignment().getRateOfProf();
+                    sum += rating;
+                    count++;
+                }
+            }
+        }
+    }
+
+    if (count != 0) {
+        BigDecimal rep = new BigDecimal(sum / count).setScale(2, RoundingMode.HALF_UP);
+        this.reputation = rep.doubleValue();
+    } else {
+        this.reputation = 0;
+    }
+}
+
 
 }
