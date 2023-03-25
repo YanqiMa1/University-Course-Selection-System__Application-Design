@@ -66,11 +66,11 @@ public class FacultyProfile {
 
         return co;
     }
-    
-    public void deleteCourseOffer(String term,String courseId){
+
+    public void deleteCourseOffer(String term, String courseId) {
         CourseSchedule cs = this.getCourseScheduleByTerm(term);
-        for(CourseOffer co : cs.getSchedule()){
-            if(co.getCourse().getCourseId().equals(courseId)){
+        for (CourseOffer co : cs.getSchedule()) {
+            if (co.getCourse().getCourseId().equals(courseId)) {
                 cs.getSchedule().remove(co);
             }
             break;
@@ -126,43 +126,46 @@ public class FacultyProfile {
         this.ratings.add(rating);
         this.reputation = calculateReputation();
     }
-    
-    private double calculateReputation() {
-    double sum = 0;
-    int count = ratings.size();
 
-    for (double rating : ratings) {
-        sum += rating;
+    private double calculateReputation() {
+        double sum = 0;
+        int count = ratings.size();
+
+        for (double rating : ratings) {
+            sum += rating;
+        }
+        System.out.println(count);
+        return count == 0 ? 0 : sum / count;
+
     }
-   System.out.println(count);
-    return count == 0 ? 0 : sum / count;
- 
-}
 
     public double getReputation() {
-      
+
         int count = 0;
-        for(Map.Entry<String,CourseSchedule> termSchedule : this.allSchedules.entrySet()){
-            CourseSchedule cs = (CourseSchedule)termSchedule.getValue();
-            for (CourseOffer co : cs.getSchedule()){
-                for(Seat s : co.getSeatlist()){
-                    if(s.getOccupied()&&s.getSeatassignment().getRateOfProf()!=0){
-                        double rating =s.getSeatassignment().getRateOfProf();
+        for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
+            CourseSchedule cs = (CourseSchedule) termSchedule.getValue();
+            for (CourseOffer co : cs.getSchedule()) {
+                for (Seat s : co.getSeatlist()) {
+                    if (s.getOccupied() && s.getSeatassignment().getRateOfProf() != 0) {
+                        double rating = s.getSeatassignment().getRateOfProf();
                         this.reputation += rating;
                         count++;
                     }
                 }
             }
         }
-        
-        
-        if(count == 0){
+
+        if (count == 0) {
             return 0;
-        }else{
-            BigDecimal rep = new BigDecimal(this.reputation/count).setScale(2, RoundingMode.HALF_UP);
+        } else {
+            BigDecimal rep = new BigDecimal(this.reputation / count).setScale(2, RoundingMode.HALF_UP);
             return rep.doubleValue();
         }
- 
+
+    }
+    
+    public double getReputationOnly(){
+        return reputation;
     }
 
     public void setReputation(double reputation) {
@@ -214,7 +217,6 @@ public class FacultyProfile {
         return false;
     }
 
-
     public boolean isIsSubscript() {
         return isSubscript;
     }
@@ -224,29 +226,28 @@ public class FacultyProfile {
     }
 
     public void updateReputation() {
-    double sum = 0;
-    int count = 0;
+        double sum = 0;
+        int count = 0;
 
-    for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
-        CourseSchedule cs = termSchedule.getValue();
-        for (CourseOffer co : cs.getSchedule()) {
-            for (Seat s : co.getSeatlist()) {
-                if (s.getOccupied() && s.getSeatassignment().getRateOfProf() != 0) {
-                    double rating = s.getSeatassignment().getRateOfProf();
-                    sum += rating;
-                    count++;
+        for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
+            CourseSchedule cs = termSchedule.getValue();
+            for (CourseOffer co : cs.getSchedule()) {
+                for (Seat s : co.getSeatlist()) {
+                    if (s.getOccupied() && s.getSeatassignment().getRateOfProf() != 0) {
+                        double rating = s.getSeatassignment().getRateOfProf();
+                        sum += rating;
+                        count++;
+                    }
                 }
             }
         }
-    }
 
-    if (count != 0) {
-        BigDecimal rep = new BigDecimal(sum / count).setScale(2, RoundingMode.HALF_UP);
-        this.reputation = rep.doubleValue();
-    } else {
-        this.reputation = 0;
+        if (count != 0) {
+            BigDecimal rep = new BigDecimal(sum / count).setScale(2, RoundingMode.HALF_UP);
+            this.reputation = rep.doubleValue();
+        } else {
+            this.reputation = 0;
+        }
     }
-}
-
 
 }
