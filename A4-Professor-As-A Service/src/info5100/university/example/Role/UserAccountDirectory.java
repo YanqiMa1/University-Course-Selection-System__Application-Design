@@ -26,7 +26,6 @@ public class UserAccountDirectory {
         department = d;
         useraccountlist = new ArrayList<UserAccount>();
         
-
     }
 
     public ArrayList<UserAccount> getUseraccountlist() {

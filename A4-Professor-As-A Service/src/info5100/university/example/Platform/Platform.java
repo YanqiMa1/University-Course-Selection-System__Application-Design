@@ -17,6 +17,8 @@ import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Persona.PersonDirectory;
 import info5100.university.example.Persona.StudentDirectory;
 import info5100.university.example.Persona.StudentProfile;
+import info5100.university.example.Role.AdminRole;
+import info5100.university.example.Role.UserAccount;
 import java.util.HashMap;
 
 /**
@@ -46,6 +48,9 @@ public class Platform {
         authoritydirectory = new AuthorityDirectory(this);
         degree = new Degree("MSIS");
         uad = new UserAccountDirectory(this);
+        
+        
+        UserAccount user = this.uad.createUserAccount("admin", "admin", new AdminRole());
     }
     
        public static Platform getInstance() {
