@@ -327,25 +327,28 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
 
     private void createCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCourseBtnActionPerformed
         // TODO add your handling code here:
-        if (isValidPrice(fieldPrice)) {
-            String name = fieldCourseName.getText();
-            String topic = fieldTopic.getText();
-            String region = fieldRegion.getText();
-            String lang = fieldLang.getText();
-            String price = fieldPrice.getText();
-            if (this.fp.getCourseCatalog().isCourseAlreadyExist(name)) {
-                JOptionPane.showMessageDialog(null, "You have already create this course");
-            } else {
-                this.fp.createCourse(name, topic, region, lang, Integer.valueOf(price), fp.getPerson().getNameOfPerson());
-            }
-
-            //        JOptionPane.showMessageDialog(null,"Created");
-            populateCourse();
-            populateCourseIdCombo();
+        if (fieldCourseName.getText().isEmpty() || fieldTopic.getText().isEmpty() || fieldRegion.getText().isEmpty() || fieldLang.getText().isEmpty() || fieldPrice.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please fill in all field");
         } else {
-            JOptionPane.showMessageDialog(null, "The price is out of range!");
-        }
+            if (isValidPrice(fieldPrice)) {
+                String name = fieldCourseName.getText();
+                String topic = fieldTopic.getText();
+                String region = fieldRegion.getText();
+                String lang = fieldLang.getText();
+                String price = fieldPrice.getText();
+                if (this.fp.getCourseCatalog().isCourseAlreadyExist(name)) {
+                    JOptionPane.showMessageDialog(null, "You have already create this course");
+                } else {
+                    this.fp.createCourse(name, topic, region, lang, Integer.valueOf(price), fp.getPerson().getNameOfPerson());
+                }
 
+                //        JOptionPane.showMessageDialog(null,"Created");
+                populateCourse();
+                populateCourseIdCombo();
+            } else {
+                JOptionPane.showMessageDialog(null, "The price is out of range!");
+            }
+        }
     }//GEN-LAST:event_createCourseBtnActionPerformed
 
     private void comboTermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTermActionPerformed
@@ -446,7 +449,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
     private void deleteCOBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCOBtnActionPerformed
         int selectedRow = scheduleTable.getSelectedRow();
         Course c = (Course) scheduleTable.getValueAt(selectedRow, 0);
-        String term = (String)scheduleTable.getValueAt(selectedRow, 2);
+        String term = (String) scheduleTable.getValueAt(selectedRow, 2);
         this.fp.deleteCourseOffer(term, c.getCourseId());
         populateSchedule();
     }//GEN-LAST:event_deleteCOBtnActionPerformed
@@ -454,7 +457,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
     private void updateSeatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSeatBtnActionPerformed
         String keyword = newSeat.getText();
         int selectedRow = scheduleTable.getSelectedRow();
-        String term = (String)scheduleTable.getValueAt(selectedRow, 2);
+        String term = (String) scheduleTable.getValueAt(selectedRow, 2);
         Course c = (Course) scheduleTable.getValueAt(selectedRow, 0);
 
         if (selectedRow >= 0) {
