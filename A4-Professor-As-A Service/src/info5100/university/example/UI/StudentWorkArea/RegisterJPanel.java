@@ -95,11 +95,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "CourseNum", "CourseName", "Semester", "topic", "region", "language", "credit", "price", "RatingOfPro", "Seat"
+                "CourseNum", "CourseName", "Semester", "ProfName", "topic", "region", "language", "credit", "price", "RatingOfPro", "Seat"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -326,18 +326,18 @@ public class RegisterJPanel extends javax.swing.JPanel {
         for (CourseOffer co : searchResList) {
             Course c = co.getCourse();
 
-            Object[] row = new Object[10];
+            Object[] row = new Object[11];
             row[0] = c;
             row[1] = c.getName();
             row[2] = co.getTerm();
-            row[3] = c.getTopic();
-
-            row[4] = c.getRegion();
-            row[5] = c.getLanguage();
-            row[6] = c.getCredit();
-            row[7] = c.getPrice();
-            row[8] = this.pf.getFacultydirectory().findProfessorByName(c.getProfname()).getReputationOnly();
-            row[9] = co.getEmptySeatCount() + "/" + co.getSeatlist().size();
+            row[3]=c.getProfname();
+            row[4] = c.getTopic();
+            row[5] = c.getRegion();
+            row[6] = c.getLanguage();
+            row[7] = c.getCredit();
+            row[8] = c.getPrice();
+            row[9] = this.pf.getFacultydirectory().findProfessorByName(c.getProfname()).getReputationOnly();
+            row[10] = co.getEmptySeatCount() + "/" + co.getSeatlist().size();
 
             model.addRow(row);
 
