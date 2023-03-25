@@ -124,7 +124,7 @@ public class TranscriptJPanel extends javax.swing.JPanel {
                 rateBtnActionPerformed(evt);
             }
         });
-        add(rateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, -1));
+        add(rateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
@@ -192,6 +192,7 @@ public class TranscriptJPanel extends javax.swing.JPanel {
             CourseLoad col = sp.getCourseLoadByTerm((String) jTable1.getValueAt(selectedRow, 2));
             SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
 
+
             if (aimedSa.getGrade() <= 1.0) {
                 JOptionPane.showMessageDialog(null, "Please finish the course first!");
             } else {
@@ -202,6 +203,7 @@ public class TranscriptJPanel extends javax.swing.JPanel {
                 populateTranscript();
             }
         } else {
+
             JOptionPane.showMessageDialog(null, "Please input your rate");
         }
 

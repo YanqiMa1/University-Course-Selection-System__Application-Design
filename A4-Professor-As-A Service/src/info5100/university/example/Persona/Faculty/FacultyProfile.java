@@ -140,17 +140,29 @@ public class FacultyProfile {
 }
 
     public double getReputation() {
-        double sum = 0;
+      
         int count = 0;
-        for (StudentProfile s : this.getEnrolledListForAllTerm()) {
-            for (CourseLoad col : s.getTranscript().getCourseloadlist().values()) {
-                for (SeatAssignment sa : col.getSeatassignments()) { //go around all the seatassignments for all the students that registered for this professor
-                    sum = sum + sa.getRateOfProf();
-                    count++;
+        for(Map.Entry<String,CourseSchedule> termSchedule : this.allSchedules.entrySet()){
+            CourseSchedule cs = (CourseSchedule)termSchedule.getValue();
+            for (CourseOffer co : cs.getSchedule()){
+                for(Seat s : co.getSeatlist()){
+                    if(s.getOccupied()&&s.getSeatassignment().getRateOfProf()!=0){
+                        double rating =s.getSeatassignment().getRateOfProf();
+                        this.reputation += rating;
+                        count++;
+                    }
                 }
             }
         }
-        return this.reputation = sum / count;
+        
+        
+        if(count == 0){
+            return 0;
+        }else{
+            BigDecimal rep = new BigDecimal(this.reputation/count).setScale(2, RoundingMode.HALF_UP);
+            return rep.doubleValue();
+        }
+ 
     }
 
     public void setReputation(double reputation) {

@@ -336,11 +336,14 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 String region = fieldRegion.getText();
                 String lang = fieldLang.getText();
                 String price = fieldPrice.getText();
-                if (this.fp.getCourseCatalog().isCourseAlreadyExist(name)) {
-                    JOptionPane.showMessageDialog(null, "You have already create this course");
+                for(FacultyProfile f :this.pf.getFacultydirectory().getProfessors()){
+                    if (f.getCourseCatalog().isCourseAlreadyExist(name)) {
+                    JOptionPane.showMessageDialog(null, "The course is already existed!");
                 } else {
                     this.fp.createCourse(name, topic, region, lang, Integer.valueOf(price), fp.getPerson().getNameOfPerson());
                 }
+                }
+                
 
                 //        JOptionPane.showMessageDialog(null,"Created");
                 populateCourse();
