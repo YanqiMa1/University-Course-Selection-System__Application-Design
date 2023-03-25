@@ -150,7 +150,7 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
                         } else if (jComboBox1.getSelectedItem().equals("C")) {
                             g = 2.0f;
                         } else {
-                            g = 0.0f;
+                            g = 1.0f;
                         }
 
                         sa.setGrade(g);
