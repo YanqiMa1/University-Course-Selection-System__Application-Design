@@ -81,13 +81,18 @@ public class ShowJPanel extends javax.swing.JPanel {
         courseTableModel.setRowCount(0);
         for (FacultyProfile fp : this.pf.getFacultydirectory().getProfessors()) {
             for (Course c : fp.getCourseCatalog().getCourses()) {
-                Object[] row = new Object[3];
+            Object[] row = new Object[8];
+            row[0] = c;
+            row[1] = c.getName();
+            row[2] = c.getLanguage();
+            row[3] = c.getTopic();
 
-                row[0] = c;
-                row[1] = c.getName();
-                row[2] = c.getLanguage();
+            row[4] = c.getRegion();
+            row[5] = c.getCredit();
+            row[6] = c.getPrice();
+            row[7] = this.pf.getFacultydirectory().findProfessorByName(c.getProfname()).getPerson().getNameOfPerson();
 
-                courseTableModel.addRow(row);
+            courseTableModel.addRow(row);
             }
         }
     }
@@ -147,18 +152,18 @@ public class ShowJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(profTable);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 261, 160));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 160));
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CourseName", "CourseNum", "language"
+                "CourseName", "CourseNum", "language", "topic", "region", "credit", "price", "professor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -167,7 +172,7 @@ public class ShowJPanel extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(courseTable);
 
-        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 261, 160));
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 750, 160));
 
         stuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,7 +192,7 @@ public class ShowJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(stuTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 261, 160));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 230, 160));
 
         authorityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,7 +212,7 @@ public class ShowJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(authorityTable);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 261, 160));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 220, 160));
 
         jLabel1.setText("Total Revenue of the platform:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 200, -1));
