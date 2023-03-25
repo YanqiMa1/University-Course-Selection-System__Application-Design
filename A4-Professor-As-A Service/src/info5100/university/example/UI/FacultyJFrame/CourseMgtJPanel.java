@@ -133,7 +133,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Price");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, -1, -1));
 
         jLabel2.setText("Course Name");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
@@ -142,21 +142,21 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jLabel4.setText("Region");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, -1, -1));
 
         jLabel5.setText("Language");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
-        add(fieldTopic, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 200, -1));
-        add(fieldRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 200, -1));
-        add(fieldLang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 200, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
+        add(fieldTopic, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 100, -1));
+        add(fieldRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 100, -1));
+        add(fieldLang, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 100, -1));
 
         fieldSeats.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldSeatsFocusLost(evt);
             }
         });
-        add(fieldSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 200, -1));
-        add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 200, -1));
+        add(fieldSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 200, -1));
+        add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 100, -1));
 
         createCourseBtn.setText("Create Course");
         createCourseBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -164,23 +164,23 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 createCourseBtnActionPerformed(evt);
             }
         });
-        add(createCourseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+        add(createCourseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 170, -1, -1));
 
         jLabel7.setText("term");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
         fieldPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 fieldPriceFocusLost(evt);
             }
         });
-        add(fieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 200, -1));
+        add(fieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 100, -1));
 
         jLabel8.setText("Course Id");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, -1, -1));
 
         jLabel9.setText("Number of seats");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
 
         comboTerm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022Fall", "2023Spring", "2023Summer" }));
         comboTerm.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 comboTermActionPerformed(evt);
             }
         });
-        add(comboTerm, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 200, -1));
+        add(comboTerm, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 200, -1));
 
         createCOBtn.setText("Create Course Offer");
         createCOBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +196,9 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 createCOBtnActionPerformed(evt);
             }
         });
-        add(createCOBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
+        add(createCOBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, -1, -1));
 
-        add(comboCourseId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 200, -1));
+        add(comboCourseId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 200, -1));
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -226,10 +226,10 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(courseTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 460, 140));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 460, 140));
 
         jLabel6.setText("My Courses");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
 
         scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,12 +252,12 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(scheduleTable);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 460, 230));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 460, 230));
 
         jLabel10.setText("My Course Schedule");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 220, -1, -1));
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 70, 20));
-        add(fieldUpdatePrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, 100, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 70, 20));
+        add(fieldUpdatePrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 100, -1));
 
         updatePriceBtn.setText("Update Price");
         updatePriceBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -265,15 +265,15 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 updatePriceBtnActionPerformed(evt);
             }
         });
-        add(updatePriceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
+        add(updatePriceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 10)); // NOI18N
         jLabel12.setText("（1--200）");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 80, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 80, -1));
 
         jLabel13.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 10)); // NOI18N
         jLabel13.setText("（1--10000）");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 80, -1));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCourseBtnActionPerformed
