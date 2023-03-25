@@ -177,21 +177,25 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_requestBtnActionPerformed
 
     private void rateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateBtnActionPerformed
-        int selectedRow = jTable1.getSelectedRow();
-        Course c = (Course) jTable1.getValueAt(selectedRow, 0);
-        StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
-        CourseLoad col = sp.getCourseLoadByTerm(c.getTerm());
-        //FIND THE SEATASSIGNMENT TO ASSIGN THE RATE TO THIS COURSE
-        SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
-        aimedSa.setRateOfProf(Double.valueOf(RateField.getText()));        
-        populateTranscript();
-        
+        if (!RateField.getText().isEmpty()) {
+            int selectedRow = jTable1.getSelectedRow();
+            Course c = (Course) jTable1.getValueAt(selectedRow, 0);
+            StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
+            CourseLoad col = sp.getCourseLoadByTerm(c.getTerm());
+            //FIND THE SEATASSIGNMENT TO ASSIGN THE RATE TO THIS COURSE
+            SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
+            aimedSa.setRateOfProf(Double.valueOf(RateField.getText()));
+            populateTranscript();
+        }else{
+            JOptionPane.showMessageDialog(null, "Please input your rate");
+        }
+
     }//GEN-LAST:event_rateBtnActionPerformed
 
     private void RateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_RateFieldFocusLost
-        if(isValidrate(RateField)){
+        if (isValidrate(RateField)) {
             //pass
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "The rate should be 1-10!");
         }
     }//GEN-LAST:event_RateFieldFocusLost
@@ -205,24 +209,25 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         }
 
     }
-    public static boolean isValidrate(JTextField textField){
+
+    public static boolean isValidrate(JTextField textField) {
         String input = textField.getText();
         try {
-           double number = Double.parseDouble(input);
-           if (number >= 1 && number <= 10) {
-    // Input is valid, between 1 and 10
-           return true;
-        } else {
-    // Input is not between 1 and 10
-        return false;
+            double number = Double.parseDouble(input);
+            if (number >= 1 && number <= 10) {
+                // Input is valid, between 1 and 10
+                return true;
+            } else {
+                // Input is not between 1 and 10
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            // Input is not a valid double
+            return false;
         }
-    } catch (NumberFormatException e) {
-  // Input is not a valid double
-    return false;
     }
-    }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField RateField;
     private javax.swing.JComboBox jComboBox1;

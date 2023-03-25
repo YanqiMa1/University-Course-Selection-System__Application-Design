@@ -84,11 +84,11 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Student Name", "Student ID", "Grade Status", "CourseId", "Term"
+                "StudentName", "Student ID", "Grade Status", "CourseId", "Term"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -134,8 +134,8 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = studentTable.getSelectedRow();
         StudentProfile student = (StudentProfile) studentTable.getValueAt(selectedRow, 0);
-
-        String courseName = this.selectedCourse.getName();
+        Course selectedCourse= (Course)studentTable.getValueAt(selectedRow, 3);
+        String courseName = selectedCourse.getName();
 
         if (selectedRow >= 0) {
             for (Map.Entry<String, CourseLoad> courseLoads : student.getTranscript().getCourseloadlist().entrySet()) {
@@ -166,12 +166,12 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         populateStudentTable();
     }//GEN-LAST:event_gradeBtnActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
 
         // TODO add your handling code here:
         //        fieldCourseName.setText(this.selectedCourse.getName());
         //        populateStudentTable();
-    }//GEN-LAST:event_comboCourseFocusLost
+    }                                     
 
     private void comboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCourseItemStateChanged
         // TODO add your handling code here:
@@ -188,10 +188,10 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
             studentTableModel.setRowCount(0);
             String term = (String) jComboBox2.getSelectedItem();
 
-
+            
             CourseSchedule cs = this.professor.getAllSchedules().get(term);
-
-            ArrayList<CourseOffer> offers = cs.getSchedule();
+            if(cs!=null){
+                 ArrayList<CourseOffer> offers = cs.getSchedule();
 
             for (CourseOffer co : offers) {
 //                    ArrayList<Student> enrolledStudentList = co.getEnrolledStudentList();
@@ -200,10 +200,10 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 
                         Object[] row = new Object[5];
 
-                        row[0] = s.getSeatassignment().getCourseload().getStudent().getPerson().getPersonId();
-                        row[1] = s.getSeatassignment().getCourseload().getStudent().getPerson().getNameOfPerson();
+                        row[0] = s.getSeatassignment().getCourseload().getStudent();
+                        row[1] = s.getSeatassignment().getCourseload().getStudent().getPerson().getPersonId();
                         row[2] = s.getSeatassignment().getGrade();
-                        row[3] = s.getCourseoffer().getCourse().getCourseId();
+                        row[3] = s.getCourseoffer().getCourse();
                         row[4] = s.getCourseoffer().getCourse().getTerm();
 
 
@@ -211,6 +211,10 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
                     }
                 }
             }
+            }else{
+                 JOptionPane.showMessageDialog(null, "Not find");
+            }
+           
 
         }
     }
