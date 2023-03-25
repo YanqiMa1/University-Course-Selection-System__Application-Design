@@ -51,6 +51,7 @@ public class FacultyJFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1200, 800));
 
         jSplitPane1.setMinimumSize(new java.awt.Dimension(800, 600));
 
