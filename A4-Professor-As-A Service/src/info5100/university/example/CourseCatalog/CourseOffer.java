@@ -51,6 +51,18 @@ public class CourseOffer {
         return null;
     }
 
+
+    public int getEmptySeatCount() {
+        int seatCounter = 0;
+        for (Seat s : seatlist) {
+            if (!s.isOccupied()) {
+                seatCounter++;
+            }
+        }
+        return seatCounter;
+    }
+
+
     public SeatAssignment assignEmptySeat(CourseLoad cl) {
 
         Seat seat = getEmptySeat();
