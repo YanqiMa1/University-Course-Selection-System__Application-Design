@@ -33,6 +33,13 @@ public class CourseOffer {
         }
     }
 
+    public void changeSeatsNumbers(int num) {
+        this.seatlist.clear();
+        for (int i = 0; i < num; i++) {
+            seatlist.add(new Seat(this));
+        }
+    }
+
     public Seat getEmptySeat() {
 
         for (Seat s : seatlist) {
@@ -44,6 +51,7 @@ public class CourseOffer {
         return null;
     }
 
+
     public int getEmptySeatCount() {
         int seatCounter = 0;
         for (Seat s : seatlist) {
@@ -53,6 +61,7 @@ public class CourseOffer {
         }
         return seatCounter;
     }
+
 
     public SeatAssignment assignEmptySeat(CourseLoad cl) {
 

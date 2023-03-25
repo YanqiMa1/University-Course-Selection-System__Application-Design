@@ -78,9 +78,9 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 Course c = co.getCourse();
                 Object[] row = new Object[5];
 
-                row[0] = cs.getTerm(); //term
-                row[1] = c.getCourseId();
-                row[2] = c.getName();
+                row[0] = c;//term
+                row[1] = c.getName();
+                row[2] = cs.getTerm();
                 row[3] = co.getProfessor().getPerson().getNameOfPerson();
                 row[4] = co.getSeatlist().size();
 
@@ -115,7 +115,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         comboTerm = new javax.swing.JComboBox<>();
-        deleteCOBtn = new javax.swing.JButton();
+        createCOBtn = new javax.swing.JButton();
         comboCourseId = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         courseTable = new javax.swing.JTable();
@@ -127,12 +127,14 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         updatePriceBtn = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        createCOBtn1 = new javax.swing.JButton();
+        deleteCOBtn = new javax.swing.JButton();
         updateSeatBtn = new javax.swing.JButton();
         createCourseBtn1 = new javax.swing.JButton();
         DeleteCourseBtn = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        newSeat = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 255, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -195,13 +197,13 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         });
         add(comboTerm, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, 200, -1));
 
-        deleteCOBtn.setText("Delete Course Offer");
-        deleteCOBtn.addActionListener(new java.awt.event.ActionListener() {
+        createCOBtn.setText("Create Course Offer");
+        createCOBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCOBtnActionPerformed(evt);
+                createCOBtnActionPerformed(evt);
             }
         });
-        add(deleteCOBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 540, 170, -1));
+        add(createCOBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 160, -1));
 
         add(comboCourseId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, 200, -1));
 
@@ -244,11 +246,11 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Term", "Course ID", "Course Name", "Professor Name", "No. of seats"
+                "Course ID", "Course Name", "Term", "Professor Name", "No. of seats"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -257,7 +259,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(scheduleTable);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 460, 230));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 460, 230));
 
         jLabel10.setText("My Course Schedule");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, -1, -1));
@@ -273,19 +275,19 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
 
         jLabel12.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 10)); // NOI18N
         jLabel12.setText("（1--200）");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 80, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 80, -1));
 
         jLabel13.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 10)); // NOI18N
         jLabel13.setText("（1--10000）");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 80, -1));
 
-        createCOBtn1.setText("Create Course Offer");
-        createCOBtn1.addActionListener(new java.awt.event.ActionListener() {
+        deleteCOBtn.setText("Delete Course Offer");
+        deleteCOBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createCOBtn1ActionPerformed(evt);
+                deleteCOBtnActionPerformed(evt);
             }
         });
-        add(createCOBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 480, 170, -1));
+        add(deleteCOBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, 160, -1));
 
         updateSeatBtn.setText("Update number of seats");
         updateSeatBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -293,7 +295,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 updateSeatBtnActionPerformed(evt);
             }
         });
-        add(updateSeatBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, -1, -1));
+        add(updateSeatBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 520, 160, -1));
 
         createCourseBtn1.setText("Create Course");
         createCourseBtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -316,31 +318,41 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("update content:");
         add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, 100, -1));
+        add(newSeat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 160, -1));
+
+        jLabel14.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 10)); // NOI18N
+        jLabel14.setText("（1--200）");
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 440, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCourseBtnActionPerformed
         // TODO add your handling code here:
-        String name = fieldCourseName.getText();
-        String topic = fieldTopic.getText();
-        String region = fieldRegion.getText();
-        String lang = fieldLang.getText();
-        String price = fieldPrice.getText();
-        if (this.fp.getCourseCatalog().isCourseAlreadyExist(name)) {
-            JOptionPane.showMessageDialog(null, "You have already create this course");
+        if (isValidPrice(fieldPrice)) {
+            String name = fieldCourseName.getText();
+            String topic = fieldTopic.getText();
+            String region = fieldRegion.getText();
+            String lang = fieldLang.getText();
+            String price = fieldPrice.getText();
+            if (this.fp.getCourseCatalog().isCourseAlreadyExist(name)) {
+                JOptionPane.showMessageDialog(null, "You have already create this course");
+            } else {
+                this.fp.createCourse(name, topic, region, lang, Integer.valueOf(price), fp.getPerson().getNameOfPerson());
+            }
+
+            //        JOptionPane.showMessageDialog(null,"Created");
+            populateCourse();
+            populateCourseIdCombo();
         } else {
-            this.fp.createCourse(name, topic, region, lang, Integer.valueOf(price), fp.getPerson().getNameOfPerson());
+            JOptionPane.showMessageDialog(null, "The price is out of range!");
         }
 
-        //        JOptionPane.showMessageDialog(null,"Created");
-        populateCourse();
-        populateCourseIdCombo();
     }//GEN-LAST:event_createCourseBtnActionPerformed
 
     private void comboTermActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTermActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboTermActionPerformed
 
-    private void deleteCOBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCOBtnActionPerformed
+    private void createCOBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCOBtnActionPerformed
         // TODO add your handling code here:
         String courseId = (String) comboCourseId.getSelectedItem();
         String seats = fieldSeats.getText();
@@ -371,7 +383,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         }
 
 
-    }//GEN-LAST:event_deleteCOBtnActionPerformed
+    }//GEN-LAST:event_createCOBtnActionPerformed
 
     private void courseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseTableMouseClicked
         // TODO add your handling code here:
@@ -383,61 +395,80 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         String keyword = fieldUpdate.getText();
         int selectedRow = courseTable.getSelectedRow();
         Course c = (Course) courseTable.getValueAt(selectedRow, 0);
-        if(selectedRow>=0){
-        if (jComboBox1.getSelectedItem().equals("Course Name")) {
-            if (this.fp.getCourseCatalog().isCourseAlreadyExist(keyword)) {
-                JOptionPane.showMessageDialog(null, "You have already create this course");
-            } else {
-                c.setName(keyword);
-                 populateCourse();
-            }
+        if (selectedRow >= 0) {
+            if (jComboBox1.getSelectedItem().equals("Course Name")) {
+                if (this.fp.getCourseCatalog().isCourseAlreadyExist(keyword)) {
+                    JOptionPane.showMessageDialog(null, "You have already create this course");
+                } else {
+                    c.setName(keyword);
+                    populateCourse();
+                }
 
-           
-        } else if (jComboBox1.getSelectedItem().equals("Topic")) {
-            c.setTopic(keyword);
-            populateCourse();
-            
-        } else if (jComboBox1.getSelectedItem().equals("Region")) {
-            c.setRegion(keyword);
-            populateCourse();
-            
-        } else if (jComboBox1.getSelectedItem().equals("Price")) {
-            if (isValidPrice(fieldUpdate)) {
-                c.setPrice(Integer.valueOf(keyword));
+            } else if (jComboBox1.getSelectedItem().equals("Topic")) {
+                c.setTopic(keyword);
                 populateCourse();
-            } else {
-                JOptionPane.showMessageDialog(null, "The price is out of range!");
+
+            } else if (jComboBox1.getSelectedItem().equals("Region")) {
+                c.setRegion(keyword);
+                populateCourse();
+
+            } else if (jComboBox1.getSelectedItem().equals("Price")) {
+                if (isValidPrice(fieldUpdate)) {
+                    c.setPrice(Integer.valueOf(keyword));
+                    populateCourse();
+                } else {
+                    JOptionPane.showMessageDialog(null, "The price is out of range!");
+                }
+
+            } else if (jComboBox1.getSelectedItem().equals("Language")) {
+                c.setLanguage(keyword);
+                populateCourse();
             }
-            
-        } else if (jComboBox1.getSelectedItem().equals("Language")) {
-            c.setLanguage(keyword);
-            populateCourse();
-        }
-        }else{
-              JOptionPane.showMessageDialog(null, "Please choose a course");
+        } else {
+            JOptionPane.showMessageDialog(null, "Please choose a course");
         }
 
     }//GEN-LAST:event_updatePriceBtnActionPerformed
 
     private void fieldPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldPriceFocusLost
-        // TODO add your handling code here:
-        if (isValidPrice(fieldPrice)) {
-            //pass
-        } else {
-            JOptionPane.showMessageDialog(null, "The price is out of range!");
-        }
+//        // TODO add your handling code here:
+//        if (isValidPrice(fieldPrice)) {
+//            //pass
+//        } else {
+//            JOptionPane.showMessageDialog(null, "The price is out of range!");
+//        }
     }//GEN-LAST:event_fieldPriceFocusLost
 
     private void fieldSeatsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSeatsFocusLost
 
     }//GEN-LAST:event_fieldSeatsFocusLost
 
-    private void createCOBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCOBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_createCOBtn1ActionPerformed
+    private void deleteCOBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCOBtnActionPerformed
+        int selectedRow = scheduleTable.getSelectedRow();
+        Course c = (Course) scheduleTable.getValueAt(selectedRow, 0);
+        String term = (String)scheduleTable.getValueAt(selectedRow, 2);
+        this.fp.deleteCourseOffer(term, c.getCourseId());
+        populateSchedule();
+    }//GEN-LAST:event_deleteCOBtnActionPerformed
 
     private void updateSeatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSeatBtnActionPerformed
-        // TODO add your handling code here:
+        String keyword = newSeat.getText();
+        int selectedRow = scheduleTable.getSelectedRow();
+        String term = (String)scheduleTable.getValueAt(selectedRow, 2);
+        Course c = (Course) scheduleTable.getValueAt(selectedRow, 0);
+
+        if (selectedRow >= 0) {
+            if (isValidSeats(newSeat)) {
+                CourseOffer co = this.fp.getAllSchedules().get(term).getCourseOfferByCourseId(c.getCourseId());
+                co.changeSeatsNumbers(Integer.valueOf(keyword));
+                populateSchedule();
+            } else {
+                JOptionPane.showMessageDialog(null, "The seat is out of range!");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please choose a course");
+        }
     }//GEN-LAST:event_updateSeatBtnActionPerformed
 
     private void createCourseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCourseBtn1ActionPerformed
@@ -490,7 +521,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboCourseId;
     private javax.swing.JComboBox<String> comboTerm;
     private javax.swing.JTable courseTable;
-    private javax.swing.JButton createCOBtn1;
+    private javax.swing.JButton createCOBtn;
     private javax.swing.JButton createCourseBtn;
     private javax.swing.JButton createCourseBtn1;
     private javax.swing.JButton deleteCOBtn;
@@ -507,6 +538,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -517,6 +549,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField newSeat;
     private javax.swing.JTable scheduleTable;
     private javax.swing.JButton updatePriceBtn;
     private javax.swing.JButton updateSeatBtn;

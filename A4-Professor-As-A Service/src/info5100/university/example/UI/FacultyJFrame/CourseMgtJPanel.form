@@ -186,16 +186,16 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="deleteCOBtn">
+    <Component class="javax.swing.JButton" name="createCOBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delete Course Offer"/>
+        <Property name="text" type="java.lang.String" value="Create Course Offer"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCOBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createCOBtnActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="540" width="170" height="-1"/>
+          <AbsoluteConstraints x="10" y="480" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -264,7 +264,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="330" y="350" width="460" height="230"/>
+          <AbsoluteConstraints x="350" y="350" width="460" height="230"/>
         </Constraint>
       </Constraints>
 
@@ -274,9 +274,9 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="5" rowCount="4">
-                <Column editable="true" title="Term" type="java.lang.String"/>
-                <Column editable="true" title="Course ID" type="java.lang.String"/>
+                <Column editable="true" title="Course ID" type="java.lang.Object"/>
                 <Column editable="true" title="Course Name" type="java.lang.String"/>
+                <Column editable="true" title="Term" type="java.lang.String"/>
                 <Column editable="true" title="Professor Name" type="java.lang.String"/>
                 <Column editable="true" title="No. of seats" type="java.lang.Integer"/>
               </Table>
@@ -356,7 +356,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="440" width="80" height="-1"/>
+          <AbsoluteConstraints x="10" y="550" width="80" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -373,16 +373,16 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="createCOBtn1">
+    <Component class="javax.swing.JButton" name="deleteCOBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create Course Offer"/>
+        <Property name="text" type="java.lang.String" value="Delete Course Offer"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createCOBtn1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteCOBtnActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="480" width="170" height="-1"/>
+          <AbsoluteConstraints x="180" y="480" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -395,7 +395,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="510" width="-1" height="-1"/>
+          <AbsoluteConstraints x="180" y="520" width="160" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -453,6 +453,26 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="550" y="220" width="100" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JTextField" name="newSeat">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="10" y="520" width="160" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel14">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Microsoft YaHei UI" size="10" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="&#xff08;1--200&#xff09;"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="10" y="440" width="80" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
