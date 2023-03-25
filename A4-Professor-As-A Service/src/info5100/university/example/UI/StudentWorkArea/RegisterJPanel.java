@@ -285,6 +285,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 if (cof != null) {
 
                     SeatAssignment seatA = col.newSeatAssignment(cof);
+                    f.collectTuition(cof.getCourse().getPrice());
                     populateRegisteredCourse();
                 } else {
                     JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
@@ -298,6 +299,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             if (cof != null) {
 
                 SeatAssignment seatA = col.newSeatAssignment(cof);
+                f.collectTuition(cof.getCourse().getPrice());
                 populateRegisteredCourse();
             } else {
                 JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");

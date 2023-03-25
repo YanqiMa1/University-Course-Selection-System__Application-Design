@@ -36,6 +36,7 @@ public class FacultyProfile {
         this.courseCatalog = new CourseCatalog(this);
         this.allSchedules = new HashMap<String, CourseSchedule>();
         this.enrolledListForAllTerm = new ArrayList<StudentProfile>();
+        tuitionCollected = 0.0;
     }
 
     public Course createCourse(String name, String topic, String region, String language, int price, String pfoN) {
@@ -64,18 +65,33 @@ public class FacultyProfile {
 
     }
 
+//    public ArrayList<StudentProfile> getEnrolledListForAllTerm() {
+//
+//        for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
+//            CourseSchedule cs = termSchedule.getValue();
+//
+//            for (StudentProfile s : cs.getEnrolledListForTerm()) {
+//                this.enrolledListForAllTerm.add(s);
+//            }
+//        }
+//        return this.enrolledListForAllTerm;
+//    }
     public ArrayList<StudentProfile> getEnrolledListForAllTerm() {
+
+        ArrayList<StudentProfile> uniqueEnrolledListForAllTerm = new ArrayList<>();
 
         for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
             CourseSchedule cs = termSchedule.getValue();
 
             for (StudentProfile s : cs.getEnrolledListForTerm()) {
-                this.enrolledListForAllTerm.add(s);
+                if (!isStudentInList(s, uniqueEnrolledListForAllTerm)) {
+                    uniqueEnrolledListForAllTerm.add(s);
+                }
             }
         }
-        return this.enrolledListForAllTerm;
+        return uniqueEnrolledListForAllTerm;
     }
-    
+
     public ArrayList<StudentProfile> getEnrolledListForAllTermOnly() {
         return enrolledListForAllTerm;
     }
@@ -104,6 +120,10 @@ public class FacultyProfile {
 
     public void setReputation(double reputation) {
         this.reputation = reputation;
+    }
+
+    public void collectTuition(double tuitionAmount) {
+        this.tuitionCollected += tuitionAmount;
     }
 
     public double getTuitionCollected() {
@@ -136,6 +156,15 @@ public class FacultyProfile {
 
     public void setEnrolledList(ArrayList<StudentProfile> enrolledList) {
         this.enrolledList = enrolledList;
+    }
+
+    private boolean isStudentInList(StudentProfile student, ArrayList<StudentProfile> studentList) {
+        for (StudentProfile s : studentList) {
+            if (s == student) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
