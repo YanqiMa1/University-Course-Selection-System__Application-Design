@@ -65,6 +65,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         semesterCombo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 102));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -160,6 +162,13 @@ public class RegisterJPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel3.setText("Registed Plan");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 200, 20));
+
+        jLabel4.setText("default");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 430, 80, -1));
+
+        jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel5.setText("Total tuition:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -170,7 +179,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             // we will delete the object
             Course c = (Course) jTable2.getValueAt(selectedRow, 0);
 
-            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm((String)jTable1.getValueAt(selectedRow, 2)).deleteSeatAssignment(c);
+            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm((String) jTable1.getValueAt(selectedRow, 2)).deleteSeatAssignment(c);
 
             populateRegisteredCourse();
         } else {
@@ -283,7 +292,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
                 CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
                 if (cof != null) {
-                    
+
                     SeatAssignment seatA = col.newSeatAssignment(cof);
                     f.collectTuition(cof.getCourse().getPrice());
                     populateRegisteredCourse();
@@ -305,7 +314,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
             }
         }
-
+        showTotalRevenue();
 
     }//GEN-LAST:event_registerBtn1ActionPerformed
     private void displayResult(ArrayList<CourseOffer> searchResList) {
@@ -326,7 +335,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             row[5] = c.getLanguage();
             row[6] = c.getCredit();
             row[7] = c.getPrice();
-            row[8] =this.pf.getFacultydirectory().findProfessorByName( c.getProfname()).getReputation();
+            row[8] = this.pf.getFacultydirectory().findProfessorByName(c.getProfname()).getReputation();
             row[9] = co.getEmptySeatCount() + "/" + co.getSeatlist().size();
 
             model.addRow(row);
@@ -355,6 +364,18 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
     }
 
+    private void showTotalRevenue() {
+
+        int totalrevenue = 0;
+        StudentProfile s = this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
+        for (CourseLoad co : s.getTranscript().getCourseloadlist().values()) {
+            for (Course c : co.getRegisteredCourses()) {
+                totalrevenue += c.getPrice();
+            }
+        }
+        jLabel4.setText(String.valueOf(totalrevenue));
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteBtn;
@@ -363,6 +384,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
