@@ -4,8 +4,13 @@
  */
 package info5100.university.example.UI.AdminWorkArea;
 
+import info5100.university.example.Authority.AuthorityProfile;
+import info5100.university.example.CourseCatalog.Course;
+import info5100.university.example.Persona.Faculty.FacultyProfile;
+import info5100.university.example.Persona.StudentProfile;
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,22 +25,87 @@ public class ShowJPanel extends javax.swing.JPanel {
     private Platform pf;
     private UserAccount ua;
     DefaultTableModel profTableModel;
+    DefaultTableModel authorityTableModel;
+    DefaultTableModel stuTableModel;
+    DefaultTableModel courseTableModel;
+
     public ShowJPanel() {
         initComponents();
     }
-    
-    public ShowJPanel(Platform platform,UserAccount userAccount) {
+
+    public ShowJPanel(Platform platform, UserAccount userAccount) {
         initComponents();
-        this.pf=platform;
-        this.ua=userAccount;
+        this.pf = platform;
+        this.ua = userAccount;
         this.profTableModel = (DefaultTableModel) profTable.getModel();
+        this.authorityTableModel = (DefaultTableModel) authorityTable.getModel();
+        this.stuTableModel = (DefaultTableModel) stuTable.getModel();
+        this.courseTableModel = (DefaultTableModel) courseTable.getModel();
+
         populateProfTotalRevenue();
+
+        populateAllStudent();
+
+        populateAllCourse();
+
+        populateAllAuthority();
+        jLabel2.setText(String.valueOf(this.pf.getCollectionFee()));
     }
-    
-    public void populateProfTotalRevenue(){
-        
+
+    public void populateAllStudent() {
+        stuTableModel.setRowCount(0);
+        for (StudentProfile sp : this.pf.getStudentdirectory().getStudentlist()) {
+            Object[] row = new Object[3];
+
+            row[0] = sp;
+            row[1] = sp.getPerson().getPersonId();
+            row[2] = sp.getTranscript().getGraduateStatus();
+
+            stuTableModel.addRow(row);
+        }
     }
-  
+
+    public void populateAllAuthority() {
+        authorityTableModel.setRowCount(0);
+        for (AuthorityProfile ap : this.pf.getAuthoritydirectory().getAuthoritylist()) {
+            Object[] row = new Object[2];
+
+            row[0] = ap.getPerson().getPersonId();
+            row[1] = ap.getPerson().getNameOfPerson();
+
+            authorityTableModel.addRow(row);
+        }
+    }
+
+    public void populateAllCourse() {
+        courseTableModel.setRowCount(0);
+        for (FacultyProfile fp : this.pf.getFacultydirectory().getProfessors()) {
+            for (Course c : fp.getCourseCatalog().getCourses()) {
+                Object[] row = new Object[3];
+
+                row[0] = c;
+                row[1] = c.getName();
+                row[2] = c.getLanguage();
+
+                courseTableModel.addRow(row);
+            }
+        }
+    }
+
+    public void populateProfTotalRevenue() {
+        ArrayList<FacultyProfile> facultyList = this.pf.getFacultydirectory().getProfessors();
+        profTableModel.setRowCount(0);
+        for (FacultyProfile fp : facultyList) {
+            Object[] row = new Object[3];
+
+            row[0] = fp.getPerson().getPersonId();
+            row[1] = fp.getPerson().getNameOfPerson();
+            row[2] = fp.getTuitionCollected();
+
+            profTableModel.addRow(row);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,11 +118,11 @@ public class ShowJPanel extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         profTable = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTableP2 = new javax.swing.JTable();
+        courseTable = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableS = new javax.swing.JTable();
+        stuTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableP = new javax.swing.JTable();
+        authorityTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -79,7 +149,7 @@ public class ShowJPanel extends javax.swing.JPanel {
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 261, 160));
 
-        jTableP2.setModel(new javax.swing.table.DefaultTableModel(
+        courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -95,11 +165,11 @@ public class ShowJPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTableP2);
+        jScrollPane4.setViewportView(courseTable);
 
         add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 261, 160));
 
-        jTableS.setModel(new javax.swing.table.DefaultTableModel(
+        stuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -115,27 +185,27 @@ public class ShowJPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTableS);
+        jScrollPane1.setViewportView(stuTable);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 261, 160));
 
-        jTableP.setModel(new javax.swing.table.DefaultTableModel(
+        authorityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "AuthorityName"
+                "AuthorityId", "AuthorityName"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTableP);
+        jScrollPane2.setViewportView(authorityTable);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 261, 160));
 
@@ -148,15 +218,15 @@ public class ShowJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable authorityTable;
+    private javax.swing.JTable courseTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTableP;
-    private javax.swing.JTable jTableP2;
-    private javax.swing.JTable jTableS;
     private javax.swing.JTable profTable;
+    private javax.swing.JTable stuTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package info5100.university.example.UI.AdminWorkArea;
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
 import info5100.university.example.UI.FacultyJFrame.CourseMgtJPanel;
+import info5100.university.example.UI.MainJFrame;
 
 /**
  *
@@ -25,6 +26,7 @@ public class AdminJFrame extends javax.swing.JFrame {
     
     public AdminJFrame(Platform platform,UserAccount userAccount) {
         initComponents();
+        this.setVisible(true);
         this.pf=platform;
         this.ua=userAccount;
     }
@@ -62,6 +64,11 @@ public class AdminJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logoutBtn2.setText("log out");
+        logoutBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtn2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(logoutBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         showBtn1.setText("ShowPerformance");
@@ -108,6 +115,13 @@ public class AdminJFrame extends javax.swing.JFrame {
         
         jSplitPane1.setRightComponent(new ShowJPanel(pf,ua));
     }//GEN-LAST:event_showBtn1ActionPerformed
+
+    private void logoutBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtn2ActionPerformed
+        // TODO add your handling code here:
+                this.setVisible(false);
+        MainJFrame mainJFrame = new MainJFrame(this.pf, this.ua);
+        mainJFrame.setVisible(true);
+    }//GEN-LAST:event_logoutBtn2ActionPerformed
 
     /**
      * @param args the command line arguments
