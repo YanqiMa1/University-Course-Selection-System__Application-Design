@@ -175,11 +175,17 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_RateFieldActionPerformed
 
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+        
         AuthorityProfile ap = (AuthorityProfile) jComboBox1.getSelectedItem();
         ap.getStudentrequest().add(this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()));
         Transcript ts = this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
-        this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript().setGraduateStatus("Pending···");
+        if(ts.getGraduateStatus().equals("Graduate")){
+             JOptionPane.showMessageDialog(null, "You have successfully graduated!");
+        }else{
+             this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript().setGraduateStatus("Pending···");
         jLabel3.setText(ts.getGraduateStatus());
+        }
+       
     }//GEN-LAST:event_requestBtnActionPerformed
 
     private void rateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateBtnActionPerformed

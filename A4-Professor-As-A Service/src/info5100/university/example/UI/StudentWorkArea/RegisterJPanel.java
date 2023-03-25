@@ -185,6 +185,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         } else {
 
         }
+        showTotalRevenue();
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
