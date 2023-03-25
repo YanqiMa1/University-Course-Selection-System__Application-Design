@@ -335,7 +335,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             row[5] = c.getLanguage();
             row[6] = c.getCredit();
             row[7] = c.getPrice();
-            row[8] = this.pf.getFacultydirectory().findProfessorByName(c.getProfname()).getReputation();
+            row[8] = this.pf.getFacultydirectory().findProfessorByName(c.getProfname()).getReputationOnly();
             row[9] = co.getEmptySeatCount() + "/" + co.getSeatlist().size();
 
             model.addRow(row);
