@@ -173,19 +173,23 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
         AuthorityProfile ap = (AuthorityProfile) jComboBox1.getSelectedItem();
         ap.getStudentrequest().add(this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()));
-        jLabel3.setText("Pending···");
+        Transcript ts =  this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
+        this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript().setGraduateStatus("Pending···");
+        jLabel3.setText(ts.getGraduateStatus());
     }//GEN-LAST:event_requestBtnActionPerformed
 
     private void rateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateBtnActionPerformed
         if (!RateField.getText().isEmpty()) {
             int selectedRow = jTable1.getSelectedRow();
             Course c = (Course) jTable1.getValueAt(selectedRow, 0);
-//            FacultyProfile fp =this.pf.getFacultydirectory().findProfessorByName(c.getProfname());
+            FacultyProfile fp =this.pf.getFacultydirectory().findProfessorByName(c.getProfname());
             StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());            
             CourseLoad col = sp.getCourseLoadByTerm((String)jTable1.getValueAt(selectedRow, 2));
             //FIND THE SEATASSIGNMENT TO ASSIGN THE RATE TO THIS COURSE
             SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
-            aimedSa.setRateOfProf(Double.valueOf(RateField.getText()));
+            double rating = Double.valueOf(RateField.getText());
+            aimedSa.setRateOfProf(rating);
+            fp.addRating(rating);
             populateTranscript();
         }else{
             JOptionPane.showMessageDialog(null, "Please input your rate");

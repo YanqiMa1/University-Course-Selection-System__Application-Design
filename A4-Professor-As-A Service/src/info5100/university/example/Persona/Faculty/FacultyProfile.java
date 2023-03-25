@@ -25,18 +25,21 @@ public class FacultyProfile {
     private Person person;
     private CourseCatalog courseCatalog;
     private HashMap<String, CourseSchedule> allSchedules;
-    private double reputation = 0; //default
+    private double reputation; //default
     private double tuitionCollected;
 //    private Boolean accountStatus; //only professor role has this attribute
     private ArrayList<StudentProfile> enrolledListForAllTerm;
     private ArrayList<StudentProfile> enrolledList;
+    private ArrayList<Double> ratings;
 
     public FacultyProfile(Person p) {
         person = p;
         this.courseCatalog = new CourseCatalog(this);
         this.allSchedules = new HashMap<String, CourseSchedule>();
         this.enrolledListForAllTerm = new ArrayList<StudentProfile>();
+        this.reputation = 0.0;
         tuitionCollected = 0.0;
+        this.ratings = new ArrayList<Double>();
     }
 
     public Course createCourse(String name, String topic, String region, String language, int price, String pfoN) {
@@ -104,10 +107,27 @@ public class FacultyProfile {
         this.courseCatalog = courseCatalog;
     }
 
+    public void addRating(double rating) {
+        this.ratings.add(rating);
+        this.reputation = calculateReputation();
+    }
+    
+    private double calculateReputation() {
+    double sum = 0;
+    int count = ratings.size();
+
+    for (double rating : ratings) {
+        sum += rating;
+    }
+   System.out.println(count);
+    return count == 0 ? 0 : sum / count;
+ 
+}
+
     public double getReputation() {
         double sum = 0;
         int count = 0;
-        for (StudentProfile s : this.getEnrolledListForAllTermOnly()) {
+        for (StudentProfile s : this.getEnrolledListForAllTerm()) {
             for (CourseLoad col : s.getTranscript().getCourseloadlist().values()) {
                 for (SeatAssignment sa : col.getSeatassignments()) { //go around all the seatassignments for all the students that registered for this professor
                     sum = sum + sa.getRateOfProf();

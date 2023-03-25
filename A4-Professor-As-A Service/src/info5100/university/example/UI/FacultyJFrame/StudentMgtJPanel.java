@@ -204,7 +204,7 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
                         row[1] = s.getSeatassignment().getCourseload().getStudent().getPerson().getPersonId();
                         row[2] = s.getSeatassignment().getGrade();
                         row[3] = s.getCourseoffer().getCourse();
-                        row[4] = s.getCourseoffer().getCourse().getTerm();
+                        row[4] = s.getCourseoffer().getTerm();
 
 
                         studentTableModel.addRow(row);
