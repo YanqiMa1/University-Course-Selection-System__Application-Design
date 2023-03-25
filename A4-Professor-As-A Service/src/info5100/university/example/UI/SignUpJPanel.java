@@ -4,7 +4,6 @@
  */
 package info5100.university.example.UI;
 
-
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Persona.Person;
 import info5100.university.example.Role.AuthorityRole;
@@ -23,13 +22,13 @@ public class SignUpJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SignUpJPanel
      */
-    
     private Platform pf;
     private UserAccountDirectory uad;
+
     public SignUpJPanel() {
         initComponents();
     }
-    
+
     public SignUpJPanel(Platform pf, UserAccount userAccount) {
         initComponents();
         this.pf = pf;
@@ -106,7 +105,7 @@ public class SignUpJPanel extends javax.swing.JPanel {
         UserAccountDirectory infoUad = this.pf.getUad();
         if (infoUad.accountExists(fieldUsername.getText())) {
             JOptionPane.showMessageDialog(null, "This username has been taken.");
-        } else if(pf.getPersondirectory().nameExists(fieldName.getText())){
+        } else if (pf.getPersondirectory().nameExists(fieldName.getText())) {
             JOptionPane.showMessageDialog(null, "This name is already exist.");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
@@ -122,10 +121,10 @@ public class SignUpJPanel extends javax.swing.JPanel {
                 UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new FacultyRole());
                 Person p = pf.getPersondirectory().newPerson(user.getAccountId());
                 p.setNameOfPerson(fieldName.getText());
-               pf.getFacultydirectory().newFacultyProfile(p);
+                pf.getFacultydirectory().newFacultyProfile(p);
                 JOptionPane.showMessageDialog(null, "Professor successfully registered.");
             }
-            
+
             if (roleComboBox.getSelectedItem().equals("Authority")) {
                 UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new AuthorityRole());
                 Person p = pf.getPersondirectory().newPerson(user.getAccountId());
