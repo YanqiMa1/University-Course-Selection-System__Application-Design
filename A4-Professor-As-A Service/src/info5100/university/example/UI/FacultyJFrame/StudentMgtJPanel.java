@@ -151,18 +151,6 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCourseItemStateChanged
-        // TODO add your handling code here:
-        populateStudentTable();
-
-    }//GEN-LAST:event_comboCourseItemStateChanged
-
-    private void comboCourseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboCourseFocusLost
-        // TODO add your handling code here:
-//        fieldCourseName.setText(this.selectedCourse.getName());
-//        populateStudentTable();
-    }//GEN-LAST:event_comboCourseFocusLost
-
     private void gradeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeBtnActionPerformed
         // TODO add your handling code here:
         int selectedRow = studentTable.getSelectedRow();
@@ -199,37 +187,64 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         populateStudentTable();
     }//GEN-LAST:event_gradeBtnActionPerformed
 
-    private void comboCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCourseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboCourseActionPerformed
-
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void comboCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCourseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCourseActionPerformed
+
+    private void comboCourseFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboCourseFocusLost
+        // TODO add your handling code here:
+        //        fieldCourseName.setText(this.selectedCourse.getName());
+        //        populateStudentTable();
+    }//GEN-LAST:event_comboCourseFocusLost
+
+    private void comboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCourseItemStateChanged
+        // TODO add your handling code here:
+        populateStudentTable();
+    }//GEN-LAST:event_comboCourseItemStateChanged
+
     public void populateStudentTable() {
         if (this.professor.getEnrolledListForAllTermOnly().size() > 0) {
             studentTableModel.setRowCount(0);
+            String term = (String) jComboBox2.getSelectedItem();
+
             CourseSchedule cs = this.professor.getCourseScheduleByTerm(selectedTerm);
+
             for (CourseOffer co : cs.getSchedule()) {
                 if (co.getCourse().equals(this.selectedCourse)) {
-                    for (StudentProfile student : co.getEnrolledStudentListOnly()) {
-                            
-
+                    for (Seat s : co.getSeatlist()) {
+                        if (s.isOccupied() == true) {
                             Object[] row = new Object[4];
-                   
-                            row[0] = student;
-                            row[1] = student.getPerson().getPersonId();
-                            row[2] = student.getTranscript().getCourseLoadBySemester(selectedTerm).findSeatAssignmentByCourse(selectedCourse).getGrade();
+
+                            row[0] = s.getSeatassignment().getCourseload().getStudent().getPerson().getPersonId();
+                            row[1] = s.getSeatassignment().getCourseload().getStudent().getPerson().getNameOfPerson();
+                            row[2] = s.getSeatassignment().getGrade();
                             row[3] = cs.getTerm();
 
                             studentTableModel.addRow(row);
                         }
                     }
-
+//                    for (StudentProfile student : co.getEnrolledStudentListOnly()) {
+//                            
+//                        
+//
+//                            Object[] row = new Object[4];
+//                   
+//                            row[0] = student;
+//                            row[1] = student.getPerson().getPersonId();
+//                            row[2] = student.getTranscript().getCourseLoadBySemester(selectedTerm).findSeatAssignmentByCourse(selectedCourse).getGrade();
+//                            row[3] = cs.getTerm();
+//
+//                            studentTableModel.addRow(row);
+//                        }
                 }
 
             }
+
+        }
     }
 
 //            for (CourseSchedule sc : this.professor.getAllSchedules().entrySet()) {
@@ -253,9 +268,6 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 //                    }
 //                }
 //            }
-        
-    
-
 //    public void populateStudentsForCourse() {
 //        if (this.professor.getEnrolledListForAllTerm().size() > 0) {
 //            studentTableModel.setRowCount(0);

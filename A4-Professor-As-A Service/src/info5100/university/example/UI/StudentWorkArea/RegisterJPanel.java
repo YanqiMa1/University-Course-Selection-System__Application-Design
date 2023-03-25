@@ -108,7 +108,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 650, 220));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 690, 220));
 
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +193,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                             researchList.add(co.getCourse());
                         }
                     }
+                    displayResult(researchList);
                 } else {
                     researchList = null;
                     JOptionPane.showMessageDialog(null, "Professor is not exist");
@@ -204,22 +205,29 @@ public class RegisterJPanel extends javax.swing.JPanel {
                     for (CourseOffer co : termSchedule.getValue().getSchedule()) {
                         if (co.getCourse().getTopic().equals(keyword)) {
                             researchList.add(co.getCourse());
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "This topic is not exist");
                         }
                     }
                 }
 
             }
+            displayResult(researchList);
         } else if (jComboBox1.getSelectedItem().equals("region")) {
             for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
                 for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
                     for (CourseOffer co : termSchedule.getValue().getSchedule()) {
                         if (co.getCourse().getRegion().equals(keyword)) {
                             researchList.add(co.getCourse());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "This region is not exist");
                         }
                     }
                 }
 
             }
+            displayResult(researchList);
 
         } else if (jComboBox1.getSelectedItem().equals("language")) {
             for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
@@ -227,16 +235,19 @@ public class RegisterJPanel extends javax.swing.JPanel {
                     for (CourseOffer co : termSchedule.getValue().getSchedule()) {
                         if (co.getCourse().getLanguage().equals(keyword)) {
                             researchList.add(co.getCourse());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "This language is not exist");
                         }
                     }
                 }
 
             }
+            displayResult(researchList);
         } else {
             JOptionPane.showMessageDialog(this, "Please choose the keyword catagory.");
         }
 
-        displayResult(researchList);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
@@ -252,6 +263,10 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         String term = (String) semesterCombo.getSelectedItem();
         if (sp.getTranscript().getCourseLoadBySemester(term) != null) {
+            if(sp.getTranscript().isThisCourseLoadExist(c)){
+                JOptionPane.showMessageDialog(this, "this course is already registered");
+            }else{
+      
             col = sp.getTranscript().getCourseLoadBySemester(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
             if (c.getTerm().equals(term)) {
@@ -261,6 +276,8 @@ public class RegisterJPanel extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
             }
+        }
+        
         } else {
             col = sp.newCourseLoad(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
