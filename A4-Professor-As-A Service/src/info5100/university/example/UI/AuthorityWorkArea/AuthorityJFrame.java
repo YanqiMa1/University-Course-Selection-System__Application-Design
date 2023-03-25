@@ -201,6 +201,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_showBtnActionPerformed
 
     private void populateRequestTable(){
+        requestTableModel.setRowCount(0);
         AuthorityProfile ap = this.pf.getAuthoritydirectory().findAuthorityProfileById(userAccount.getAccountId());
         if (ap.getStudentrequest().size() > 0) {
             requestTableModel.setRowCount(0);
