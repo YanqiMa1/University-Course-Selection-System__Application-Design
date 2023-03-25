@@ -10,9 +10,11 @@ import info5100.university.example.CourseCatalog.CourseSchedule;
 import info5100.university.example.Persona.Faculty.FacultyProfile;
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
+import static info5100.university.example.UI.StudentWorkArea.TranscriptJPanel.isValidrate;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -39,7 +41,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
 
         this.courseTableModel = (DefaultTableModel) courseTable.getModel();
         this.scheduleTableModel = (DefaultTableModel) scheduleTable.getModel();
-
+        populateCourseIdCombo();
         populateCourse();
         populateSchedule();
     }
@@ -124,12 +126,14 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         fieldUpdatePrice = new javax.swing.JTextField();
         updatePriceBtn = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 255, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Price");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jLabel2.setText("Course Name");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
@@ -141,10 +145,16 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jLabel5.setText("Language");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
         add(fieldTopic, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 200, -1));
         add(fieldRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 200, -1));
-        add(fieldLang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 200, -1));
+        add(fieldLang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 200, -1));
+
+        fieldSeats.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldSeatsFocusLost(evt);
+            }
+        });
         add(fieldSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 200, -1));
         add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 200, -1));
 
@@ -158,7 +168,13 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("term");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
-        add(fieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 200, -1));
+
+        fieldPrice.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldPriceFocusLost(evt);
+            }
+        });
+        add(fieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 200, -1));
 
         jLabel8.setText("Course Id");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
@@ -250,6 +266,14 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
             }
         });
         add(updatePriceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 10)); // NOI18N
+        jLabel12.setText("（1--200）");
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 80, -1));
+
+        jLabel13.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 10)); // NOI18N
+        jLabel13.setText("（1--10000）");
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createCourseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCourseBtnActionPerformed
@@ -281,24 +305,30 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         String term = (String) comboTerm.getSelectedItem();
         CourseSchedule courseSchedle;
 
-        if (this.fp.getCourseScheduleByTerm(term) != null) {
-            courseSchedle = this.fp.getCourseScheduleByTerm(term);
-            if (courseSchedle.isThisCourseOfferExist(courseId)) {
-                JOptionPane.showMessageDialog(null, "You have already create this courseOffer for this semester");
+        if (isValidSeats(fieldSeats)) {
+            if (this.fp.getCourseScheduleByTerm(term) != null) {
+                courseSchedle = this.fp.getCourseScheduleByTerm(term);
+                if (courseSchedle.isThisCourseOfferExist(courseId)) {
+                    JOptionPane.showMessageDialog(null, "You have already create this courseOffer for this semester");
+                } else {
+                    CourseOffer co = this.fp.createCourseOffer(term, courseId);
+                    co.getCourse().setTerm(term);
+                    co.generatSeats(Integer.valueOf(seats));
+                }
+
             } else {
+                CourseSchedule cs = this.fp.newCourseSchedule(term);
                 CourseOffer co = this.fp.createCourseOffer(term, courseId);
                 co.getCourse().setTerm(term);
                 co.generatSeats(Integer.valueOf(seats));
             }
 
+            populateSchedule();
         } else {
-            CourseSchedule cs = this.fp.newCourseSchedule(term);
-            CourseOffer co = this.fp.createCourseOffer(term, courseId);
-            co.getCourse().setTerm(term);
-            co.generatSeats(Integer.valueOf(seats));
+            JOptionPane.showMessageDialog(null, "The seat is out of range!");
         }
 
-        populateSchedule();
+
     }//GEN-LAST:event_createCOBtnActionPerformed
 
     private void courseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseTableMouseClicked
@@ -311,16 +341,66 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
 
     private void updatePriceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePriceBtnActionPerformed
         // TODO add your handling code here:
-        int selectedRow = courseTable.getSelectedRow();
-        Course c = (Course) courseTable.getValueAt(selectedRow, 0);
+        if (isValidPrice(fieldUpdatePrice)) {
+            int selectedRow = courseTable.getSelectedRow();
+            Course c = (Course) courseTable.getValueAt(selectedRow, 0);
 
-        String price = fieldUpdatePrice.getText();
-        c.setPrice(Integer.valueOf(price));
+            String price = fieldUpdatePrice.getText();
+            c.setPrice(Integer.valueOf(price));
 
-        populateCourse();
+            populateCourse();
+        } else {
+            JOptionPane.showMessageDialog(null, "The price is out of range!");
+        }
+
     }//GEN-LAST:event_updatePriceBtnActionPerformed
 
+    private void fieldPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldPriceFocusLost
+        // TODO add your handling code here:
+        if (isValidPrice(fieldPrice)) {
+            //pass
+        } else {
+            JOptionPane.showMessageDialog(null, "The price is out of range!");
+        }
+    }//GEN-LAST:event_fieldPriceFocusLost
 
+    private void fieldSeatsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSeatsFocusLost
+
+    }//GEN-LAST:event_fieldSeatsFocusLost
+
+    public static boolean isValidPrice(JTextField textField) {
+        String input = textField.getText();
+        try {
+            int number = Integer.parseInt(input);
+            if (number >= 1 && number <= 10000) {
+                // Input is valid, between 1 and 10
+                return true;
+            } else {
+                // Input is not between 1 and 10
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            // Input is not a valid double
+            return false;
+        }
+    }
+
+    public static boolean isValidSeats(JTextField textField) {
+        String input = textField.getText();
+        try {
+            int number = Integer.parseInt(input);
+            if (number >= 1 && number <= 200) {
+                // Input is valid, between 1 and 10
+                return true;
+            } else {
+                // Input is not between 1 and 10
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            // Input is not a valid double
+            return false;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboCourseId;
     private javax.swing.JComboBox<String> comboTerm;
@@ -337,6 +417,8 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

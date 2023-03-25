@@ -182,69 +182,70 @@ public class RegisterJPanel extends javax.swing.JPanel {
 //        System.out.println(keyword);
         if (keyword == null || keyword.trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Please Input the Keyword.");
-        }
-        ArrayList<Course> researchList = new ArrayList<Course>();
+        } else {
+            ArrayList<Course> researchList = new ArrayList<Course>();
 
-        if (jComboBox1.getSelectedItem().equals("professor name")) {
-            for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
-                if (p.getPerson().getNameOfPerson().equals(keyword)) {
+            if (jComboBox1.getSelectedItem().equals("professor name")) {
+                for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
+                    if (p.getPerson().getNameOfPerson().equals(keyword)) {
+                        for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
+                            for (CourseOffer co : termSchedule.getValue().getSchedule()) {
+                                researchList.add(co.getCourse());
+                            }
+                        }
+                        displayResult(researchList);
+                    } else {
+                        researchList = null;
+                        JOptionPane.showMessageDialog(null, "Professor is not exist");
+                    }
+                }
+            } else if (jComboBox1.getSelectedItem().equals("topic")) {
+                for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
                     for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
                         for (CourseOffer co : termSchedule.getValue().getSchedule()) {
-                            researchList.add(co.getCourse());
+                            if (co.getCourse().getTopic().equals(keyword)) {
+                                researchList.add(co.getCourse());
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "This topic is not exist");
+                            }
                         }
                     }
-                    displayResult(researchList);
-                } else {
-                    researchList = null;
-                    JOptionPane.showMessageDialog(null, "Professor is not exist");
-                }
-            }
-        } else if (jComboBox1.getSelectedItem().equals("topic")) {
-            for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
-                for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
-                    for (CourseOffer co : termSchedule.getValue().getSchedule()) {
-                        if (co.getCourse().getTopic().equals(keyword)) {
-                            researchList.add(co.getCourse());
 
-                        } else {
-                            JOptionPane.showMessageDialog(null, "This topic is not exist");
+                }
+                displayResult(researchList);
+            } else if (jComboBox1.getSelectedItem().equals("region")) {
+                for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
+                    for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
+                        for (CourseOffer co : termSchedule.getValue().getSchedule()) {
+                            if (co.getCourse().getRegion().equals(keyword)) {
+                                researchList.add(co.getCourse());
+                            } else {
+                                JOptionPane.showMessageDialog(null, "This region is not exist");
+                            }
                         }
                     }
-                }
 
-            }
-            displayResult(researchList);
-        } else if (jComboBox1.getSelectedItem().equals("region")) {
-            for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
-                for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
-                    for (CourseOffer co : termSchedule.getValue().getSchedule()) {
-                        if (co.getCourse().getRegion().equals(keyword)) {
-                            researchList.add(co.getCourse());
-                        } else {
-                            JOptionPane.showMessageDialog(null, "This region is not exist");
+                }
+                displayResult(researchList);
+
+            } else if (jComboBox1.getSelectedItem().equals("language")) {
+                for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
+                    for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
+                        for (CourseOffer co : termSchedule.getValue().getSchedule()) {
+                            if (co.getCourse().getLanguage().equals(keyword)) {
+                                researchList.add(co.getCourse());
+                            } else {
+                                JOptionPane.showMessageDialog(null, "This language is not exist");
+                            }
                         }
                     }
+
                 }
-
+                displayResult(researchList);
+            } else {
+                JOptionPane.showMessageDialog(this, "Please choose the keyword catagory.");
             }
-            displayResult(researchList);
-
-        } else if (jComboBox1.getSelectedItem().equals("language")) {
-            for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
-                for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
-                    for (CourseOffer co : termSchedule.getValue().getSchedule()) {
-                        if (co.getCourse().getLanguage().equals(keyword)) {
-                            researchList.add(co.getCourse());
-                        } else {
-                            JOptionPane.showMessageDialog(null, "This language is not exist");
-                        }
-                    }
-                }
-
-            }
-            displayResult(researchList);
-        } else {
-            JOptionPane.showMessageDialog(this, "Please choose the keyword catagory.");
         }
 
 
@@ -263,21 +264,21 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
         String term = (String) semesterCombo.getSelectedItem();
         if (sp.getTranscript().getCourseLoadBySemester(term) != null) {
-            if(sp.getTranscript().isThisCourseLoadExist(c)){
+            if (sp.getTranscript().isThisCourseLoadExist(c)) {
                 JOptionPane.showMessageDialog(this, "this course is already registered");
-            }else{
-      
-            col = sp.getTranscript().getCourseLoadBySemester(term);
-            f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
-            if (c.getTerm().equals(term)) {
-                CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
-                SeatAssignment seatA = col.newSeatAssignment(cof);
-                populateRegisteredCourse();
             } else {
-                JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
+
+                col = sp.getTranscript().getCourseLoadBySemester(term);
+                f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
+                if (c.getTerm().equals(term)) {
+                    CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
+                    SeatAssignment seatA = col.newSeatAssignment(cof);
+                    populateRegisteredCourse();
+                } else {
+                    JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
+                }
             }
-        }
-        
+
         } else {
             col = sp.newCourseLoad(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
