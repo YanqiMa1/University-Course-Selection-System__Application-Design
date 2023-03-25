@@ -15,6 +15,7 @@ import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccountDirectory;
 import info5100.university.example.Role.UserAccount;
 import info5100.university.example.UI.MainJFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -168,6 +169,9 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
         StudentProfile sp = (StudentProfile) requestTable.getValueAt(selectedRow, 0);
         sp.getTranscript().setGraduateStatus("Graduate");
+        JOptionPane.showMessageDialog(null, "This studnet has been sucessfully graduated, congrats to the student!");
+        AuthorityProfile ap = this.pf.getAuthoritydirectory().findAuthorityProfileById(userAccount.getAccountId());
+        ap.getStudentrequest().remove(sp);
 
         populateRequestTable();
     }//GEN-LAST:event_btnAcceptActionPerformed
@@ -185,6 +189,10 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
         StudentProfile sp = (StudentProfile) requestTable.getValueAt(selectedRow, 0);
         sp.getTranscript().setGraduateStatus("Reject");
+        
+        JOptionPane.showMessageDialog(null, "This request has been sucessfully rejected!");
+        AuthorityProfile ap = this.pf.getAuthoritydirectory().findAuthorityProfileById(userAccount.getAccountId());
+        ap.getStudentrequest().remove(sp);
 
         populateRequestTable();
     }//GEN-LAST:event_btnRejectActionPerformed
