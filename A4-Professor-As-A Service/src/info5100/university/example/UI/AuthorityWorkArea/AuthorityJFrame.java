@@ -64,6 +64,8 @@ public class AuthorityJFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         stuTranscriptTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        showBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 255));
@@ -141,8 +143,19 @@ public class AuthorityJFrame extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 600, 210));
 
-        jLabel1.setText("Student Transcript Table");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, -1, -1));
+        jLabel1.setText("Student Request Table");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
+
+        showBtn.setText("View Student Transcript");
+        showBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(showBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, -1));
+
+        jLabel2.setText("Student Transcript Table");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, -1, -1));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -179,8 +192,13 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     private void requestTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestTableMouseClicked
         // TODO add your handling code here:
         
-        populateStudentTranscriptTable();
+        
     }//GEN-LAST:event_requestTableMouseClicked
+
+    private void showBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtnActionPerformed
+        // TODO add your handling code here:
+        populateStudentTranscriptTable();
+    }//GEN-LAST:event_showBtnActionPerformed
 
     private void populateRequestTable(){
         AuthorityProfile ap = this.pf.getAuthoritydirectory().findAuthorityProfileById(userAccount.getAccountId());
@@ -200,6 +218,7 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     }
     
     private void populateStudentTranscriptTable(){
+        stuTranscriptTableModel.setRowCount(0);
         int selectedStudentRow = requestTable.getSelectedRow();
         StudentProfile sp = (StudentProfile) requestTable.getValueAt(selectedStudentRow, 0);
         Transcript t = sp.getTranscript();
@@ -263,10 +282,12 @@ public class AuthorityJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnReject;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable requestTable;
+    private javax.swing.JButton showBtn;
     private javax.swing.JTable stuTranscriptTable;
     // End of variables declaration//GEN-END:variables
 }
