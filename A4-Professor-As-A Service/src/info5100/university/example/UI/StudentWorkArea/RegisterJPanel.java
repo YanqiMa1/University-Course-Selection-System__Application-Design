@@ -194,6 +194,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                             }
                         }
                         displayResult(researchList);
+                        break;
                     } else {
                         researchList = null;
                         JOptionPane.showMessageDialog(null, "Professor is not exist");
@@ -273,6 +274,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 if (c.getTerm().equals(term)) {
                     CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
                     SeatAssignment seatA = col.newSeatAssignment(cof);
+                    f.collectTuition(cof.getCourse().getPrice());
                     populateRegisteredCourse();
                 } else {
                     JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");
@@ -285,6 +287,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             if (c.getTerm().equals(term)) {
                 CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
                 SeatAssignment seatA = col.newSeatAssignment(cof);
+                f.collectTuition(cof.getCourse().getPrice());
                 populateRegisteredCourse();
             } else {
                 JOptionPane.showMessageDialog(this, "the semester you selected do not offer this course");

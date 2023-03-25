@@ -34,7 +34,7 @@ public class ProfessorAnalyticsJPanel extends javax.swing.JPanel {
         this.fp= this.pf.getFacultydirectory().findProfessorById(ua.getAccountId());
         
         jLabel6.setText(String.valueOf(this.fp.getTuitionCollected()));
-        jLabel2.setText(String.valueOf(this.fp.getEnrolledListForAllTermOnly().size()));
+        jLabel2.setText(String.valueOf(this.fp.getEnrolledListForAllTerm().size()));
         fee.setText(String.valueOf(0.15 * this.fp.getTuitionCollected()));
     }
 
