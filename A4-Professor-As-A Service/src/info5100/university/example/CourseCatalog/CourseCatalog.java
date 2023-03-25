@@ -35,6 +35,10 @@ public class CourseCatalog {
         return c;
     }
     
+    public void deleteCourse(Course c){
+        this.courses.remove(c);
+    }
+    
     public Course getCourseById(String id){
         for (Course c : courses) {
             if (c.getCourseId().equals(id))
