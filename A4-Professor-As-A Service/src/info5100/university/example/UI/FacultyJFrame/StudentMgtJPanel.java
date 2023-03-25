@@ -263,6 +263,6 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
 
     private void populateRateOfPro() {
         FacultyProfile fp = this.platform.getFacultydirectory().findProfessorById(this.ua.getAccountId());
-        rating.setText(String.valueOf(fp.getReputation()));
+        rating.setText(String.valueOf(fp.getReputationOnly()));
     }
 }
