@@ -107,6 +107,8 @@ public class SignUpJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "This username has been taken.");
         } else if (pf.getPersondirectory().nameExists(fieldName.getText())) {
             JOptionPane.showMessageDialog(null, "This name is already exist.");
+        } else if(fieldName.getText().isEmpty() || fieldUsername.getText().isEmpty()|| fieldPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "please fill all field");
         } else {
             if (roleComboBox.getSelectedItem().equals("Student")) {
                 UserAccount user = infoUad.createUserAccount(fieldUsername.getText(), fieldPassword.getText(), new StudentRole());
