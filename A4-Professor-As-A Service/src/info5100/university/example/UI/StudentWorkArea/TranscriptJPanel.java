@@ -44,8 +44,8 @@ public class TranscriptJPanel extends javax.swing.JPanel {
 
         populateTranscript();
         populateDropdowns();
-        
-        Transcript ts =  this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
+
+        Transcript ts = this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
         jLabel3.setText(ts.getGraduateStatus());
     }
 
@@ -65,6 +65,7 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         for (CourseLoad cl : tp.getCourseloadlist().values()) {
             for (SeatAssignment a : cl.getSeatassignments()) {
                 Course c = a.getCourse();
+                FacultyProfile fp = this.pf.getFacultydirectory().findProfessorByName(c.getProfname());
 
                 Object[] row = new Object[6];
                 row[0] = c;
@@ -72,13 +73,13 @@ public class TranscriptJPanel extends javax.swing.JPanel {
                 row[2] = cl.getTerm();
                 row[3] = c.getProfname();
                 row[4] = a.getGrade();
-                row[5] = String.valueOf(pf.getFacultydirectory().findProfessorByName(c.getProfname()).getReputation());
+                row[5] = String.valueOf(a.getRateOfProf());
 
                 model.addRow(row);
             }
-
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -176,27 +177,34 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
         AuthorityProfile ap = (AuthorityProfile) jComboBox1.getSelectedItem();
         ap.getStudentrequest().add(this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()));
-        Transcript ts =  this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
+        Transcript ts = this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
         this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript().setGraduateStatus("Pending···");
         jLabel3.setText(ts.getGraduateStatus());
     }//GEN-LAST:event_requestBtnActionPerformed
 
     private void rateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateBtnActionPerformed
+
         if (!RateField.getText().isEmpty()) {
             int selectedRow = jTable1.getSelectedRow();
             Course c = (Course) jTable1.getValueAt(selectedRow, 0);
-            FacultyProfile fp =this.pf.getFacultydirectory().findProfessorByName(c.getProfname());
-            StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());            
-            CourseLoad col = sp.getCourseLoadByTerm((String)jTable1.getValueAt(selectedRow, 2));
-            //FIND THE SEATASSIGNMENT TO ASSIGN THE RATE TO THIS COURSE
+            FacultyProfile fp = this.pf.getFacultydirectory().findProfessorByName(c.getProfname());
+            StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
+            CourseLoad col = sp.getCourseLoadByTerm((String) jTable1.getValueAt(selectedRow, 2));
             SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
-            double rating = Double.valueOf(RateField.getText());
-            aimedSa.setRateOfProf(rating);
-            fp.addRating(rating);
-            populateTranscript();
-        }else{
+
+            if (aimedSa.getGrade() <= 1.0) {
+                JOptionPane.showMessageDialog(null, "Please finish the course first!");
+            } else {
+                double rating = Double.valueOf(RateField.getText());
+                aimedSa.setRateOfProf(rating);
+                fp.updateReputation(); // Update professor's reputation based on new ratings
+                JOptionPane.showMessageDialog(null, "Rated professor successfully!");
+                populateTranscript();
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Please input your rate");
         }
+
 
     }//GEN-LAST:event_rateBtnActionPerformed
 

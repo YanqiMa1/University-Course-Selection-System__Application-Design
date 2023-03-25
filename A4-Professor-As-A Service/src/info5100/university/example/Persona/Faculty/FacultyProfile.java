@@ -10,8 +10,11 @@ import info5100.university.example.CourseCatalog.CourseCatalog;
 import info5100.university.example.CourseCatalog.CourseLoad;
 import info5100.university.example.CourseCatalog.CourseOffer;
 import info5100.university.example.CourseCatalog.CourseSchedule;
+import info5100.university.example.CourseCatalog.Seat;
 import info5100.university.example.CourseCatalog.SeatAssignment;
 import info5100.university.example.Persona.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -208,6 +211,30 @@ public class FacultyProfile {
         this.isSubscript = isSubscript;
     }
 
-    
+    public void updateReputation() {
+    double sum = 0;
+    int count = 0;
+
+    for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
+        CourseSchedule cs = termSchedule.getValue();
+        for (CourseOffer co : cs.getSchedule()) {
+            for (Seat s : co.getSeatlist()) {
+                if (s.getOccupied() && s.getSeatassignment().getRateOfProf() != 0) {
+                    double rating = s.getSeatassignment().getRateOfProf();
+                    sum += rating;
+                    count++;
+                }
+            }
+        }
+    }
+
+    if (count != 0) {
+        BigDecimal rep = new BigDecimal(sum / count).setScale(2, RoundingMode.HALF_UP);
+        this.reputation = rep.doubleValue();
+    } else {
+        this.reputation = 0;
+    }
+}
+
 
 }
