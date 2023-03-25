@@ -37,6 +37,17 @@ public class CourseSchedule {
         }
 
     }
+    public ArrayList<CourseOffer> getCourseOfferListByCourseId(String id) {
+        ArrayList<CourseOffer> aimedOffer = new ArrayList<CourseOffer>();
+        for (CourseOffer co : schedule) {
+
+            if (co.getCourse().getCourseId().equals(id)) {
+                aimedOffer.add(co);
+            }
+        }
+        return aimedOffer;
+    }
+    
 
     public CourseOffer getCourseOfferByCourseId(String id) {
 

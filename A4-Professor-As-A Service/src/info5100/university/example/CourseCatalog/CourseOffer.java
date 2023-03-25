@@ -17,6 +17,7 @@ public class CourseOffer {
     private ArrayList<Seat> seatlist;
     private FacultyProfile professor;
     private ArrayList<StudentProfile> enrolledStudentList;
+    private String term;
     
     public CourseOffer(Course c,FacultyProfile prof) {
         course = c;
@@ -110,6 +111,14 @@ public class CourseOffer {
     
       public int getCreditHours(){
         return course.getCredits();
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
     }
 
     

@@ -66,7 +66,7 @@ public class TranscriptJPanel extends javax.swing.JPanel {
                 Object[] row = new Object[6];
                 row[0] = c;
                 row[1] = c.getName();
-                row[2] = c.getTerm();
+                row[2] = cl.getTerm();
                 row[3] = c.getProfname();
                 row[4] = a.getGrade();
                 row[5] = String.valueOf(pf.getFacultydirectory().findProfessorByName(c.getProfname()).getReputation());
@@ -180,8 +180,9 @@ public class TranscriptJPanel extends javax.swing.JPanel {
         if (!RateField.getText().isEmpty()) {
             int selectedRow = jTable1.getSelectedRow();
             Course c = (Course) jTable1.getValueAt(selectedRow, 0);
-            StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
-            CourseLoad col = sp.getCourseLoadByTerm(c.getTerm());
+//            FacultyProfile fp =this.pf.getFacultydirectory().findProfessorByName(c.getProfname());
+            StudentProfile sp = pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());            
+            CourseLoad col = sp.getCourseLoadByTerm((String)jTable1.getValueAt(selectedRow, 2));
             //FIND THE SEATASSIGNMENT TO ASSIGN THE RATE TO THIS COURSE
             SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
             aimedSa.setRateOfProf(Double.valueOf(RateField.getText()));
