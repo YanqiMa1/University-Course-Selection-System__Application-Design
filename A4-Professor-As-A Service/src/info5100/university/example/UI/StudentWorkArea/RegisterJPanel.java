@@ -93,11 +93,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "CourseNum", "CourseName", "Semester", "topic", "region", "language", "credit", "price", "RatingOfPro"
+                "CourseNum", "CourseName", "Semester", "topic", "region", "language", "credit", "price", "RatingOfPro", "Seat"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -316,7 +316,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         for (CourseOffer co : searchResList) {
             Course c = co.getCourse();
 
-            Object[] row = new Object[9];
+            Object[] row = new Object[10];
             row[0] = c;
             row[1] = c.getName();
             row[2] = co.getTerm();
@@ -327,6 +327,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             row[6] = c.getCredit();
             row[7] = c.getPrice();
             row[8] =this.pf.getFacultydirectory().findProfessorByName( c.getProfname()).getReputation();
+            row[9] = co.getEmptySeatCount() + "/" + co.getSeatlist().size();
 
             model.addRow(row);
 

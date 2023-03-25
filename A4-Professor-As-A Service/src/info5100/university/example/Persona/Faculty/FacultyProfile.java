@@ -31,6 +31,7 @@ public class FacultyProfile {
     private ArrayList<StudentProfile> enrolledListForAllTerm;
     private ArrayList<StudentProfile> enrolledList;
     private ArrayList<Double> ratings;
+    private boolean isSubscript;
 
     public FacultyProfile(Person p) {
         person = p;
@@ -40,6 +41,7 @@ public class FacultyProfile {
         this.reputation = 0.0;
         tuitionCollected = 0.0;
         this.ratings = new ArrayList<Double>();
+        isSubscript = false;
     }
 
     public Course createCourse(String name, String topic, String region, String language, int price, String pfoN) {
@@ -187,4 +189,13 @@ public class FacultyProfile {
         return false;
     }
 
+    public boolean isIsSubscript() {
+        return isSubscript;
+    }
+
+    public void setIsSubscript(boolean isSubscript) {
+        this.isSubscript = isSubscript;
+    }
+
+    
 }
