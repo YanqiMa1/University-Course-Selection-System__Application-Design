@@ -283,7 +283,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
                 f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
                 CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
                 if (cof != null) {
-
+                    
                     SeatAssignment seatA = col.newSeatAssignment(cof);
                     f.collectTuition(cof.getCourse().getPrice());
                     populateRegisteredCourse();
