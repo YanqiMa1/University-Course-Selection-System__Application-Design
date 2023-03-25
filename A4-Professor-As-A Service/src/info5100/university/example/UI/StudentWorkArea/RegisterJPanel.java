@@ -29,6 +29,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
      */
     private Platform pf;
     private UserAccount userAccount;
+    boolean professorExists = false;
 
     public RegisterJPanel() {
         initComponents();
@@ -123,11 +124,11 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "CourseNum", "CourseName"
+                "CourseNum", "CourseName", "semester"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -169,7 +170,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             // we will delete the object
             Course c = (Course) jTable2.getValueAt(selectedRow, 0);
 
-            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm(c.getTerm()).deleteSeatAssignment(c);
+            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm((String)jTable1.getValueAt(selectedRow, 2)).deleteSeatAssignment(c);
 
             populateRegisteredCourse();
         } else {
@@ -178,41 +179,47 @@ public class RegisterJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String keyword = searchField.getText();
-//        System.out.println(keyword);
+
         if (keyword == null || keyword.trim().equals("")) {
             JOptionPane.showMessageDialog(this, "Please Input the Keyword.");
         } else {
-            ArrayList<Course> researchList = new ArrayList<Course>();
+            ArrayList<CourseOffer> researchList = new ArrayList<CourseOffer>();
+            boolean found = false;
 
             if (jComboBox1.getSelectedItem().equals("professor name")) {
                 for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
                     if (p.getPerson().getNameOfPerson().equals(keyword)) {
+                        found = true;
                         for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
                             for (CourseOffer co : termSchedule.getValue().getSchedule()) {
-                                researchList.add(co.getCourse());
+                                researchList.add(co);
                             }
                         }
                         displayResult(researchList);
                         break;
-                    } else {
-                        researchList = null;
-                        JOptionPane.showMessageDialog(null, "Professor is not exist");
                     }
+                }
+                if (!found) {
+                    researchList = null;
+                    JOptionPane.showMessageDialog(null, "Professor is not exist");
+                    model.setRowCount(0);
                 }
             } else if (jComboBox1.getSelectedItem().equals("topic")) {
                 for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
                     for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
                         for (CourseOffer co : termSchedule.getValue().getSchedule()) {
                             if (co.getCourse().getTopic().equals(keyword)) {
-                                researchList.add(co.getCourse());
-
-                            } else {
-                                JOptionPane.showMessageDialog(null, "This topic is not exist");
+                                found = true;
+                                researchList.add(co);
                             }
                         }
                     }
-
+                }
+                if (!found) {
+                    JOptionPane.showMessageDialog(null, "This topic is not exist");
+                    model.setRowCount(0);
                 }
                 displayResult(researchList);
             } else if (jComboBox1.getSelectedItem().equals("region")) {
@@ -220,35 +227,38 @@ public class RegisterJPanel extends javax.swing.JPanel {
                     for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
                         for (CourseOffer co : termSchedule.getValue().getSchedule()) {
                             if (co.getCourse().getRegion().equals(keyword)) {
-                                researchList.add(co.getCourse());
-                            } else {
-                                JOptionPane.showMessageDialog(null, "This region is not exist");
+                                found = true;
+                                researchList.add(co);
                             }
                         }
                     }
+                }
+                if (!found) {
+                    JOptionPane.showMessageDialog(null, "This region is not exist");
+                    model.setRowCount(0);
 
                 }
                 displayResult(researchList);
-
             } else if (jComboBox1.getSelectedItem().equals("language")) {
                 for (FacultyProfile p : this.pf.getFacultydirectory().getProfessors()) {
                     for (Map.Entry<String, CourseSchedule> termSchedule : p.getAllSchedules().entrySet()) {
                         for (CourseOffer co : termSchedule.getValue().getSchedule()) {
                             if (co.getCourse().getLanguage().equals(keyword)) {
-                                researchList.add(co.getCourse());
-                            } else {
-                                JOptionPane.showMessageDialog(null, "This language is not exist");
+                                found = true;
+                                researchList.add(co);
                             }
                         }
                     }
-
+                }
+                if (!found) {
+                    JOptionPane.showMessageDialog(null, "This language is not exist");
+                    model.setRowCount(0);
                 }
                 displayResult(researchList);
             } else {
-                JOptionPane.showMessageDialog(this, "Please choose the keyword catagory.");
+                JOptionPane.showMessageDialog(this, "Please choose the keyword category.");
             }
         }
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -271,8 +281,9 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
                 col = sp.getTranscript().getCourseLoadBySemester(term);
                 f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
-                if (c.getTerm().equals(term)) {
-                    CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
+                CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
+                if (cof != null) {
+
                     SeatAssignment seatA = col.newSeatAssignment(cof);
                     f.collectTuition(cof.getCourse().getPrice());
                     populateRegisteredCourse();
@@ -284,8 +295,9 @@ public class RegisterJPanel extends javax.swing.JPanel {
         } else {
             col = sp.newCourseLoad(term);
             f = pf.getFacultydirectory().findProfessorByName(c.getProfname());
-            if (c.getTerm().equals(term)) {
-                CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
+            CourseOffer cof = f.getCourseScheduleByTerm(term).getCourseOfferByCourseId(c.getCourseId());
+            if (cof != null) {
+
                 SeatAssignment seatA = col.newSeatAssignment(cof);
                 f.collectTuition(cof.getCourse().getPrice());
                 populateRegisteredCourse();
@@ -296,17 +308,18 @@ public class RegisterJPanel extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_registerBtn1ActionPerformed
-    private void displayResult(ArrayList<Course> searchResList) {
+    private void displayResult(ArrayList<CourseOffer> searchResList) {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
 
-        for (Course c : searchResList) {
+        for (CourseOffer co : searchResList) {
+            Course c = co.getCourse();
 
             Object[] row = new Object[9];
             row[0] = c;
             row[1] = c.getName();
-            row[2] = c.getTerm();
+            row[2] = co.getTerm();
             row[3] = c.getTopic();
 
             row[4] = c.getRegion();
@@ -326,17 +339,19 @@ public class RegisterJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         StudentProfile s = this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
         String term = (String) semesterCombo.getSelectedItem();
-        CourseLoad coload = s.getCourseLoadBySemester(term);
+        for (CourseLoad co : s.getTranscript().getCourseloadlist().values()) {
+            for (Course c : co.getRegisteredCourses()) {
 
-        for (Course c : coload.getRegisteredCourses()) {
+                Object[] row = new Object[3];
+                row[0] = c;
+                row[1] = c.getName();
+                row[2] = co.getTerm();
 
-            Object[] row = new Object[2];
-            row[0] = c;
-            row[1] = c.getName();
+                model.addRow(row);
 
-            model.addRow(row);
-
+            }
         }
+
     }
 
 

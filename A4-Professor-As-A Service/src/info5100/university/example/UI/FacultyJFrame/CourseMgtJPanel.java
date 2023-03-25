@@ -312,14 +312,14 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "You have already create this courseOffer for this semester");
                 } else {
                     CourseOffer co = this.fp.createCourseOffer(term, courseId);
-                    co.getCourse().setTerm(term);
+                    co.setTerm(term);
                     co.generatSeats(Integer.valueOf(seats));
                 }
 
             } else {
                 CourseSchedule cs = this.fp.newCourseSchedule(term);
                 CourseOffer co = this.fp.createCourseOffer(term, courseId);
-                co.getCourse().setTerm(term);
+                co.setTerm(term);
                 co.generatSeats(Integer.valueOf(seats));
             }
 
