@@ -61,6 +61,16 @@ public class FacultyProfile {
 
         return co;
     }
+    
+    public void deleteCourseOffer(String term,String courseId){
+        CourseSchedule cs = this.getCourseScheduleByTerm(term);
+        for(CourseOffer co : cs.getSchedule()){
+            if(co.getCourse().getCourseId().equals(courseId)){
+                cs.getSchedule().remove(co);
+            }
+            break;
+        }
+    }
 
     public CourseSchedule getCourseScheduleByTerm(String term) {
 
@@ -186,5 +196,9 @@ public class FacultyProfile {
         }
         return false;
     }
+
+  
+
+  
 
 }

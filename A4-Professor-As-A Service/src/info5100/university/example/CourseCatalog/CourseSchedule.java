@@ -37,6 +37,7 @@ public class CourseSchedule {
         }
 
     }
+
     public ArrayList<CourseOffer> getCourseOfferListByCourseId(String id) {
         ArrayList<CourseOffer> aimedOffer = new ArrayList<CourseOffer>();
         for (CourseOffer co : schedule) {
@@ -47,7 +48,6 @@ public class CourseSchedule {
         }
         return aimedOffer;
     }
-    
 
     public CourseOffer getCourseOfferByCourseId(String id) {
 
@@ -68,10 +68,10 @@ public class CourseSchedule {
         }
         return this.enrolledListForTerm;
     }
-    
-     public ArrayList<StudentProfile> getEnrolledListForTermOnly() {
-     return this.enrolledListForTerm;
-     }
+
+    public ArrayList<StudentProfile> getEnrolledListForTermOnly() {
+        return this.enrolledListForTerm;
+    }
 
     public int calculateTotalRevenues() {
         int sum = 0;
@@ -108,12 +108,21 @@ public class CourseSchedule {
     }
 
     public boolean isThisCourseOfferExist(String courseId) {
-        for(CourseOffer co : this.schedule){
-            if(co.getCourse().getCourseId().equals(courseId)){
+        for (CourseOffer co : this.schedule) {
+            if (co.getCourse().getCourseId().equals(courseId)) {
                 return true;
             }
         }
         return false;
     }
 
+    public void deleteOffer(Course c) {
+        for (CourseOffer co : this.schedule) {
+            if (co.getCourse().equals(c)) {
+                this.schedule.remove(co);
+            }
+            
+        }
+
+    }
 }
