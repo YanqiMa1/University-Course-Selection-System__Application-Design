@@ -12,6 +12,7 @@ import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -144,7 +145,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         add(fieldTopic, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 200, -1));
         add(fieldRegion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 200, -1));
         add(fieldLang, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 200, -1));
-        add(fieldSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 200, -1));
+        add(fieldSeats, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, 200, -1));
         add(fieldCourseName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 200, -1));
 
         createCourseBtn.setText("Create Course");
@@ -156,14 +157,14 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         add(createCourseBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         jLabel7.setText("term");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
         add(fieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 200, -1));
 
         jLabel8.setText("Course Id");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         jLabel9.setText("Number of seats");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
 
         comboTerm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022Fall", "2023Spring", "2023Summer" }));
         comboTerm.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +172,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
                 comboTermActionPerformed(evt);
             }
         });
-        add(comboTerm, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 200, -1));
+        add(comboTerm, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 270, 200, -1));
 
         createCOBtn.setText("Create Course Offer");
         createCOBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +182,7 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         });
         add(createCOBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
-        add(comboCourseId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 200, -1));
+        add(comboCourseId, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 200, -1));
 
         courseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -258,8 +259,11 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         String region = fieldRegion.getText();
         String lang = fieldLang.getText();
         String price = fieldPrice.getText();
-
-        this.fp.createCourse(name, topic, region, lang, Integer.valueOf(price), fp.getPerson().getNameOfPerson());
+        if (this.fp.getCourseCatalog().isCourseAlreadyExist(name)) {
+            JOptionPane.showMessageDialog(null, "You have already create this course");
+        } else {
+            this.fp.createCourse(name, topic, region, lang, Integer.valueOf(price), fp.getPerson().getNameOfPerson());
+        }
 
         //        JOptionPane.showMessageDialog(null,"Created");
         populateCourse();
@@ -275,12 +279,17 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         String courseId = (String) comboCourseId.getSelectedItem();
         String seats = fieldSeats.getText();
         String term = (String) comboTerm.getSelectedItem();
+        CourseSchedule courseSchedle;
 
         if (this.fp.getCourseScheduleByTerm(term) != null) {
-            CourseSchedule courseSchedle = this.fp.getCourseScheduleByTerm(term);
-            CourseOffer co = this.fp.createCourseOffer(term, courseId);
-            co.getCourse().setTerm(term);
-            co.generatSeats(Integer.valueOf(seats));
+            courseSchedle = this.fp.getCourseScheduleByTerm(term);
+            if (courseSchedle.isThisCourseOfferExist(courseId)) {
+                JOptionPane.showMessageDialog(null, "You have already create this courseOffer for this semester");
+            } else {
+                CourseOffer co = this.fp.createCourseOffer(term, courseId);
+                co.getCourse().setTerm(term);
+                co.generatSeats(Integer.valueOf(seats));
+            }
 
         } else {
             CourseSchedule cs = this.fp.newCourseSchedule(term);

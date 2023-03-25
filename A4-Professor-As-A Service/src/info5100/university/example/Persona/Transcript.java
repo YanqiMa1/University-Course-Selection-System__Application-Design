@@ -5,6 +5,7 @@
  */
 package info5100.university.example.Persona;
 
+import info5100.university.example.CourseCatalog.Course;
 import info5100.university.example.CourseCatalog.CourseLoad;
 import info5100.university.example.CourseCatalog.SeatAssignment;
 
@@ -101,6 +102,17 @@ public class Transcript {
         }
         
         return passedCourses;
+    }
+    
+    public boolean isThisCourseLoadExist(Course c){
+        for(CourseLoad col : this.courseloadlist.values()){
+            for(Course cc : col.getRegisteredCourses()){
+                if(cc.equals(c)){
+                    return true;
+                }
+        }
+        
+    }return false;
     }
 
 //    public float getStudentTotalScore() {

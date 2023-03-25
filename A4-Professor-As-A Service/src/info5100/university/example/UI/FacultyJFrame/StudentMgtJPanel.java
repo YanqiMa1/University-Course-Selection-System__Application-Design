@@ -167,8 +167,16 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_gradeBtnActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+        //        fieldCourseName.setText(this.selectedCourse.getName());
+        //        populateStudentTable();
+    }//GEN-LAST:event_comboCourseFocusLost
+
+    private void comboCourseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboCourseItemStateChanged
+        // TODO add your handling code here:
+        populateStudentTable();
+    }//GEN-LAST:event_comboCourseItemStateChanged
 
     private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
         // TODO add your handling code here:
@@ -179,6 +187,7 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
         if (this.professor.getEnrolledListForAllTerm().size() > 0) {
             studentTableModel.setRowCount(0);
             String term = (String) jComboBox2.getSelectedItem();
+
 
             CourseSchedule cs = this.professor.getAllSchedules().get(term);
 
@@ -197,10 +206,12 @@ public class StudentMgtJPanel extends javax.swing.JPanel {
                         row[3] = s.getCourseoffer().getCourse().getCourseId();
                         row[4] = s.getCourseoffer().getCourse().getTerm();
 
+
                         studentTableModel.addRow(row);
                     }
                 }
             }
+
         }
     }
 

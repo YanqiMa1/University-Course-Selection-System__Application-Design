@@ -96,4 +96,13 @@ public class CourseSchedule {
         this.schedule = schedule;
     }
 
+    public boolean isThisCourseOfferExist(String courseId) {
+        for(CourseOffer co : this.schedule){
+            if(co.getCourse().getCourseId().equals(courseId)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

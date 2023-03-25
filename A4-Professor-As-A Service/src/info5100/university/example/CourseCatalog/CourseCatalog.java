@@ -42,6 +42,15 @@ public class CourseCatalog {
         }
         return null;
     }
+
+    public boolean isCourseAlreadyExist(String name) {
+        for(Course c : this.courses){
+            if(c.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
     
     
 }
