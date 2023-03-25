@@ -64,17 +64,17 @@ public class FacultyProfile {
 
     }
 
-//    public ArrayList<StudentProfile> getEnrolledListForAllTerm() {
-//
-//        for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
-//            CourseSchedule cs = termSchedule.getValue();
-//
-//            for (StudentProfile s : cs.getEnrolledListForTerm()) {
-//                this.enrolledListForAllTerm.add(s);
-//            }
-//        }
-//        return this.enrolledListForAllTerm;
-//    }
+    public ArrayList<StudentProfile> getEnrolledListForAllTerm() {
+
+        for (Map.Entry<String, CourseSchedule> termSchedule : this.allSchedules.entrySet()) {
+            CourseSchedule cs = termSchedule.getValue();
+
+            for (StudentProfile s : cs.getEnrolledListForTerm()) {
+                this.enrolledListForAllTerm.add(s);
+            }
+        }
+        return this.enrolledListForAllTerm;
+    }
     
     public ArrayList<StudentProfile> getEnrolledListForAllTermOnly() {
         return enrolledListForAllTerm;

@@ -6,6 +6,7 @@ package info5100.university.example.UI.AdminWorkArea;
 
 import info5100.university.example.Platform.Platform;
 import info5100.university.example.Role.UserAccount;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,14 +19,21 @@ public class ShowJPanel extends javax.swing.JPanel {
      */
     private Platform pf;
     private UserAccount ua;
+    DefaultTableModel profTableModel;
     public ShowJPanel() {
         initComponents();
     }
     
-    public ShowJPanel(Platform platform,UserAccount useraccount) {
+    public ShowJPanel(Platform platform,UserAccount userAccount) {
         initComponents();
         this.pf=platform;
-        this.ua=useraccount;
+        this.ua=userAccount;
+        this.profTableModel = (DefaultTableModel) profTable.getModel();
+        populateProfTotalRevenue();
+    }
+    
+    public void populateProfTotalRevenue(){
+        
     }
   
     /**
@@ -38,7 +46,7 @@ public class ShowJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTableP1 = new javax.swing.JTable();
+        profTable = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableP2 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -51,7 +59,7 @@ public class ShowJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(153, 153, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableP1.setModel(new javax.swing.table.DefaultTableModel(
+        profTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -67,7 +75,7 @@ public class ShowJPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTableP1);
+        jScrollPane3.setViewportView(profTable);
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 261, 160));
 
@@ -147,8 +155,8 @@ public class ShowJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableP;
-    private javax.swing.JTable jTableP1;
     private javax.swing.JTable jTableP2;
     private javax.swing.JTable jTableS;
+    private javax.swing.JTable profTable;
     // End of variables declaration//GEN-END:variables
 }
