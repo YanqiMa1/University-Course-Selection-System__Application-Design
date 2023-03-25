@@ -175,17 +175,17 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_RateFieldActionPerformed
 
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
-        
+
         AuthorityProfile ap = (AuthorityProfile) jComboBox1.getSelectedItem();
         ap.getStudentrequest().add(this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()));
         Transcript ts = this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript();
-        if(ts.getGraduateStatus().equals("Graduate")){
-             JOptionPane.showMessageDialog(null, "You have successfully graduated!");
-        }else{
-             this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript().setGraduateStatus("Pending···");
-        jLabel3.setText(ts.getGraduateStatus());
+        if (ts.getGraduateStatus().equals("Graduate")) {
+            JOptionPane.showMessageDialog(null, "You have successfully graduated!");
+        } else {
+            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getTranscript().setGraduateStatus("Pending···");
+            jLabel3.setText(ts.getGraduateStatus());
         }
-       
+
     }//GEN-LAST:event_requestBtnActionPerformed
 
     private void rateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rateBtnActionPerformed
@@ -198,15 +198,23 @@ public class TranscriptJPanel extends javax.swing.JPanel {
             CourseLoad col = sp.getCourseLoadByTerm((String) jTable1.getValueAt(selectedRow, 2));
             SeatAssignment aimedSa = col.findSeatAssignmentByCourse(c);
 
-
+//            if (isValidrate(RateField)) {
+//                //pass
+//            } else {
+//                JOptionPane.showMessageDialog(null, "The rate should be 1-10!");
+//            }
             if (aimedSa.getGrade() <= 1.0) {
                 JOptionPane.showMessageDialog(null, "Please finish the course first!");
             } else {
-                double rating = Double.valueOf(RateField.getText());
-                aimedSa.setRateOfProf(rating);
-                fp.updateReputation(); // Update professor's reputation based on new ratings
-                JOptionPane.showMessageDialog(null, "Rated professor successfully!");
-                populateTranscript();
+                if (isValidrate(RateField)) {
+                    double rating = Double.valueOf(RateField.getText());
+                    aimedSa.setRateOfProf(rating);
+                    fp.updateReputation(); // Update professor's reputation based on new ratings
+                    JOptionPane.showMessageDialog(null, "Rated professor successfully!");
+                    populateTranscript();
+                } else {
+                    JOptionPane.showMessageDialog(null, "The rate should be 1-10!");
+                }
             }
         } else {
 
@@ -217,11 +225,11 @@ public class TranscriptJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rateBtnActionPerformed
 
     private void RateFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_RateFieldFocusLost
-        if (isValidrate(RateField)) {
-            //pass
-        } else {
-            JOptionPane.showMessageDialog(null, "The rate should be 1-10!");
-        }
+//        if (isValidrate(RateField)) {
+//            //pass
+//        } else {
+//            JOptionPane.showMessageDialog(null, "The rate should be 1-10!");
+//        }
     }//GEN-LAST:event_RateFieldFocusLost
 
     public void populateDropdowns() {
