@@ -13,19 +13,20 @@ import java.util.ArrayList;
  * @author Ma2017
  */
 public class CourseOffer {
+
     private Course course;
     private ArrayList<Seat> seatlist;
     private FacultyProfile professor;
     private ArrayList<StudentProfile> enrolledStudentList;
     private String term;
-    
-    public CourseOffer(Course c,FacultyProfile prof) {
+
+    public CourseOffer(Course c, FacultyProfile prof) {
         course = c;
         seatlist = new ArrayList<Seat>();
         enrolledStudentList = new ArrayList<StudentProfile>();
-        professor=prof;
+        professor = prof;
     }
-    
+
     public void generatSeats(int numOfSeats) {
         for (int i = 0; i < numOfSeats; i++) {
             seatlist.add(new Seat(this));
@@ -42,8 +43,16 @@ public class CourseOffer {
         }
         return null;
     }
-    
- 
+
+    public int getEmptySeatCount() {
+        int seatCounter = 0;
+        for (Seat s : seatlist) {
+            if (!s.isOccupied()) {
+                seatCounter++;
+            }
+        }
+        return seatCounter;
+    }
 
     public SeatAssignment assignEmptySeat(CourseLoad cl) {
 
@@ -55,7 +64,7 @@ public class CourseOffer {
         cl.registerStudent(sa); // add the sa to student's course load's ArrayList<SeatAssignment>
         return sa;
     }
-    
+
     public int getTotalCourseRevenues() {
 
         int sum = 0;
@@ -68,9 +77,9 @@ public class CourseOffer {
         }
         return sum;
     }
-    
-    public ArrayList<StudentProfile> getEnrolledStudentList(){
-        
+
+    public ArrayList<StudentProfile> getEnrolledStudentList() {
+
         for (Seat s : seatlist) {
             if (s.isOccupied() == true) {
                 this.enrolledStudentList.add(s.getSeatassignment().getCourseload().getStudent());
@@ -79,11 +88,10 @@ public class CourseOffer {
         }
         return this.enrolledStudentList;
     }
-    
-    public ArrayList<StudentProfile> getEnrolledStudentListOnly(){
-         return this.enrolledStudentList;
+
+    public ArrayList<StudentProfile> getEnrolledStudentListOnly() {
+        return this.enrolledStudentList;
     }
-    
 
     public Course getCourse() {
         return course;
@@ -105,11 +113,11 @@ public class CourseOffer {
         return professor;
     }
 
-    public void setProfessor( FacultyProfile professor) {
+    public void setProfessor(FacultyProfile professor) {
         this.professor = professor;
     }
-    
-      public int getCreditHours(){
+
+    public int getCreditHours() {
         return course.getCredits();
     }
 
@@ -121,6 +129,4 @@ public class CourseOffer {
         this.term = term;
     }
 
-    
-    
 }

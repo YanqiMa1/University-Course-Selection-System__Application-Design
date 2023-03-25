@@ -33,7 +33,6 @@ public class ProfessorAnalyticsJPanel extends javax.swing.JPanel {
         this.ua = userAccount;
         this.fp= this.pf.getFacultydirectory().findProfessorById(ua.getAccountId());
         
-        jLabel6.setText(String.valueOf(this.fp.getTuitionCollected()));
         jLabel2.setText(String.valueOf(this.fp.getEnrolledListForAllTerm().size()));
         fee.setText(String.valueOf(0.15 * this.fp.getTuitionCollected()));
     }
@@ -53,8 +52,11 @@ public class ProfessorAnalyticsJPanel extends javax.swing.JPanel {
         fee = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        subButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        fee1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 255, 153));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,51 +66,80 @@ public class ProfessorAnalyticsJPanel extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         jLabel1.setText("（15% of your total revenue)");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel2.setText("0");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 40, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 40, -1));
 
         fee.setText("0");
-        add(fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 30, -1));
+        add(fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 30, -1));
 
         jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jLabel5.setText("Total Revenue：");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        jLabel5.setText("My Revenue from course：");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
-        jLabel6.setText("0");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
+        jLabel6.setText("hidden due to unsubscribe");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
-        jButton1.setText("Subscribe to platform");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        subButton.setText("Subscribe to platform");
+        subButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                subButtonActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, -1));
+        add(subButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
-        jLabel4.setText("Subscription Fee need to pay：");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        jLabel4.setText("Subscription Fee need to pay:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        jButton2.setText("View my revenue");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, -1, 20));
+
+        jLabel7.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
+        jLabel7.setText("Subscription Fee already paid:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        fee1.setText("0");
+        add(fee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 30, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void subButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subButtonActionPerformed
       
        
         this.pf.addCollectionFee(0.15*this.fp.getTuitionCollected());//add revenue to platform
+        this.fp.setIsSubscript(true);
         
         JOptionPane.showMessageDialog(null, "Successfully Pay!");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        fee1.setText(String.valueOf(0.15 * this.fp.getTuitionCollected()));
+    }//GEN-LAST:event_subButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(!this.fp.isIsSubscript()){
+            JOptionPane.showMessageDialog(null, "Cannot view because you did not subscript");
+        }else{
+            jLabel6.setText(String.valueOf(this.fp.getTuitionCollected()));
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fee;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel fee1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton subButton;
     // End of variables declaration//GEN-END:variables
 }
