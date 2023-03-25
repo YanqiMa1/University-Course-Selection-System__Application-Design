@@ -398,39 +398,45 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
         String keyword = fieldUpdate.getText();
         int selectedRow = courseTable.getSelectedRow();
         Course c = (Course) courseTable.getValueAt(selectedRow, 0);
-        if (selectedRow >= 0) {
-            if (jComboBox1.getSelectedItem().equals("Course Name")) {
-                if (this.fp.getCourseCatalog().isCourseAlreadyExist(keyword)) {
-                    JOptionPane.showMessageDialog(null, "You have already create this course");
-                } else {
-                    c.setName(keyword);
-                    populateCourse();
-                }
+        if (fieldUpdate.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill the text");
 
-            } else if (jComboBox1.getSelectedItem().equals("Topic")) {
-                c.setTopic(keyword);
-                populateCourse();
-
-            } else if (jComboBox1.getSelectedItem().equals("Region")) {
-                c.setRegion(keyword);
-                populateCourse();
-
-            } else if (jComboBox1.getSelectedItem().equals("Price")) {
-                if (isValidPrice(fieldUpdate)) {
-                    c.setPrice(Integer.valueOf(keyword));
-                    populateCourse();
-                } else {
-                    JOptionPane.showMessageDialog(null, "The price is out of range!");
-                }
-
-            } else if (jComboBox1.getSelectedItem().equals("Language")) {
-                c.setLanguage(keyword);
-                populateCourse();
-            }
         } else {
-            JOptionPane.showMessageDialog(null, "Please choose a course");
-        }
 
+            if (selectedRow >= 0) {
+                if (jComboBox1.getSelectedItem().equals("Course Name")) {
+                    if (this.fp.getCourseCatalog().isCourseAlreadyExist(keyword)) {
+                        JOptionPane.showMessageDialog(null, "You have already create this course");
+                    } else {
+                        c.setName(keyword);
+                        populateCourse();
+                    }
+
+                } else if (jComboBox1.getSelectedItem().equals("Topic")) {
+                    c.setTopic(keyword);
+                    populateCourse();
+
+                } else if (jComboBox1.getSelectedItem().equals("Region")) {
+                    c.setRegion(keyword);
+                    populateCourse();
+
+                } else if (jComboBox1.getSelectedItem().equals("Price")) {
+                    if (isValidPrice(fieldUpdate)) {
+                        c.setPrice(Integer.valueOf(keyword));
+                        populateCourse();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "The price is out of range!");
+                    }
+
+                } else if (jComboBox1.getSelectedItem().equals("Language")) {
+                    c.setLanguage(keyword);
+                    populateCourse();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please choose a course");
+            }
+
+        }
     }//GEN-LAST:event_updatePriceBtnActionPerformed
 
     private void fieldPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldPriceFocusLost
