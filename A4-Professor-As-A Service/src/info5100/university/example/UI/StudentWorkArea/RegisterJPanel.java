@@ -41,6 +41,9 @@ public class RegisterJPanel extends javax.swing.JPanel {
         this.setVisible(true);
         this.pf = pf;
         this.userAccount = userAccount;
+        populateRegisteredCourse();
+        showTotalRevenue();
+
     }
 
     /**
@@ -111,7 +114,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 690, 220));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 780, 220));
 
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +182,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
             // we will delete the object
             Course c = (Course) jTable2.getValueAt(selectedRow, 0);
 
-            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm((String) jTable1.getValueAt(selectedRow, 2)).deleteSeatAssignment(c);
+            this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId()).getCourseLoadByTerm((String) jTable2.getValueAt(selectedRow, 2)).deleteSeatAssignment(c);
 
             populateRegisteredCourse();
         } else {
@@ -284,6 +287,7 @@ public class RegisterJPanel extends javax.swing.JPanel {
         StudentProfile sp = this.pf.getStudentdirectory().findStudent(this.userAccount.getAccountId());
 
         String term = (String) semesterCombo.getSelectedItem();
+        
         if (sp.getTranscript().getCourseLoadBySemester(term) != null) {
             if (sp.getTranscript().isThisCourseLoadExist(c)) {
                 JOptionPane.showMessageDialog(this, "this course is already registered");

@@ -69,10 +69,10 @@ public class ProfessorAnalyticsJPanel extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         jLabel2.setText("0");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 40, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 90, -1));
 
         fee.setText("0");
-        add(fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 30, -1));
+        add(fee, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 80, -1));
 
         jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 12)); // NOI18N
         jLabel5.setText("My Revenue from course：");
@@ -106,7 +106,7 @@ public class ProfessorAnalyticsJPanel extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         fee1.setText("0");
-        add(fee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 30, -1));
+        add(fee1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void subButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subButtonActionPerformed
