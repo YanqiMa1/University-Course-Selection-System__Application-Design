@@ -411,13 +411,26 @@ public class CourseMgtJPanel extends javax.swing.JPanel {
 
             if (selectedRow >= 0) {
                 if (jComboBox1.getSelectedItem().equals("Course Name")) {
-                    if (this.fp.getCourseCatalog().isCourseAlreadyExist(keyword)) {
-                        JOptionPane.showMessageDialog(null, "You have already create this course");
-                    } else {
+                    Boolean exist = false;
+
+                    for (FacultyProfile f : this.pf.getFacultydirectory().getProfessors()) {
+                        if (f.getCourseCatalog().isCourseAlreadyExist(keyword)) {
+                            exist = true;
+                            JOptionPane.showMessageDialog(null, "The course name is already existed!");
+                        }
+                    }
+
+                    if (!exist) {
                         c.setName(keyword);
                         populateCourse();
                     }
-
+                    //
+//                    if (this.fp.getCourseCatalog().isCourseAlreadyExist(keyword)) {
+//                        JOptionPane.showMessageDialog(null, "You have already create this course");
+//                    } else {
+//                        c.setName(keyword);
+//                        populateCourse();
+//                    }
                 } else if (jComboBox1.getSelectedItem().equals("Topic")) {
                     c.setTopic(keyword);
                     populateCourse();
